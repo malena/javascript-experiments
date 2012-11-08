@@ -1,5 +1,6 @@
 body {
    padding: 20px;
+   color: #666;
 }
 
 ul {
@@ -15,25 +16,17 @@ a {
     color: #666;
 }
 
+/* Layout
+=============================================== */
+
 #calculator {
     display: block;
     width: 500px;
-    height: 600px;
+    height: 490px;
     margin: auto auto;
-    padding: 20px;
     border-radius: 9px;
-    box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-.numbers li {
-    float: left;
-    display: block;
-    margin:  10px 20px;
-    border-radius: 3px;
-    padding: 30px;
-    font-size: 30px;
-    border-top: solid 1px #eee;
-    box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 -3px 1px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.25);
+    padding: 20px;
 }
 
 .operators {
@@ -43,7 +36,7 @@ a {
 }
 
 .display {
-    box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0 -3px 1px rgba(255, 255, 255, 1), inset 0 0 3px rgba(0, 0, 0, 0.9);
     margin: 20px auto;
     width: 500px;
     height: 60px;
@@ -60,9 +53,62 @@ a {
     padding-right: 5px;
 }
 
+.numbers {
+    width: 500px;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    -webkit-flex-direction: row;
+    -webkit-justify-content: center;
+    -webkit-align-content: center;
+    -webkit-align-items: center;
+    -webkit-align-self: auto;
+}
+
+.b-7 { -webkit-order: 1; }
+.b-8 { -webkit-order: 2; }
+.b-9 { -webkit-order: 3; }
+.divide { -webkit-order: 4; }
+
+.b-4 { -webkit-order: 5; }
+.b-5 { -webkit-order: 6; }
+.b-6 { -webkit-order: 7; }
+.multiply { -webkit-order: 8; }
+
+.b-1 { -webkit-order: 9; }
+.b-2 { -webkit-order: 10; }
+.b-3 { -webkit-order: 11; }
+.add { -webkit-order: 12; }
+
+.b-0 { -webkit-order: 13; }
+.decimal { -webkit-order: 14; }
+.equals { -webkit-order: 15; }
+.subtract { -webkit-order: 16; }
+
+
+/* Buttons
+=============================================== */
+
+.numbers li {
+    min-width: 40px;
+    min-height: 40px;
+    -webkit-flex: 0 1 auto;
+    -webkit-align-self: auto;
+    margin:  10px 20px;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 30px;
+    background-color: #eee;
+    border-top: solid 1px #eee;
+    box-shadow: inset 0 -3px 1px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+
 /* Calculator Interactive Interface
 =============================================== */
 
-.numbers li:hover {
-   box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+.numbers li:hover,
+.operators li:hover {
+   border-top: none;
+   border-bottom: solid 1px #eee;
+   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
 }
