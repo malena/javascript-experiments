@@ -64,6 +64,23 @@ a {
     -webkit-align-self: auto;
 }
 
+/* Buttons
+=============================================== */
+
+.numbers li {
+    min-width: 40px;
+    min-height: 40px;
+    -webkit-flex: 0 1 auto;
+    -webkit-align-self: auto;
+    margin:  10px 20px;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 30px;
+    background-color: #eee;
+    border-top: solid 1px #eee;
+    box-shadow: inset 0 -3px 1px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
 .b-7 { -webkit-order: 1; }
 .b-8 { -webkit-order: 2; }
 .b-9 { -webkit-order: 3; }
@@ -84,30 +101,10 @@ a {
 .equals { -webkit-order: 15; }
 .subtract { -webkit-order: 16; }
 
-
-/* Buttons
-=============================================== */
-
-.numbers li {
-    min-width: 40px;
-    min-height: 40px;
-    -webkit-flex: 0 1 auto;
-    -webkit-align-self: auto;
-    margin:  10px 20px;
-    border-radius: 3px;
-    padding: 15px;
-    font-size: 30px;
-    background-color: #eee;
-    border-top: solid 1px #eee;
-    box-shadow: inset 0 -3px 1px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-
 /* Calculator Interactive Interface
 =============================================== */
 
-.numbers li:hover,
-.operators li:hover {
+.numbers li.active {
    border-top: none;
    border-bottom: solid 1px #eee;
    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
