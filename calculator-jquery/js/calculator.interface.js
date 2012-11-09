@@ -1,5 +1,6 @@
 $(function() {
 
+    /*
     // Using GSAP
         $('.numbers li').on('click', function(){
             var button = $(this);
@@ -11,9 +12,9 @@ $(function() {
                 onComplete: buttonClicked.reverse()
             });
         });
+    */
 
 
-    /*
     // Using jQuery
     $('.numbers li').on('click', function(){
         var $button = $(this);
@@ -24,6 +25,6 @@ $(function() {
             $button.removeClass('active');
         }, 100);
     });
-    */
+
 
 });
