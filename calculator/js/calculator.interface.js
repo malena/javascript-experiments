@@ -17,6 +17,11 @@ $(function() {
         /* Display Digit */
         $('.digit').append(digit);
 
+        /* If operator clicked get current number displayed */
+        if($(this).hasClass('operator')){
+            var storedNumber = $('.digit').text();
+            console.log(storedNumber);
+        }
 
     });
 
