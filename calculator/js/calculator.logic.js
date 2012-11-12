@@ -2,9 +2,6 @@ $(function() {
 
     $('button').click(function(){
 
-        var firstInputVal = parseInt($('#firstInput').val());
-        var secondInputVal = parseInt($('#secondInput').val());
-
 
         var calculator = {
 
