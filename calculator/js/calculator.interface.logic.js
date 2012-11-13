@@ -1,42 +1,32 @@
 $(function() {
 
     var numberSet = [ 0 ];
-    var operators = [null];
-
+    var operators = [];
 
     var handleDigitClick = function(event) {
-        var counter = 1;
 
-        if($(this).hasClass('operator')){
-            counter = counter++;
-            console.log(counter);
-        }
+        $(this).each(function(){
 
-        var digit = $(this).attr('id');
+            var digit = $(this).attr('id');
 
-        if(!isNaN(digit)){
-            $('.digit').append(digit);
-        }
+            if(!isNaN(digit)){
+                $('.digit').append(digit);
+            }
 
-        /*
-            If operator clicked
-            get current number displayed
-            store current number displayed
-            store current operator
-        */
+            if($(this).hasClass('operator')){
 
-        if($(this).hasClass('operator')){
-            operators[1] = $(this).attr('id');
-            numberSet[1] = $('.digit').text();
-            console.log(numberSet);
-            console.log(operators);
-            $('.digit').text('');
-        }
+                operators.push($(this).attr('id'));
+                numberSet.push(parseInt($('.digit').text(),10));
+
+                console.log(numberSet);
+                console.log(operators);
+                $('.digit').text('');
+            }
+
+        });
 
     };
 
-    $('.numbers li').each(function(){
-        $(this).bind('click', handleDigitClick);
-    });
+    $('.numbers li').on('click', handleDigitClick);
 
 });
