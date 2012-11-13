@@ -1,21 +1,18 @@
 $(function() {
 
-    /* Number Set Array */
     var numberSet = [ 0 ];
     var operators = [null];
 
-    $('.numbers li').on('click', function(){
+    var handleDigitClick = function(event) {
 
         var digit = $(this).attr('id');
 
-
-        /* Display Digit */
         if(!isNaN(digit)){
             $('.digit').append(digit);
         }
 
-
-        /*  If operator clicked
+        /*
+            If operator clicked
             get current number displayed
             store current number displayed
             store current operator
@@ -29,7 +26,14 @@ $(function() {
             $('.digit').text('');
         }
 
-    });
+    };
+
+    $('.numbers li').on('click', handleDigitClick);
+
+
+
+
+
 
 
 });

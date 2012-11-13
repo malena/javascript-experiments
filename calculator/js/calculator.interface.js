@@ -1,11 +1,10 @@
 $(function() {
 
-    $('.numbers li').on('click', function(){
+    $('.numbers li').click(function(){
 
         var button = $(this);
         var buttonClicked = new TimelineLite();
 
-        /* Button Click */
         buttonClicked.to(button, 0.10, {css:{
             borderTop: 'none',
             borderBottom: 'solid 1px #eee',
