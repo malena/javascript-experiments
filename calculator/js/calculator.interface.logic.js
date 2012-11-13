@@ -3,7 +3,14 @@ $(function() {
     var numberSet = [ 0 ];
     var operators = [null];
 
+
     var handleDigitClick = function(event) {
+        var counter = 1;
+
+        if($(this).hasClass('operator')){
+            counter = counter++;
+            console.log(counter);
+        }
 
         var digit = $(this).attr('id');
 
@@ -28,12 +35,8 @@ $(function() {
 
     };
 
-    $('.numbers li').on('click', handleDigitClick);
-
-
-
-
-
-
+    $('.numbers li').each(function(){
+        $(this).bind('click', handleDigitClick);
+    });
 
 });
