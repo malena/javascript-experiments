@@ -5,32 +5,25 @@ $(function() {
 
         var calculator = {
 
-            firstInput      : firstInputVal,
-            secondInput     : secondInputVal,
+            x: x,
+            y: y,
 
             add             : function () {
-                return (this.firstInput + this.secondInput);
+                return (this.x + this.y);
             },
 
             subtract        : function () {
-                return (this.firstInput - this.secondInput);
+                return (this.x - this.y);
             },
 
             divide          : function () {
-                return (this.firstInput / this.secondInput);
+                return (this.x / this.y);
             },
 
             multiply        : function () {
-                return (this.firstInput * this.secondInput);
-            },
-
-            square          : function () {
-                return (Math.sqrt(this.firstInput));
-            },
-
-            power           : function () {
-                return (Math.pow(this.firstInput, this.secondInput));
+                return (this.x * this.y);
             }
+
         };
 
 
