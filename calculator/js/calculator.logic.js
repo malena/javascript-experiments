@@ -13,7 +13,6 @@ $(function() {
 
             console.log('this is the numbers clicked so far:' + numberSet);
             console.log(operators);
-            console.log('operator state is ' + operators.length);
 
 
             var operator = $(this).attr('id');
@@ -29,15 +28,21 @@ $(function() {
                 },
 
                 subtract        : function (x,y) {
-                    return (x - y);
+                    var result = (x - y);
+                    $('.digit').text(Math.abs(result));
+                    return result;
                 },
 
                 divide          : function (x,y) {
-                    return (x / y);
+                    var result = (x / y);
+                    $('.digit').text(result);
+                    return result;
                 },
 
                 multiply        : function (x,y) {
-                    return (x * y);
+                    var result = (x * y);
+                    $('.digit').text(result);
+                    return result;
                 }
 
             };
@@ -50,19 +55,22 @@ $(function() {
                     if (operators.length == 1){
                         var result = calculator.add(numberSet[0], numberSet[1]);
                         results.push(result);
-                        console.log('the first result is: ' + result);
-
-                    }
-                    else {
+                    } else {
                         var result = calculator.add(results[operators.length - 2], numberSet[operators.length]);
                         results.push(result);
-                        console.log('the next result is: ' + result);
-                        console.log('this is the accumulative results' + results);
                         $('.digit').text(result);
                     }
                 break;
 
                 case 'subtract':
+                    if (operators.length == 1){
+                        var result = Math.abs(calculator.subtract(numberSet[0], numberSet[1]));
+                        results.push(result);
+                    } else {
+                        var result = calculator.subtract(results[operators.length - 2], numberSet[operators.length]);
+                        results.push(result);
+                        $('.digit').text(result);
+                    }
                 break;
 
             }
