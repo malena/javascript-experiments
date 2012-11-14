@@ -1,61 +1,77 @@
 $(function() {
 
-    $('button').click(function(){
+    var numberSet = [ 0 ];
+    var operators = [];
+    var results = [];
+
+    var handleOperatorClick = function(event) {
+
+        $(this).each(function(){
+
+            operators.push($(this).attr('id'));
+            numberSet.push(parseInt($('.digit').text(),10));
+
+            console.log('this is the numbers clicked so far:' + numberSet);
+            console.log(operators);
+            console.log('operator state is ' + operators.length);
 
 
-        var calculator = {
+            var operator = $(this).attr('id');
+            var state = operators.length;
 
-            x: x,
-            y: y,
 
-            add             : function () {
-                return (this.x + this.y);
-            },
+            var calculator = {
 
-            subtract        : function () {
-                return (this.x - this.y);
-            },
+                add             : function (x,y) {
+                    var result = (x + y);
+                    $('.digit').text(result);
+                    return result;
+                },
 
-            divide          : function () {
-                return (this.x / this.y);
-            },
+                subtract        : function (x,y) {
+                    return (x - y);
+                },
 
-            multiply        : function () {
-                return (this.x * this.y);
+                divide          : function (x,y) {
+                    return (x / y);
+                },
+
+                multiply        : function (x,y) {
+                    return (x * y);
+                }
+
+            };
+
+
+
+            switch(operator) {
+
+                case 'add':
+                    if (operators.length == 1){
+                        var result = calculator.add(numberSet[0], numberSet[1]);
+                        results.push(result);
+                        console.log('the first result is: ' + result);
+
+                    }
+                    else {
+                        var result = calculator.add(results[operators.length - 2], numberSet[operators.length]);
+                        results.push(result);
+                        console.log('the next result is: ' + result);
+                        console.log('this is the accumulative results' + results);
+                        $('.digit').text(result);
+                    }
+                break;
+
+                case 'subtract':
+                break;
+
             }
 
-        };
 
+        });
 
-        var operationSelected = $('input[name=operation]:checked').val();
+    };
 
-        switch (operationSelected) {
-
-            case "add":
-                alert(calculator.add());
-            break;
-
-            case "subtract":
-                alert(calculator.subtract());
-            break;
-
-            case "divide":
-                alert(calculator.divide());
-            break;
-
-            case "multiply":
-                alert(calculator.multiply());
-            break;
-
-            case "multiply":
-                alert(calculator.square());
-            break;
-
-            case "square":
-                alert(calculator.power());
-            break;
-        }
-
-    });
+    $('li.operator').on('click', handleOperatorClick);
 
 });

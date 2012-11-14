@@ -53,7 +53,7 @@ a {
     padding-right: 5px;
 }
 
-.numbers {
+.digits {
     width: 500px;
     display: -webkit-flex;
     -webkit-flex-wrap: wrap;
@@ -67,7 +67,7 @@ a {
 /* Buttons
 =============================================== */
 
-.numbers li {
+.digits li {
     min-width: 40px;
     min-height: 40px;
     -webkit-flex: 0 1 auto;
