@@ -16,6 +16,7 @@ $(function() {
 
             if($(this).hasClass('operator')){
 
+
                 operators.push($(this).attr('id'));
                 numberSet.push(parseInt($('.digit').text(),10));
 
@@ -57,12 +58,15 @@ $(function() {
                             var result = calculator.add(numberSet[0], numberSet[1]);
                             results.push(result);
                             console.log('the first result is: ' + result);
+                            $('.digit').text(result);
+
                         }
                         else {
                             var result = calculator.add(results[operators.length - 2], numberSet[operators.length]);
                             results.push(result);
                             console.log('the next result is: ' + result);
                             console.log('this is the accumulative results' + results);
+                            $('.digit').text(result);
                         }
                     break;
 
@@ -71,9 +75,10 @@ $(function() {
 
                 }
 
-            $('.digit').text('');
+                $('.digit').text('');
 
             }
+
 
         });
 
