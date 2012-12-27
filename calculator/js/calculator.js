@@ -30,6 +30,7 @@ $(function() {
                 break;
                 case 'subtract':
                 this.lastResult = this.lastResult - this.currentValue;
+                break;
             }
         }
     };

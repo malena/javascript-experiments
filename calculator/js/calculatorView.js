@@ -8,6 +8,7 @@ $(function() {
 
         $('.digit').each(function(){
             $digit.click(function(){
+                console.log('clicked');
                 var currentValue = calculator.inputDigit($digit.val());
                 $display.val(currentValue);
             });
@@ -23,6 +24,8 @@ $(function() {
             $display.val(result);
         });
     }
+
+    CalculatorView();
 
 
 
