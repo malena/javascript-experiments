@@ -1,33 +1,25 @@
-$(function() {
+function CalculatorView(){
 
-    function CalculatorView(){
+    var calculator = new Calculator({});
 
-        var calculator = new Calculator();
-        var $display = $('.display');
-        var $digit = $('.digit');
+    var $display = $('.display');
 
-        $('.digit').each(function(){
-            $digit.click(function(){
-                console.log('clicked');
-                var currentValue = calculator.inputDigit($digit.val());
-                $display.val(currentValue);
-            });
+    $('.digit').each(function(){
+        $(this).click(function(){
+            var $digit = $(this).text();
+            var currentValue = calculator.inputDigit($digit);
+            $display.text(currentValue);
         });
+    });
 
-        $('#add').click(function(){
-            var result = calculator.add();
-            $display.val(result);
-        });
+    $('#add').click(function(){
+        var result = calculator.add();
+        $display.val(result);
+    });
 
-        $('#equals').click(function(){
-            var result = calculator.equals();
-            $display.val(result);
-        });
-    }
+    $('#equals').click(function(){
+        var result = calculator.equals();
+        $display.val(result);
+    });
+}
 
-    CalculatorView();
-
-
-
-
-});

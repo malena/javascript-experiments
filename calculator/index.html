@@ -6,6 +6,9 @@
     <script src='js/calculator.js'></script>
     <script src='js/calculatorView.js'></script>
     <script>
+        $(function (){
+            new CalculatorView();
+        });
     </script>
 
     <link href='http://fonts.googleapis.com/css?family=Offside' rel='stylesheet' type='text/css'>
@@ -18,22 +21,22 @@
             0
         </div>
         <ul class="digits">
-            <li id="1" class="digit"><a href="#">1</a></li>
-            <li id="2" class="digit"><a href="#">2</a></li>
-            <li id="3" class="digit"><a href="#">3</a></li>
-            <li id="4" class="digit"><a href="#">4</a></li>
-            <li id="5" class="digit"><a href="#">5</a></li>
-            <li id="6" class="digit"><a href="#">6</a></li>
-            <li id="7" class="digit"><a href="#">7</a></li>
-            <li id="8" class="digit"><a href="#">8</a></li>
-            <li id="9" class="digit"><a href="#">9</a></li>
-            <li id="0" class="digit"><a href="#">0</a></li>
-            <li id="add" class="operator"><a href="#">+</a></li>
-            <li id="subtract" class="operator"><a href="#">-</a></li>
-            <li id="multiply" class="operator"><a href="#">x</a></li>
-            <li id="divide" class="operator"><a href="#">/</a></li>
-            <li id="decimal"><a href="#">.</a></li>
-            <li id="equals"><a href="#">=</a></li>
+            <li id="1" class="digit">1</li>
+            <li id="2" class="digit">2</li>
+            <li id="3" class="digit">3</li>
+            <li id="4" class="digit">4</li>
+            <li id="5" class="digit">5</li>
+            <li id="6" class="digit">6</li>
+            <li id="7" class="digit">7</li>
+            <li id="8" class="digit">8</li>
+            <li id="9" class="digit">9</li>
+            <li id="0" class="digit">0</li>
+            <li id="add" class="operator">+</li>
+            <li id="subtract" class="operator">-</li>
+            <li id="multiply" class="operator">x</li>
+            <li id="divide" class="operator">/</li>
+            <li id="decimal">.</li>
+            <li id="equals">=</li>
         </ul>
     </div>
 </body>
