@@ -68,6 +68,7 @@ a {
 =============================================== */
 
 .digits li {
+    cursor: pointer;
     min-width: 40px;
     min-height: 40px;
     -webkit-flex: 0 1 auto;
@@ -100,8 +101,5 @@ a {
 .decimal { -webkit-order: 14; }
 .equals { -webkit-order: 15; }
 .subtract { -webkit-order: 16; }
-
-/* Calculator Interactive Interface
-=============================================== */
 
 
