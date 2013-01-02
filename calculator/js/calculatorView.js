@@ -37,5 +37,9 @@ function CalculatorView(){
         var result = calculator.divide();
         $display.text(result);
     });
+
+    $('.close').hover(function(){
+        $('.close span').toggle();
+    });
 }
 

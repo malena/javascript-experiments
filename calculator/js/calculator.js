@@ -9,7 +9,6 @@ function Calculator(){
 Calculator.prototype.inputDigit = function(digit){
     if(this.currentValue === null){
         this.currentValue = digit;
-        console.log('current value is null');
         return this.currentValue;
     }
     if(this.lastOperator !== null){
@@ -17,10 +16,6 @@ Calculator.prototype.inputDigit = function(digit){
         stringValue = digit;
         this.currentValue = stringValue;
         return this.currentValue;
-    }
-    if(this.lastOperator === null){
-        console.log('last operator was null');
-
     } else {
         stringValue = '' + this.currentValue + digit;
         this.currentValue = stringValue;
