@@ -1,6 +1,7 @@
 function Calculator(){
     this.currentValue = null;
     this.lastOperator = null;
+    this.currentOperator = null;
     var stringValue;
 }
 
@@ -45,6 +46,8 @@ Calculator.prototype.add = function(){
             this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
             break;
         }
+
+        this.lastOperator = 'add';
         return this.lastResult;
     }
 };
@@ -72,6 +75,8 @@ Calculator.prototype.subtract = function(){
             this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
             break;
         }
+
+        this.lastOperator = 'subtract';
         return this.lastResult;
     }
 };
@@ -99,6 +104,8 @@ Calculator.prototype.multiply = function(){
             this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
             break;
         }
+
+        this.lastOperator = 'subtract';
         return this.lastResult;
     }
 };
@@ -126,6 +133,8 @@ Calculator.prototype.divide = function(){
             this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
             break;
         }
+
+        this.lastOperator = 'subtract';
         return this.lastResult;
     }
 };
