@@ -9,6 +9,7 @@ function Calculator(){
 Calculator.prototype.inputDigit = function(digit){
     if(this.currentValue === null){
         this.currentValue = digit;
+        console.log('current value is null');
         return this.currentValue;
     }
     if(this.lastOperator !== null){
@@ -16,9 +17,14 @@ Calculator.prototype.inputDigit = function(digit){
         stringValue = digit;
         this.currentValue = stringValue;
         return this.currentValue;
+    }
+    if(this.lastOperator === null){
+        console.log('last operator was null');
+
     } else {
         stringValue = '' + this.currentValue + digit;
         this.currentValue = stringValue;
+        console.log('current value is string');
         return this.currentValue;
     }
 };
@@ -30,6 +36,10 @@ Calculator.prototype.add = function(){
     if(this.lastOperator === null){
         this.lastOperator = 'add';
         this.lastResult = this.currentValue;
+        return this.lastResult;
+    }
+    if(this.lastOperator === 'equals'){
+        this.lastOperator = 'add';
         return this.lastResult;
     } else {
         switch(this.lastOperator){
@@ -60,6 +70,10 @@ Calculator.prototype.subtract = function(){
         this.lastOperator = 'subtract';
         this.lastResult = this.currentValue;
         return this.lastResult;
+    }
+    if(this.lastOperator === 'equals'){
+        this.lastOperator = 'subtract';
+        return this.lastResult;
     } else {
         switch(this.lastOperator){
             case 'add':
@@ -89,6 +103,10 @@ Calculator.prototype.multiply = function(){
         this.lastOperator = 'multiply';
         this.lastResult = this.currentValue;
         return this.lastResult;
+    }
+    if(this.lastOperator === 'equals'){
+        this.lastOperator = 'multiply';
+        return this.lastResult;
     } else {
         switch(this.lastOperator){
             case 'add':
@@ -105,7 +123,7 @@ Calculator.prototype.multiply = function(){
             break;
         }
 
-        this.lastOperator = 'subtract';
+        this.lastOperator = 'multiply';
         return this.lastResult;
     }
 };
@@ -118,6 +136,10 @@ Calculator.prototype.divide = function(){
         this.lastOperator = 'divide';
         this.lastResult = this.currentValue;
         return this.lastResult;
+    }
+    if(this.lastOperator === 'equals'){
+        this.lastOperator = 'multiply';
+        return this.lastResult;
     } else {
         switch(this.lastOperator){
             case 'add':
@@ -134,7 +156,37 @@ Calculator.prototype.divide = function(){
             break;
         }
 
-        this.lastOperator = 'subtract';
+        this.lastOperator = 'divide';
         return this.lastResult;
     }
 };
+
+Calculator.prototype.equals = function(){
+    if(this.currentValue === null){
+        return 0;
+    }
+    if(this.lastOperator === null){
+        this.lastResult = this.currentValue;
+        this.lastOperator = 'equals';
+        return this.lastResult;
+    } else {
+        switch(this.lastOperator){
+            case 'add':
+            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            break;
+            case 'subtract':
+            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            break;
+            case 'multiply':
+            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            break;
+            case 'divide':
+            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            break;
+        }
+
+        this.lastOperator = 'equals';
+        return this.lastResult;
+    }
+};
+
