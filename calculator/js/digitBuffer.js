@@ -1,6 +1,6 @@
 function DigitBuffer(){
     this.hasValue = false;
-    this.digitChars = '';
+    this.digitChars = '0';
 }
 
 DigitBuffer.prototype.inputDigit = function(digit){
@@ -9,7 +9,7 @@ DigitBuffer.prototype.inputDigit = function(digit){
 };
 
 DigitBuffer.prototype.clear = function(){
-    this.digitChars = '';
+    this.digitChars = '0';
     this.hasValue = false;
 };
 

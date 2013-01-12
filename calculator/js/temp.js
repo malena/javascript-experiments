@@ -1,22 +1,27 @@
-    if(this.currentValue === null){
-        this.currentValue = digit;
-        console.log('I\'m null!');
-        return this.currentValue;
+   if(this.previousValue === null){
+        return 0;
     }
-    else {
-        if(this.clearState === true) {
-            this.currentValue = digit;
-            console.log('display cleared');
-            this.clearState = false;
-            return this.currentValue;
-        }
-        else {
-            this.stringValue = '' + this.currentValue + digit;
-            this.currentValue = this.stringValue;
-            return this.currentValue;
+    if(this.lastOperator === null){
+        this.lastResult = this.previousValue;
+        this.lastOperator = 'equals';
+        return this.lastResult;
+    } else {
+        switch(this.lastOperator){
+            case 'add':
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
+            break;
+            case 'subtract':
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
+            break;
+            case 'multiply':
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
+            break;
+            case 'divide':
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
+            break;
         }
 
-        this.stringValue = '' + this.currentValue + digit;
-        this.currentValue = this.stringValue;
-        return this.currentValue;
+        this.lastOperator = 'equals';
+        this.digitBuffer.clear();
+        return this.lastResult;
     }
