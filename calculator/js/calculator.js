@@ -12,6 +12,10 @@ Calculator.prototype.inputDigit = function(digit){
     this.digitBuffer.inputDigit(digit);
 };
 
+Calculator.prototype.getCurrentValue = function(){
+    return this.digitBuffer.getValue();
+};
+
 Calculator.prototype.add = function(){
     if(!this.digitBuffer.hasValue){
         return 0;
@@ -42,7 +46,7 @@ Calculator.prototype.add = function(){
         }
 
         this.lastOperator = 'add';
-        this.digit.clear();
+        this.digitBuffer.clear();
         return this.lastResult;
     }
 };
@@ -63,16 +67,16 @@ Calculator.prototype.subtract = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
             break;
         }
 
@@ -98,21 +102,21 @@ Calculator.prototype.multiply = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
             break;
         }
 
         this.lastOperator = 'multiply';
-        this.clearState = true;
+        this.digitBuffer.clear();
         return this.lastResult;
     }
 };
@@ -133,21 +137,21 @@ Calculator.prototype.divide = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
             break;
         }
 
         this.lastOperator = 'divide';
-        this.clearState = true;
+        this.digitBuffer.clear();
         return this.lastResult;
     }
 };
@@ -163,21 +167,21 @@ Calculator.prototype.equals = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
             break;
         }
 
         this.lastOperator = 'equals';
-        this.clearState = true;
+        this.digitBuffer.clear();
         return this.lastResult;
     }
 };

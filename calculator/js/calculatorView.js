@@ -7,7 +7,8 @@ function CalculatorView(){
     $('.digit').each(function(){
         $(this).click(function(){
             var $digit = $(this).text();
-            var currentValue = calculator.inputDigit($digit);
+            calculator.inputDigit($digit);
+            var currentValue = calculator.getCurrentValue();
             $display.text(currentValue);
         });
     });
