@@ -1,44 +1,25 @@
 function Calculator(){
-    this.currentValue = null;
+    this.previousValue = null;
     this.lastOperator = null;
     this.currentOperator = null;
     this.stringValue = '';
     this.clearState = false;
+    this.digitBuffer = new DigitBuffer();
 }
 
-Calculator.prototype.inputDigit = function(digit){
-    if(this.currentValue === null){
-        this.currentValue = digit;
-        console.log('I\'m null!');
-        return this.currentValue;
-    }
-    else {
-        if(this.clearState === true) {
-            this.currentValue = digit;
-            console.log('display cleared');
-            this.clearState = false;
-            return this.currentValue;
-        }
-        else {
-            this.stringValue = '' + this.currentValue + digit;
-            this.currentValue = this.stringValue;
-            return this.currentValue;
-        }
 
-        this.stringValue = '' + this.currentValue + digit;
-        this.currentValue = this.stringValue;
-        return this.currentValue;
-    }
+Calculator.prototype.inputDigit = function(digit){
+    this.digitBuffer.inputDigit(digit);
 };
 
 Calculator.prototype.add = function(){
-    if(this.currentValue === null){
+    if(!this.digitBuffer.hasValue){
         return 0;
     }
     if(this.lastOperator === null){
         this.lastOperator = 'add';
-        this.lastResult = this.currentValue;
-        this.clearState = true;
+        this.lastResult = this.digitBuffer.getValue();
+        this.digitBuffer.clear();
         return this.lastResult;
     }
     if(this.lastOperator === 'equals'){
@@ -47,32 +28,32 @@ Calculator.prototype.add = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            this.lastResult = this.lastResult + this.digitBuffer.getValue();
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            this.lastResult = this.lastResult - this.digitBuffer.getValue();
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            this.lastResult = this.lastResult * this.digitBuffer.getValue();
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            this.lastResult = this.lastResult / this.digitBuffer.getValue();
             break;
         }
 
         this.lastOperator = 'add';
-        this.clearState = true;
+        this.digit.clear();
         return this.lastResult;
     }
 };
 
 Calculator.prototype.subtract = function(){
-    if(this.currentValue === null){
+    if(this.previousValue === null){
         return 0;
     }
     if(this.lastOperator === null){
         this.lastOperator = 'subtract';
-        this.lastResult = this.currentValue;
+        this.lastResult = this.previousValue;
         this.clearState = true;
         return this.lastResult;
     }
@@ -82,32 +63,32 @@ Calculator.prototype.subtract = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
             break;
         }
 
         this.lastOperator = 'subtract';
-        this.clearState = true;
+        this.digitBuffer.clear();
         return this.lastResult;
     }
 };
 
 Calculator.prototype.multiply = function(){
-    if(this.currentValue === null){
+    if(this.previousValue === null){
         return 0;
     }
     if(this.lastOperator === null){
         this.lastOperator = 'multiply';
-        this.lastResult = this.currentValue;
+        this.lastResult = this.previousValue;
         this.clearState = true;
         return this.lastResult;
     }
@@ -117,16 +98,16 @@ Calculator.prototype.multiply = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
             break;
         }
 
@@ -137,12 +118,12 @@ Calculator.prototype.multiply = function(){
 };
 
 Calculator.prototype.divide = function(){
-    if(this.currentValue === null){
+    if(this.previousValue === null){
         return 0;
     }
     if(this.lastOperator === null){
         this.lastOperator = 'divide';
-        this.lastResult = this.currentValue;
+        this.lastResult = this.previousValue;
         this.clearState = true;
         return this.lastResult;
     }
@@ -152,16 +133,16 @@ Calculator.prototype.divide = function(){
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
             break;
         }
 
@@ -172,26 +153,26 @@ Calculator.prototype.divide = function(){
 };
 
 Calculator.prototype.equals = function(){
-    if(this.currentValue === null){
+    if(this.previousValue === null){
         return 0;
     }
     if(this.lastOperator === null){
-        this.lastResult = this.currentValue;
+        this.lastResult = this.previousValue;
         this.lastOperator = 'equals';
         return this.lastResult;
     } else {
         switch(this.lastOperator){
             case 'add':
-            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) + parseInt(this.previousValue,10);
             break;
             case 'subtract':
-            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) - parseInt(this.previousValue,10);
             break;
             case 'multiply':
-            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) * parseInt(this.previousValue,10);
             break;
             case 'divide':
-            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.currentValue,10);
+            this.lastResult = parseInt(this.lastResult,10) / parseInt(this.previousValue,10);
             break;
         }
 
