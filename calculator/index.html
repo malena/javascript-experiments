@@ -3,22 +3,25 @@
 <head>
     <title>title</title>
     <script src='js/jquery.min.js'></script>
+    <script src='js/TweenMax.min.js'></script>
     <script src='js/digitBuffer.js'></script>
     <script src='js/calculator.js'></script>
     <script src='js/calculatorView.js'></script>
+    <script src='js/calculatorAnimations.js'></script>
+
     <script>
         $(function (){
             new CalculatorView();
         });
     </script>
 
-    <link href='http://fonts.googleapis.com/css?family=Offside'>
+    <link href='http://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
     <link href='css/global.css' rel='stylesheet' type='text/css'>
     <meta charset="UTF-8">
 </head>
 <body>
     <div id="calculator">
-        <div class='close'><span>x</span></div>
+        <div class='close'><span></span></div>
         <div class="display">
             0
         </div>
@@ -37,7 +40,7 @@
             <li id="subtract" class="operator">-</li>
             <li id="multiply" class="operator">x</li>
             <li id="divide" class="operator">/</li>
-            <li id="decimal">.</li>
+            <li id="decimal" class="digit">.</li>
             <li id="equals">=</li>
         </ul>
     </div>

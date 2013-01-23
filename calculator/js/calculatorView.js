@@ -38,9 +38,7 @@ function CalculatorView(){
         $display.text(result);
     });
 
-    $('.close').hover(function(){
-        $('.close span').toggle();
-    });
+
 
 }
 
