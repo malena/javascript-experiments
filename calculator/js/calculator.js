@@ -13,17 +13,6 @@ Calculator.prototype.getCurrentValue = function(){
 };
 
 Calculator.prototype.operate = function(operation){
-    /*
-    if(this.lastResult === null){
-        console.log('No last result');
-
-        if (this.digitBuffer.hasValue){
-           return this.getCurrentValue();
-        }
-        return 0;
-    }
-    */
-
     if(this.lastOperator === null){
         this.lastOperator = operation;
         this.lastResult = this.digitBuffer.getValue();

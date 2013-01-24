@@ -14,7 +14,6 @@ DigitBuffer.prototype.clear = function(){
 };
 
 DigitBuffer.prototype.getValue = function(){
-    console.log(this.digitChars);
     return parseFloat(this.digitChars,10);
 };
 
