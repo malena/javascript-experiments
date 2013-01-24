@@ -29,13 +29,13 @@ Animation.prototype.borderRadiusJiggle = function(element, state){
 };
 
 Animation.prototype.buttonPush = function(element){
-        var buttonPush = new TimelineLite();
-        buttonPush.to(element, 0.05, {css:{
-            borderTop: 'none',
-            borderBottom: 'solid 1px #eee',
-            boxShadow: 'inset 0 1px 4px rgba(0, 0, 0, 0.6)'},
-            onComplete: buttonPush.reverse()
-        });
+    var buttonPush = new TimelineLite();
+    buttonPush.to(element, 0.05, {css:{
+        borderTop: 'none',
+        borderBottom: 'solid 1px #eee',
+        boxShadow: 'inset 0 1px 4px rgba(0, 0, 0, 0.6)'},
+        onComplete: buttonPush.reverse()
+    });
 };
 
 $(function(){
@@ -58,6 +58,13 @@ $(function(){
         calculatorAnimation.buttonPush($(this));
     });
 
+    $('.close').on('hover', function(){
+        $('.close span').toggle();
+    });
+
+    $('.close').click(function(){
+        container.hide();
+    });
 
 
 });
