@@ -11,7 +11,8 @@ $(document).ready(function(){
     var hangman = $('.hangman');
     TweenLite.to(hangman, 3, {css:{
         top: '0px'},
-        ease: Bounce.easeOut
+        ease: Bounce.easeOut,
+        onComplete: hangWord 
     });
 
 	$('.hover').hover(function(){
@@ -19,6 +20,10 @@ $(document).ready(function(){
 	},function(){
 		$(this).removeClass('flip');
 	});
+
+    function hangWord() {
+        $('.message span').addClass('tween');
+    }
 
     var word_count = $('.word ul li').length;
 
@@ -40,6 +45,7 @@ $(document).ready(function(){
         flip(i);
         return i++
     },190);
+
 
 
 });

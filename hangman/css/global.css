@@ -21,7 +21,7 @@ div {
     box-sizing: border-box;
 }
 
-.user-input {
+.message {
     height: 20%;
 }
 
@@ -51,6 +51,26 @@ div {
     height: 100%;
     width: 54%;
     float: right;
+}
+
+.message {
+    display: block;
+    position: relative;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    -o-perspective: 600px;
+    perspective: 600px;
+}
+
+.message .tween {
+    display: block;
+    -webkit-transform: rotateZ( 90deg );
+    -moz-transform: rotateZ( 90deg );
+    -o-transform: rotateZ( 90deg );
+    transform: rotateZ( 90deg );
+    position: relative;
+    top: 145px;
+    left: -80px;
 }
 
 .incorrect-letters {
