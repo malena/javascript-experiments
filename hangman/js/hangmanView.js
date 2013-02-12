@@ -10,8 +10,21 @@ $(document).ready(function(){
        this.onIntroFlipLetters();
     }
 
-    HangmanAnimations.prototype.hangWord = function(element){
-        $('.message span').addClass('tween');
+    HangmanAnimations.prototype.deadManFace = function(){
+        $('.hangman').addClass('dead');
+    }
+
+    HangmanAnimations.prototype.hangWord = function(){
+       $('.message span').addClass('tween');
+
+        var word = $('.message span');
+        TweenLite.to(word, 3, {css:{
+            top: '145px',
+            left: '-80px',
+            rotationZ: 90},
+            ease: Elastic.easeOut,
+            onComplete: this.deadManFace
+        });
     }
 
     HangmanAnimations.prototype.bounceIn = function(){
@@ -54,6 +67,8 @@ $(document).ready(function(){
             return i++
         },190);
     }
+
+  
 
     HangmanAnimations.prototype.initialize();
 

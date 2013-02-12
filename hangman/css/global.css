@@ -35,7 +35,7 @@ div {
 
 .word {
     width: 100%;
-    height: 25%;
+    height: 10%;
 }
 
 .centered {
@@ -62,15 +62,18 @@ div {
     perspective: 600px;
 }
 
-.message .tween {
+.message .hanged {
+    width: 300px;
     display: block;
+/*
     -webkit-transform: rotateZ( 90deg );
     -moz-transform: rotateZ( 90deg );
     -o-transform: rotateZ( 90deg );
     transform: rotateZ( 90deg );
+*/
     position: relative;
-    top: 145px;
-    left: -80px;
+    top: -82px;
+    left: 100px;
 }
 
 .incorrect-letters {
@@ -87,8 +90,12 @@ div {
     background-repeat: no-repeat;
 }
 
+.hangman.dead {
+    background-image: url('../images/hangman-hanged.png');
+}
+
 .word {
-    margin: 90px auto 0 auto;
+    margin: 40px auto 0 auto;
     text-align: center;
 }
 
