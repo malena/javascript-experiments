@@ -8,6 +8,7 @@ $(document).ready(function(){
     HangmanAnimations.prototype.initialize = function(){
        this.bounceIn();
        this.onIntroFlipLetters();
+       this.flipCardIntoInputBox();
     }
 
     HangmanAnimations.prototype.deadManFace = function(){
@@ -68,7 +69,11 @@ $(document).ready(function(){
         },190);
     }
 
-  
+    HangmanAnimations.prototype.flipCardIntoInputBox = function(){
+        $('.panel').click(function(){
+            $(this).addClass('flip');
+        });
+    }
 
     HangmanAnimations.prototype.initialize();
 
