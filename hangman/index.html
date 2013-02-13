@@ -11,78 +11,99 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <div class="centered">
-        <div class="hangman">
-
+    <section id="game" class="playground">
+        <div class="word">
+            <ul>
+                <li>
+                    <div class="hover panel">
+                        <div class="front">
+                            <p>?</p>
+                        </div>
+                        <div class="back">
+                            <p>h</p>
+                            <form class="letter-guess">
+                                <input type="text" size="1" maxlength="1" autofocus></input>
+                                <button type="submit" name="button">Go!</button>
+                            </form>
+                        </div>
+                    </div>
+				</li>
+                <li>
+                    <div class="hover panel">
+                        <div class="front">
+                            <p>?</p>
+                        </div>
+                        <div class="back">
+                            <p>a</p>
+                            <form class="letter-guess">
+                                <input type="text" size="1" maxlength="1" autofocus></input>
+                                <button type="submit" name="button">Go!</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hover panel">
+                        <div class="front">
+                            <p>?</p>
+                        </div>
+                        <div class="back">
+                            <p>p</p>
+                            <form class="letter-guess">
+                                <input type="text" size="1" maxlength="1" autofocus></input>
+                                <button type="submit" name="button">Go!</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hover panel">
+                        <div class="front">
+                            <p>?</p>
+                        </div>
+                        <div class="back">
+                            <p>p</p>
+                            <form class="letter-guess">
+                                <input type="text" size="1" maxlength="1" autofocus></input>
+                                <button type="submit" name="button">Go!</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hover panel">
+                        <div class="front">
+                            <p>?</p>
+                        </div>
+                        <div class="back">
+                            <p>y</p>
+                            <form class="letter-guess">
+                                <input type="text" size="1" maxlength="1" autofocus></input>
+                                <button type="submit" name="button">Go!</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="dashboard">
-            <div class="word">
+         <div class="incorrect-letters">
                 <ul>
-                    <li>
-                        <div class="hover panel">
-                            <div class="front">
-                                <span>?<span>
-                            </div>
-                            <div class="back">
-                                <span>h<span>
-                            </div>
-                        </div>
-					</li>
-                    <li>
-                        <div class="hover panel">
-                            <div class="front">
-                                <span>?<span>
-                            </div>
-                            <div class="back">
-                                <span>a<span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="hover panel">
-                            <div class="front">
-                                <span>?<span>
-                            </div>
-                            <div class="back">
-                                <span>p<span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="hover panel">
-                            <div class="front">
-                                <span>?<span>
-                            </div>
-                            <div class="back">
-                                <span>p<span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="hover panel">
-                            <div class="front">
-                                <span>?<span>
-                            </div>
-                            <div class="back">
-                                <span>y<span>
-                            </div>
-                        </div>
-                    </li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </ul>
-            </div>
+        </div>
+    </section>
+    <section class="centered">
+        <section class="hangman">
+        </section>
+        <section class="dashboard">
             <div class="message">
                 <h1>Prepare to be <span class="hanged">hanged!</span></h1>
             </div>
-            <div class="incorrect-letters">
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-        </div>
+        </section>
     </div>
 </body>
 </html>
