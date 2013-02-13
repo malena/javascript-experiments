@@ -12,7 +12,7 @@ $(document).ready(function(){
 
     HangmanAnimations.prototype.startGameScreen = function(){
         var playground = $('.playground');
-        TweenMax.to(playground, 4, {css:{
+        TweenMax.to(playground, 1, {css:{
             opacity:1}
         })
     }
@@ -36,10 +36,9 @@ $(document).ready(function(){
         });
     }
 
-
     HangmanAnimations.prototype.bounceIn = function(){
         var hangman =  $('.hangman');
-        TweenMax.to(hangman, 3, {css:{
+        TweenMax.to(hangman, 2, {css:{
             top:'0px'},
             ease:Bounce.easeOut,
             onComplete:this.hangWord
@@ -75,12 +74,16 @@ $(document).ready(function(){
     }
 
     HangmanAnimations.prototype.checkLetter = function(){
-        $('.letter-guess').submit(function(){
+        $('.letter-guess').submit(function(e){
+            e.preventDefault();
             var letter = $(this).prev().text();
 
             if ($("input:first").val() === letter) {
                 //function that will flip all panels with the letter in question
-                alert('yes');   
+                alert(letter);
+                $(this).closest('div.panel').removeClass('flip');
+                $(this).closest('div.front p').append(letter);
+
             } else {
                 alert('nope');
             }
