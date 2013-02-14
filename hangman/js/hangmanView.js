@@ -2,12 +2,14 @@
 $(document).ready(function(){
 
     function HangmanAnimations(){
+        this.hangman = '.hangman';
+        this.playground = '.playground';
     }
 
     HangmanAnimations.prototype.initialize = function(){
-       this.bounceIn();
-       this.onClickFlipPanel();
-       this.checkLetter();
+        this.bounceIn();
+        this.onClickFlipPanel();
+        this.checkLetter();
     }
 
     HangmanAnimations.prototype.startGameScreen = function(){
@@ -76,18 +78,28 @@ $(document).ready(function(){
     HangmanAnimations.prototype.checkLetter = function(){
         $('.letter-guess').submit(function(e){
             e.preventDefault();
+
+            var $front_letter = $(this).parent().siblings().find('p');
             var letter = $(this).prev().text();
 
-            if ($("input:first").val() === letter) {
-                //function that will flip all panels with the letter in question
-                alert(letter);
+            if ($(this).find('input').val() === letter) {
+                alert('yes!');
+                //TODO: function that will flip all panels with the letter in question
                 $(this).closest('div.panel').removeClass('flip');
-                $(this).closest('div.front p').append(letter);
+                $front_letter.text(letter);
+                //TODO: make that letter not clickable after success
 
             } else {
                 alert('nope');
+                $(this).closest('div.panel').removeClass('flip');
+                console.log($('input').val());
+                console.log(letter);
             }
         });
+    }
+
+    HangmanAnimations.prototype.checkWordGuessComplete = function(){
+
     }
 
     HangmanAnimations.prototype.initialize();
