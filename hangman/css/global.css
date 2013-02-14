@@ -42,9 +42,29 @@ div {
     height: 10%;
 }
 
-/* Game Playground 
+/* Garbage Letters 
 =========================================*/
+.white-bg  {
+    text-align: center;
+    height: 98px;
+    width: 98px;
+    background-color: #000;
+    top: -120px;
+    position: relative;
+}
 
+.panel .white-bg span {
+    color: #fff;
+    font-family: Helvetica;
+    display: block;
+    position: absolute;
+    font-size: 80px;
+}
+
+.incorrect-letters {
+    color: #fff;
+    position: relative;
+}
 
 .message {
     height: 20%;
@@ -140,10 +160,11 @@ div {
 }
 
 input {
+    font-family: Helvetica;
     text-align: center;
     height: 92px;
     width: 92px;
-    font-size: 6em;
+    font-size: 80px;
 
     border-radius: 10px;
     -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);

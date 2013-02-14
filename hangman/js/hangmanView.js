@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
     function HangmanAnimations(){
+        // TODO: These are undefined when called in a method?
         this.hangman = '.hangman';
         this.playground = '.playground';
     }
@@ -10,6 +11,7 @@ $(document).ready(function(){
         this.bounceIn();
         this.onClickFlipPanel();
         this.checkLetter();
+        //this.startGameScreen();
     }
 
     HangmanAnimations.prototype.startGameScreen = function(){
@@ -22,9 +24,9 @@ $(document).ready(function(){
     HangmanAnimations.prototype.deadManFace = function(){
         $('.hangman').addClass('dead');
 
-        setTimeout(function(){
-            HangmanAnimations.prototype.startGameScreen();
-        },3000);
+        setTimeout($.proxy(function(){
+            this.startGameScreen();
+        }, HangmanAnimations.prototype),1000);
     }
 
     HangmanAnimations.prototype.hangWord = function(){
@@ -34,7 +36,8 @@ $(document).ready(function(){
             top:'145px',
             left:'-80px'},
             ease:Elastic.easeOut,
-            onComplete:HangmanAnimations.prototype.deadManFace
+            onComplete:this.deadManFace,
+            onCompleteScope:this
         });
     }
 
@@ -43,7 +46,8 @@ $(document).ready(function(){
         TweenMax.to(hangman, 2, {css:{
             top:'0px'},
             ease:Bounce.easeOut,
-            onComplete:this.hangWord
+            onComplete:this.hangWord,
+            onCompleteScope:this
         });
     }
 
@@ -75,7 +79,31 @@ $(document).ready(function(){
         }
     }
 
+    HangmanAnimations.prototype.dumpLetter = function(letter){
+        console.log(letter);
+        $('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
+        $('.letter-guess').parent().append('<div class="white-bg"></div>');
+        $('.white-bg').append($('span.' + letter));
+
+        setTimeout(function(){
+            TweenMax.to($('.white-bg span'), .5, {css:{
+                top:'300px'},
+                ease:Bounce.easeOut,
+                onComplete:flip
+            });
+        }, 200);
+
+        function flip(){
+            $('div.panel').removeClass('flip');
+        }
+
+
+    }
+
+
     HangmanAnimations.prototype.checkLetter = function(){
+        var self = this;
+
         $('.letter-guess').submit(function(e){
             e.preventDefault();
 
@@ -83,25 +111,32 @@ $(document).ready(function(){
             var letter = $(this).prev().text();
 
             if ($(this).find('input').val() === letter) {
-                alert('yes!');
                 //TODO: function that will flip all panels with the letter in question
                 $(this).closest('div.panel').removeClass('flip');
                 $front_letter.text(letter);
                 //TODO: make that letter not clickable after success
 
             } else {
-                alert('nope');
-                $(this).closest('div.panel').removeClass('flip');
-                console.log($('input').val());
-                console.log(letter);
+                var garbage_letter = $(this).find('input').val();
+                self.dumpLetter(garbage_letter);
+                //$(this).closest('div.panel').removeClass('flip');
             }
+
         });
     }
 
-    HangmanAnimations.prototype.checkWordGuessComplete = function(){
-
+    HangmanAnimations.prototype.checkIfAllCardsFlipped = function() {
+        //TODO: Rethink this!
+        //Do any .front p have a "?"? 
+        // This doesn't work because the last check will always contain a "?";
+        if($('div.front p:contains("?")')){
+            console.log('continue');
+        } else {
+            console.log('done!');
+        }
     }
 
+   
     HangmanAnimations.prototype.initialize();
 
 });
