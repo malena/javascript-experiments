@@ -5,6 +5,7 @@ $(document).ready(function(){
         // TODO: These are undefined when called in a method?
         this.hangman = '.hangman';
         this.playground = '.playground';
+
     }
 
     HangmanAnimations.prototype.initialize = function(){
@@ -13,6 +14,7 @@ $(document).ready(function(){
         this.checkLetter();
         this.startGameScreen();
     }
+
 
     HangmanAnimations.prototype.startGameScreen = function(){
         var playground = $('.playground');
@@ -104,24 +106,24 @@ $(document).ready(function(){
 
     HangmanAnimations.prototype.checkLetter = function(){
         var self = this;
-
+        //what are letters in word?
 
         $('.letter-guess').submit(function(e){
             e.preventDefault();
-
             var letter = $(this).find('input').val();
-            console.log(letter);
 
-            if (letter) {
-                //TODO: function that will flip all panels with the letter in question
+            // If letter matches letter in word. 
 
+            if (letter === 'a') {
+                console.log('match');
                 //Find the panel who's child is the matching letter
                 //Flip panel of correct letter
 
-                $('.panel .back p').text(letter).removeClass('flip');
+                $('.panel .back p:contains("a")').removeClass('flip');
                 //TODO: make that letter not clickable after success
 
             } else {
+                console.log('no match');
                 var garbage_letter = $(this).find('input').val();
                 self.dumpLetter(garbage_letter);
                 self.resetPanel();
