@@ -8,10 +8,10 @@ $(document).ready(function(){
     }
 
     HangmanAnimations.prototype.initialize = function(){
-        this.bounceIn();
-        this.onClickFlipPanel();
+        //this.bounceIn();
+        //this.flipPanel('.p-click.panel', 'click');
         this.checkLetter();
-        //this.startGameScreen();
+        this.startGameScreen();
     }
 
     HangmanAnimations.prototype.startGameScreen = function(){
@@ -51,12 +51,13 @@ $(document).ready(function(){
         });
     }
 
-    HangmanAnimations.prototype.onClickFlipPanel = function(){
-        $('.hover').on('click', function(){
-            $(this).addClass('flip');
+
+    HangmanAnimations.prototype.flipPanel = function(element, hangmanEvent) {
+        $(element).on(hangmanEvent, function(){
+            $(element).addClass('flip');
             $('form').fadeIn();
         });
-    }
+    };
 
     HangmanAnimations.prototype.onIntroFlipLetters = function(element) {
         var i =             0;
@@ -83,47 +84,55 @@ $(document).ready(function(){
         console.log(letter);
         $('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
         $('.letter-guess').parent().append('<div class="white-bg"></div>');
+
         $('.white-bg').append($('span.' + letter));
 
         setTimeout(function(){
             TweenMax.to($('.white-bg span'), .5, {css:{
                 top:'300px'},
                 ease:Bounce.easeOut,
-                onComplete:flip
+                onComplete:reset
             });
         }, 200);
 
-        function flip(){
-            $('div.panel').removeClass('flip');
+        function reset(){
+            $('form input').focus().val('');
+            $('.white-bg').hide();
         }
-
-
     }
 
 
     HangmanAnimations.prototype.checkLetter = function(){
         var self = this;
 
+
         $('.letter-guess').submit(function(e){
             e.preventDefault();
 
-            var $front_letter = $(this).parent().siblings().find('p');
-            var letter = $(this).prev().text();
+            var letter = $(this).find('input').val();
+            console.log(letter);
 
-            if ($(this).find('input').val() === letter) {
+            if (letter) {
                 //TODO: function that will flip all panels with the letter in question
-                $(this).closest('div.panel').removeClass('flip');
-                $front_letter.text(letter);
+
+                //Find the panel who's child is the matching letter
+                //Flip panel of correct letter
+
+                $('.panel .back p').text(letter).removeClass('flip');
                 //TODO: make that letter not clickable after success
 
             } else {
                 var garbage_letter = $(this).find('input').val();
                 self.dumpLetter(garbage_letter);
+                self.resetPanel();
                 //$(this).closest('div.panel').removeClass('flip');
             }
 
         });
     }
+
+    HangmanAnimations.prototype.resetPanel = function() {
+    };
 
     HangmanAnimations.prototype.checkIfAllCardsFlipped = function() {
         //TODO: Rethink this!

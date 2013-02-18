@@ -15,7 +15,13 @@ h1 {
 }
 
 form {
-    display: none;
+}
+
+.word ul.guess {
+    clear: both;
+    display: block;
+    text-align: center; 
+    width: 115px;
 }
 
 /* Layout
@@ -48,7 +54,7 @@ div {
     text-align: center;
     height: 98px;
     width: 98px;
-    background-color: #000;
+    background-color: #fff;
     top: -120px;
     position: relative;
 }
