@@ -3,6 +3,11 @@ body {
     padding:0;
 }
 
+p {
+    margin:0;
+    padding:0;
+}
+
 ul {
     margin:0;
     padding:0;
@@ -162,7 +167,9 @@ div {
 }
 
 .back p {
-    display: none;
+    font-family: helvetica;
+    font-size: 90px;
+    line-height: 95px;
 }
 
 input {
