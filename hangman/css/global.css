@@ -50,7 +50,7 @@ div {
 
 /* Garbage Letters 
 =========================================*/
-.white-bg  {
+.white-bg {
     text-align: center;
     height: 98px;
     width: 98px;
@@ -136,7 +136,7 @@ div {
 }
 
 .word {
-    margin: 40px auto 0 auto;
+    margin: 5% auto 0 auto;
     text-align: center;
 }
 

@@ -9,15 +9,20 @@ $(document).ready(function(){
     }
 
     HangmanAnimations.prototype.initialize = function(){
-        //this.bounceIn();
-        //this.flipPanel('.p-click.panel', 'click');
+        this.bounce('in');
+        this.flipPanel('.p-click.panel', 'click');
         this.checkLetter();
-        this.startGameScreen();
+        //this.startGameScreen();
     }
 
 
     HangmanAnimations.prototype.startGameScreen = function(){
         var playground = $('.playground');
+        TweenMax.from(playground, 1, {css:{
+            opacity:1,
+            top: '-200px'},
+            ease:Elastic.easeOut
+        })
         TweenMax.to(playground, 1, {css:{
             opacity:1}
         })
@@ -28,7 +33,7 @@ $(document).ready(function(){
 
         setTimeout($.proxy(function(){
             this.startGameScreen();
-        }, HangmanAnimations.prototype),1000);
+        }, HangmanAnimations.prototype),2000);
     }
 
     HangmanAnimations.prototype.hangWord = function(){
@@ -37,20 +42,26 @@ $(document).ready(function(){
             rotationZ: 90,
             top:'145px',
             left:'-80px'},
-            ease:Elastic.easeOut,
-            onComplete:this.deadManFace,
-            onCompleteScope:this
+            ease:Elastic.easeOut
         });
+        this.deadManFace();
     }
 
-    HangmanAnimations.prototype.bounceIn = function(){
-        var hangman =  $('.hangman');
-        TweenMax.to(hangman, 2, {css:{
-            top:'0px'},
-            ease:Bounce.easeOut,
-            onComplete:this.hangWord,
-            onCompleteScope:this
-        });
+    HangmanAnimations.prototype.bounce = function(state){
+
+        if(state == 'in'){
+            console.log('state is bounce in');
+            var hangman =  $('.hangman');
+            TweenMax.to(hangman, 2, {css:{
+                top:'0px'},
+                ease:Bounce.easeOut,
+                onComplete:this.hangWord,
+                onCompleteScope:this
+            });
+        } 
+        else if(state == 'out'){
+            console.log('dajd');
+        }
     }
 
 
