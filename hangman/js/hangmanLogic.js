@@ -1,15 +1,13 @@
-function HangmanWordDisplay(element){
-	this.element;	
+function HangmanWordDisplay(){
+    this.words          = ['happy', 'hungry', 'tree', 'mug', 'cat', 'dog'];
+    this.words_count    = this.words.length;
+    this.word           = this.getWord();
+    this.letter_count   = this.word.length; 
+    this.word_array     = this.word.split('');
 }
 
 HangmanWordDisplay.prototype.initialize = function(){
-    this.words = ['happy', 'hungry', 'tree', 'mug', 'cat', 'dog'];
-    this.words_length = this.words.length;
-
-    this.word = this.getWord();
-    var panel_count = this.word.length; 
-
-    this.clonePanels(panel_count);
+    this.clonePanels(this.letter_count);
     this.populatePanelsWithLetters();
 }
 
@@ -30,8 +28,8 @@ HangmanWordDisplay.prototype.getRandomIndex = function(word_list_count){
     return random;
 }
 
-HangmanWordDisplay.prototype.clonePanels = function(panel_count){
-    for(var i = 1; i < panel_count; i++){
+HangmanWordDisplay.prototype.clonePanels = function(letter_count){
+    for(var i = 1; i < letter_count; i++){
         $('.random-letter').clone().removeClass('random-letter').appendTo('.random-word');
     }
     $('.random-word li').addClass('random-letter');
@@ -43,11 +41,4 @@ HangmanWordDisplay.prototype.populatePanelsWithLetters = function(){
     $('div.back p').each(function(index){
         $(this).text(character_array[index]);
     });
-
 }
-
-$(function(){
-	HangmanWordDisplay.prototype.initialize();	
-});
-
-

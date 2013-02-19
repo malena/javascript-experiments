@@ -5,10 +5,8 @@ function HangmanAnimations(element){
 HangmanAnimations.prototype.initialize = function(){
     //this.bounce('in');
     //this.flipPanel('.p-click.panel', 'click');
-    this.checkLetter();
     this.startGameScreen();
 }
-
 
 HangmanAnimations.prototype.startGameScreen = function(){
     var playground = $('.playground');
@@ -55,7 +53,6 @@ HangmanAnimations.prototype.bounce = function(state){
     else if(state == 'out'){
     }
 }
-
 
 HangmanAnimations.prototype.flipPanel = function(element, hangmanEvent) {
     $(element).on(hangmanEvent, function(){
@@ -106,36 +103,7 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
     }
 }
 
-
-HangmanAnimations.prototype.checkLetter = function(){
-    var self = this;
-
-    $('.letter-guess').submit(function(e){
-        e.preventDefault();
-        // check all div.backs to see if it contains the same letter as input
-        // for each div.back that matches, flip that div
-
-        var letter = $(this).find('input').val();
-        console.log(letter);
-
-
-        $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
-
-        /*
-            //Flip panel of correct letter
-            //TODO: make that letter not clickable after success
-            var garbage_letter = $(this).find('input').val();
-            self.dumpLetter(garbage_letter);
-            self.resetPanel();
-            //$(this).closest('div.panel').removeClass('flip');
-        */
-
-    });
-}
-
-
 $(function(){
     HangmanAnimations();
     HangmanAnimations.prototype.initialize();
 });
-
