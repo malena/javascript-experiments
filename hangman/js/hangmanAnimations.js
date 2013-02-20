@@ -3,9 +3,7 @@ function HangmanAnimations(element){
 }
 
 HangmanAnimations.prototype.initialize = function(){
-    //this.bounce('in');
-    //this.flipPanel('.p-click.panel', 'click');
-    this.startGameScreen();
+    this.bounce('in');
 }
 
 HangmanAnimations.prototype.startGameScreen = function(){
@@ -51,34 +49,6 @@ HangmanAnimations.prototype.bounce = function(state){
         });
     } 
     else if(state == 'out'){
-    }
-}
-
-HangmanAnimations.prototype.flipPanel = function(element, hangmanEvent) {
-    $(element).on(hangmanEvent, function(){
-        $(element).addClass('flip');
-        $('form').fadeIn();
-    });
-};
-
-HangmanAnimations.prototype.onIntroFlipLetters = function(element) {
-    var i =             0;
-    var secret_letter = $('.hover');
-
-    function flip(i){
-        secret_letter.eq(i).addClass('flip');
-
-        setInterval(function(){
-           secret_letter.eq(i).removeClass('flip');
-        }, 280);
-    };
-
-    var word_count =    $('.word ul li').length;
-    if (i <= word_count) {
-        setInterval(function(){
-            flip(i);
-            return i++
-        },190);
     }
 }
 
