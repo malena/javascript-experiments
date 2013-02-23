@@ -55,6 +55,86 @@ div {
     z-index: 2;
 }
 
+/* Hangman man 
+=========================================*/
+
+.hangman-game {
+    float: right;
+    width: 50%;
+    margin-right: 10%;
+}
+
+.hangman-man {
+    margin: 5% 0 0 5%;
+    float: left;
+    width: 20%;
+    background-image: url(../images/pole.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: relative;
+}
+
+.hangman-man div {
+    position: absolute;
+    background-repeat: no-repeat; 
+}
+
+.head {
+    display: none;
+    width: 105px;
+    height: 98px;
+    background-image: url(../images/body-parts/head.png);
+    top: 53px;
+    left: 156px;
+}
+
+.arm-left {
+    display: none;
+    width: 200px;
+    height: 98px;
+    background-image: url(../images/body-parts/arm-left.png);
+    top: 159px;
+    left: 127px;
+}
+
+.arm-right {
+    display: none;
+    width: 200px;
+    height: 98px;
+    background-image: url(../images/body-parts/arm-right.png);
+    top: 161px;
+    left: 215px;
+}
+
+.leg-left {
+    display: none;
+    width: 200px;
+    height: 98px;
+    background-image: url(../images/body-parts/leg-left.png);
+    top: 256px;
+    left: 144px;
+}
+
+.leg-right {
+    display: none;
+    width: 200px;
+    height: 98px;
+    background-image: url(../images/body-parts/leg-right.png);
+    top: 252px;
+    left: 215px;
+}
+
+.body {
+    display: none;
+    width: 50px;
+    height: 200px;
+    background-image: url(../images/body-parts/body.png);
+    top: 151px;
+    left: 189px;
+}
+
+
 /* Garbage Letters 
 =========================================*/
 .white-bg {

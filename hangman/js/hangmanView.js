@@ -1,8 +1,10 @@
 function HangmanView(){
+    this.incorrect_index = 0;
 
 	var hangman = new HangmanWordDisplay({});
 	var hangman_initialize = hangman.initialize();
 	var hangman_word_array = hangman.word_array;
+    var i = 0;
 
     $('.letter-guess').submit(function(e){
         e.preventDefault();
@@ -21,10 +23,20 @@ function HangmanView(){
     	} 
         // otherwise dump letter
     	else {
+            i++;
     		console.log('no match');
     		var animate = new HangmanAnimations({});
     		animate.dumpLetter(letter);
+
+            //keep track of number of incorrect letters
     		//animate incorrect letter
+            console.log(i);
+            animate.showBodyPart(i);
+
+            if (i == 6) {
+                animate.endGame();
+            }
+
     	}
 
         //reset input box

@@ -3,7 +3,8 @@ function HangmanAnimations(element){
 }
 
 HangmanAnimations.prototype.initialize = function(){
-    this.bounce('in');
+    //this.bounce('in');
+    this.startGameScreen();
 }
 
 HangmanAnimations.prototype.startGameScreen = function(){
@@ -71,6 +72,14 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
         $('form input').focus().val('');
         $('.white-bg').hide();
     }
+}
+
+HangmanAnimations.prototype.showBodyPart = function(index){
+        $('.hangman-man div').eq(index-1).toggle();
+}
+
+HangmanAnimations.prototype.endGame = function(){
+    console.log('test');
 }
 
 $(function(){
