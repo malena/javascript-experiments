@@ -23,9 +23,8 @@ h1 {
 form {
 }
 
-.word ul.guess {
-    clear: both;
-    display: block;
+.hangman-game ul.guess {
+    margin: 0 auto 40px auto;
     text-align: center; 
     width: 115px;
 }
@@ -35,6 +34,13 @@ form {
 
 div {
     box-sizing: border-box;
+}
+
+.hangman-game {
+    width: 100%;
+    margin: 5% auto 5% auto;
+    text-align: center;
+    display: block;
 }
 
 /* Game Playground 
@@ -47,11 +53,6 @@ div {
     background-color: #000;
     opacity: 0;
     z-index: 2;
-}
-
-.word {
-    width: 100%;
-    height: 10%;
 }
 
 /* Garbage Letters 
@@ -140,17 +141,13 @@ div {
     background-image: url('../images/hangman-hanged.png');
 }
 
-.word {
-    margin: 5% auto 0 auto;
-    text-align: center;
-}
 
-.word ul {
+ul.random-word {
     margin: auto auto;
     display: inline-block;
 }
 
-.word ul li {
+ul.random-word li {
 
 	float: left;
 	position: relative;
