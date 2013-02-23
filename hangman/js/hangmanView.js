@@ -14,15 +14,21 @@ function HangmanView(){
     	var array_letter = hangman_word_array[letter_index];	
     	//console.log('array letter is: ' + array_letter);
 
+
+        //if there is a return value then flip letter of matching index
     	if(letter_index >= 0){
 	        $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
     	} 
+        // otherwise dump letter
     	else {
     		console.log('no match');
     		var animate = new HangmanAnimations({});
     		animate.dumpLetter(letter);
     		//animate incorrect letter
     	}
+
+        //reset input box
+        $('form input').focus().val('');
     });
 
 }
