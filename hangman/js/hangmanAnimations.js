@@ -76,10 +76,9 @@ HangmanAnimations.prototype.bounce = function(state){
 
 HangmanAnimations.prototype.dumpLetter = function(letter){
     console.log(letter);
-    $('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
-    $('.letter-guess').parent().append('<div class="white-bg"></div>');
+    //$('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
 
-    $('.white-bg').append($('span.' + letter));
+    $('.white-bg').append($('<span>' + letter + '</span>'));
 
     setTimeout(function(){
         TweenMax.to($('.white-bg span'), .5, {css:{
@@ -89,14 +88,19 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
         });
     }, 200);
 
+
+
     function reset(){
+        TweenMax.to($('.white-bg span'), .5, {css:{
+            left:'-=50px'},
+            ease:Bounce.easeOut
+        });
         $('form input').focus().val('');
-        $('.white-bg').hide();
     }
 }
 
 HangmanAnimations.prototype.showBodyPart = function(index){
-        $('.hangman-man div').eq(index-1).toggle();
+    $('.hangman-man div').eq(index-1).toggle();
 }
 
 

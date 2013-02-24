@@ -203,9 +203,6 @@ div {
     left: 190px;
 }
 
-.incorrect-letters {
-}
-
 .hangman {
     background-image: url('../images/hangman.png');
     background-size: 100% 100%;
