@@ -7,18 +7,6 @@ HangmanAnimations.prototype.initialize = function(){
     //this.endGame();
 }
 
-HangmanAnimations.prototype.startGameScreenOld = function(){
-    var playground = $('.playground');
-    TweenMax.from(playground, 1, {css:{
-        opacity:1,
-        top: '-200px'},
-        ease:Elastic.easeOut
-    })
-    TweenMax.to(playground, 1, {css:{
-        opacity:1}
-    })
-}
-
 HangmanAnimations.prototype.startGameScreen = function(){
     var playground = $('.playground');
     TweenMax.from(playground, 1, {css:{
@@ -48,15 +36,28 @@ HangmanAnimations.prototype.hangWord = function(){
     this.deadManFace();
 }
 
-HangmanAnimations.prototype.endGame = function(){
+HangmanAnimations.prototype.endGame = function(game_state){
     $('.playground').hide();
-    var hangman =  $('.hangman');
-    TweenMax.to(hangman, 2, {css:{
-        top:'0px'},
-        ease:Bounce.easeOut,
-        onComplete:this.hangWord,
-        onCompleteScope:this
-    });
+    
+    if(game_state === 'win'){
+        $('.hangman').addClass('alive')
+        $('.message h1').text('You won!!');
+        var hangman =  $('.hangman');
+        TweenMax.to(hangman, 2, {css:{
+            top:'0px'},
+            ease:Bounce.easeOut,
+            onComplete:this.hangWord,
+            onCompleteScope:this
+        });
+    } else {
+        var hangman =  $('.hangman');
+        TweenMax.to(hangman, 2, {css:{
+            top:'0px'},
+            ease:Bounce.easeOut,
+            onComplete:this.hangWord,
+            onCompleteScope:this
+        });
+    }
 }
 
 HangmanAnimations.prototype.bounce = function(state){

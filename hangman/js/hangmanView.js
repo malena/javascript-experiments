@@ -4,7 +4,9 @@ function HangmanView(){
 	var hangman = new HangmanWordDisplay({});
 	var hangman_initialize = hangman.initialize();
 	var hangman_word_array = hangman.word_array;
+    var hangman_word_letter_count = hangman.letter_count;
     var i = 0;
+    var index_correct = 0;
 
     $('.letter-guess').submit(function(e){
         e.preventDefault();
@@ -16,16 +18,23 @@ function HangmanView(){
     	var array_letter = hangman_word_array[letter_index];	
     	//console.log('array letter is: ' + array_letter);
 
+        var animate = new HangmanAnimations({});
 
         //if there is a return value then flip letter of matching index
     	if(letter_index >= 0){
-	        $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
+            console.log(hangman.letter_count);
+            index_correct++;
+            if(index_correct == hangman.letter_count){
+                $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
+                $.proxy(animate.endGame('win'), animate);
+            } else {
+    	        $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
+            }
     	} 
         // otherwise dump letter
     	else {
             i++;
     		console.log('no match');
-    		var animate = new HangmanAnimations({});
     		animate.dumpLetter(letter);
 
             //keep track of number of incorrect letters
@@ -34,7 +43,7 @@ function HangmanView(){
             animate.showBodyPart(i);
 
             if (i == 6) {
-                animate.endGame();
+                animate.endGame('lose');
             }
 
     	}

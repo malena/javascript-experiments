@@ -212,6 +212,9 @@ div {
 .hangman.dead {
     background-image: url('../images/hangman-hanged.png');
 }
+.hangman.alive {
+    background-image: url('../images/hangman-alive.png');
+}
 
 
 ul.random-word {
