@@ -37,10 +37,6 @@ div {
 }
 
 .hangman-game {
-    width: 100%;
-    margin: 5% auto 5% auto;
-    text-align: center;
-    display: block;
 }
 
 /* Game Playground 
@@ -59,9 +55,11 @@ div {
 =========================================*/
 
 .hangman-game {
+    margin: 5% 10% 5% auto;
+    text-align: center;
+    display: block;
     float: right;
-    width: 50%;
-    margin-right: 10%;
+    width: 60%;
 }
 
 .hangman-man {
