@@ -3,16 +3,26 @@ function HangmanAnimations(element){
 }
 
 HangmanAnimations.prototype.initialize = function(){
-    //this.bounce('in');
     this.startGameScreen();
+    //this.endGame();
 }
 
-HangmanAnimations.prototype.startGameScreen = function(){
+HangmanAnimations.prototype.startGameScreenOld = function(){
     var playground = $('.playground');
     TweenMax.from(playground, 1, {css:{
         opacity:1,
         top: '-200px'},
         ease:Elastic.easeOut
+    })
+    TweenMax.to(playground, 1, {css:{
+        opacity:1}
+    })
+}
+
+HangmanAnimations.prototype.startGameScreen = function(){
+    var playground = $('.playground');
+    TweenMax.from(playground, 1, {css:{
+        opacity:1}
     })
     TweenMax.to(playground, 1, {css:{
         opacity:1}
@@ -31,11 +41,22 @@ HangmanAnimations.prototype.hangWord = function(){
     var word = $('.message span');
     TweenMax.to(word, 2, {css:{
         rotationZ: 90,
-        top:'145px',
-        left:'-80px'},
+        top:'88px',
+        left:'81px'},
         ease:Elastic.easeOut
     });
     this.deadManFace();
+}
+
+HangmanAnimations.prototype.endGame = function(){
+    $('.playground').hide();
+    var hangman =  $('.hangman');
+    TweenMax.to(hangman, 2, {css:{
+        top:'0px'},
+        ease:Bounce.easeOut,
+        onComplete:this.hangWord,
+        onCompleteScope:this
+    });
 }
 
 HangmanAnimations.prototype.bounce = function(state){
@@ -78,9 +99,6 @@ HangmanAnimations.prototype.showBodyPart = function(index){
         $('.hangman-man div').eq(index-1).toggle();
 }
 
-HangmanAnimations.prototype.endGame = function(){
-    console.log('test');
-}
 
 $(function(){
     HangmanAnimations();
