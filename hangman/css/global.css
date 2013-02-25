@@ -67,7 +67,6 @@ div {
     float: left;
     width: 20%;
     background-image: url(../images/pole.png);
-    background-size: 90%;
     background-repeat: no-repeat;
     height: 100%;
     position: relative;
@@ -84,7 +83,7 @@ div {
     height: 98px;
     background-image: url(../images/body-parts/head.png);
     top: 53px;
-    left: 156px;
+    left: 173px;
 }
 
 .arm-left {
@@ -93,7 +92,7 @@ div {
     height: 98px;
     background-image: url(../images/body-parts/arm-left.png);
     top: 159px;
-    left: 127px;
+    left: 144px;
 }
 
 .arm-right {
@@ -102,7 +101,7 @@ div {
     height: 98px;
     background-image: url(../images/body-parts/arm-right.png);
     top: 161px;
-    left: 215px;
+    left: 232px;
 }
 
 .leg-left {
@@ -111,7 +110,7 @@ div {
     height: 98px;
     background-image: url(../images/body-parts/leg-left.png);
     top: 256px;
-    left: 144px;
+    left: 161px;
 }
 
 .leg-right {
@@ -120,7 +119,7 @@ div {
     height: 98px;
     background-image: url(../images/body-parts/leg-right.png);
     top: 252px;
-    left: 215px;
+    left: 232px;
 }
 
 .body {
@@ -129,7 +128,7 @@ div {
     height: 200px;
     background-image: url(../images/body-parts/body.png);
     top: 151px;
-    left: 189px;
+    left: 206px;
 }
 
 

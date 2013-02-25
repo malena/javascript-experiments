@@ -22,7 +22,7 @@ HangmanAnimations.prototype.deadManFace = function(){
 
     setTimeout($.proxy(function(){
         this.startGameScreen();
-    }, HangmanAnimations.prototype),2000);
+    }, HangmanAnimations.prototype),1000);
 }
 
 HangmanAnimations.prototype.hangWord = function(){
@@ -82,12 +82,12 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
     $('.white-bg').append($('<span>' + letter + '</span>'));
 
     setTimeout(function(){
-        TweenMax.to($('.white-bg span'), .5, {css:{
+        TweenMax.to($('.white-bg span'), .2, {css:{
             top:'300px'},
             ease:Bounce.easeOut,
             onComplete:reset
         });
-    }, 200);
+    }, 50);
 
 
 

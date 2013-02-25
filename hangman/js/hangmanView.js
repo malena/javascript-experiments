@@ -26,7 +26,10 @@ function HangmanView(){
             index_correct++;
             if(index_correct == hangman.letter_count){
                 $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
-                $.proxy(animate.endGame('win'), animate);
+                setTimeout(function(){
+                    $.proxy(animate.endGame('win'), animate);
+                }, 1000);
+
             } else {
     	        $("div.guess p:contains('" + letter + "')").parent().parent().addClass('flip');
             }
@@ -43,9 +46,10 @@ function HangmanView(){
             animate.showBodyPart(i);
 
             if (i == 6) {
-                animate.endGame('lose');
+                setTimeout(function(){
+                    animate.endGame('lose');
+                }, 1000);
             }
-
     	}
 
         //reset input box
