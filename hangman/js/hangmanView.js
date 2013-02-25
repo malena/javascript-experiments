@@ -11,12 +11,9 @@ function HangmanView(){
     $('.letter-guess').submit(function(e){
         e.preventDefault();
 
-        var letter = $(this).find('input').val();
-        //console.log('input letter: ' + letter);
-        var letter_index = hangman_word_array.indexOf(letter);
-        //console.log('letter index: ' + letter_index);
-    	var array_letter = hangman_word_array[letter_index];	
-    	//console.log('array letter is: ' + array_letter);
+        var letter = $(this).find('input').val(); // input letter
+        var letter_index = hangman_word_array.indexOf(letter); // letter index
+    	var array_letter = hangman_word_array[letter_index]; // array letter
 
         var animate = new HangmanAnimations({});
 
@@ -37,12 +34,7 @@ function HangmanView(){
         // otherwise dump letter
     	else {
             i++;
-    		console.log('no match');
     		animate.dumpLetter(letter);
-
-            //keep track of number of incorrect letters
-    		//animate incorrect letter
-            console.log(i);
             animate.showBodyPart(i);
 
             if (i == 6) {
@@ -51,7 +43,6 @@ function HangmanView(){
                 }, 1000);
             }
     	}
-
         //reset input box
         $('form input').focus().val('');
     });
