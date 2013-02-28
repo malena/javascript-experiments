@@ -126,8 +126,9 @@ div {
 }
 
 
-/* Garbage Letters 
+/* Dumped Letters 
 =========================================*/
+
 .animated-letter {
     text-align: center;
     height: 98px;
@@ -143,11 +144,6 @@ div {
     display: block;
     position: absolute;
     font-size: 80px;
-}
-
-.incorrect-letters {
-    color: #fff;
-    position: relative;
 }
 
 .hangman {
@@ -277,7 +273,6 @@ button:hover {
     cursor: pointer;
 }
 
-
 .panel {
     cursor: pointer;
     float: left;
@@ -303,9 +298,6 @@ button:hover {
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
     box-shadow: 0 1px 5px rgba(0,0,0,0.9);
 }
-
-/* -- make sure to declare a default for every property that you want animated -- */
-/* -- general styles, including Y axis rotation -- */
 
 .random-letter .panel .front {
     background-image: url(../images/question-box.png);
