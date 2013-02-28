@@ -1,6 +1,9 @@
 function HangmanView(){
+    var animate = new HangmanAnimations({});
+    animate.initialize();
 	var hangman = new HangmanWordDisplay({});
-	var hangman_initialize = hangman.initialize();
+	hangman.initialize();
+    
 	var hangman_word_array = hangman.word_array;
     var hangman_word_letter_count = hangman.letter_count;
     var incorrect = 1;
@@ -11,7 +14,6 @@ function HangmanView(){
 
         var letter = $(this).find('input').val(); // input letter
         var letter_index = hangman_word_array.indexOf(letter); // letter index
-        var animate = new HangmanAnimations({});
 
         // dump letter
     	if(letter_index == -1){

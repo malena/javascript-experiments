@@ -1,5 +1,6 @@
-function HangmanAnimations(element){
-    this.element;
+function HangmanAnimations(){
+    this.animated_letter_container = '.animated-letter';
+    this.hangman = '.hangman';
 }
 
 HangmanAnimations.prototype.initialize = function(){
@@ -17,7 +18,7 @@ HangmanAnimations.prototype.startGameScreen = function(){
 }
 
 HangmanAnimations.prototype.deadManFace = function(){
-    $('.hangman').addClass('dead');
+    $(this.hangman).addClass('dead');
 
     setTimeout($.proxy(function(){
         this.startGameScreen();
@@ -36,21 +37,20 @@ HangmanAnimations.prototype.hangWord = function(){
 }
 
 HangmanAnimations.prototype.endGame = function(game_state){
+    var self = this;
     $('.playground').hide();
     
     if(game_state === 'win'){
-        $('.hangman').addClass('alive')
+        $(self.hangman).addClass('alive')
         $('.message h1').text('Cheers!!');
-        var hangman =  $('.hangman');
-        TweenMax.to(hangman, 2, {css:{
+        TweenMax.to($(self.hangman), 2, {css:{
             top:'0px'},
             ease:Bounce.easeOut,
             onComplete:this.hangWord,
             onCompleteScope:this
         });
     } else if(game_state === 'lose'){
-        var hangman =  $('.hangman');
-        TweenMax.to(hangman, 2, {css:{
+        TweenMax.to($(self.hangman), 2, {css:{
             top:'0px'},
             ease:Bounce.easeOut,
             onComplete:this.hangWord,
@@ -60,10 +60,10 @@ HangmanAnimations.prototype.endGame = function(game_state){
 }
 
 HangmanAnimations.prototype.bounce = function(state){
+    var self = this;
 
     if(state == 'in'){
-        var hangman =  $('.hangman');
-        TweenMax.to(hangman, 2, {css:{
+        TweenMax.to($(self.hangman), 2, {css:{
             top:'0px'},
             ease:Bounce.easeOut,
             onComplete:this.hangWord,
@@ -73,10 +73,10 @@ HangmanAnimations.prototype.bounce = function(state){
 }
 
 HangmanAnimations.prototype.dumpLetter = function(letter){
-    $('.animated-letter').append($('<span>' + letter + '</span>'));
+    $(this.animated_letter_container).append($('<span class="tween-letter">' + letter + '</span>'));
 
     setTimeout(function(){
-        TweenMax.to($('.animated-letter span'), .2, {css:{
+        TweenMax.to($('.tween-letter'), .2, {css:{
             top:'300px'},
             ease:Bounce.easeOut,
             onComplete:reset
@@ -84,7 +84,7 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
     }, 50);
 
     function reset(){
-        TweenMax.to($('.animated-letter span'), .5, {css:{
+        TweenMax.to($('.tween-letter'), .5, {css:{
             left:'-=50px'},
             ease:Bounce.easeOut
         });
@@ -95,8 +95,3 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
 HangmanAnimations.prototype.showBodyPart = function(index){
     $('.hangman-man div').eq(index-1).toggle();
 }
-
-$(function(){
-    HangmanAnimations();
-    HangmanAnimations.prototype.initialize();
-});
