@@ -4,7 +4,6 @@ function HangmanAnimations(element){
 
 HangmanAnimations.prototype.initialize = function(){
     this.startGameScreen();
-    //this.endGame();
 }
 
 HangmanAnimations.prototype.startGameScreen = function(){
@@ -41,7 +40,7 @@ HangmanAnimations.prototype.endGame = function(game_state){
     
     if(game_state === 'win'){
         $('.hangman').addClass('alive')
-        $('.message h1').text('You won!!');
+        $('.message h1').text('Cheers!!');
         var hangman =  $('.hangman');
         TweenMax.to(hangman, 2, {css:{
             top:'0px'},
@@ -49,7 +48,7 @@ HangmanAnimations.prototype.endGame = function(game_state){
             onComplete:this.hangWord,
             onCompleteScope:this
         });
-    } else {
+    } else if(game_state === 'lose'){
         var hangman =  $('.hangman');
         TweenMax.to(hangman, 2, {css:{
             top:'0px'},
@@ -71,28 +70,21 @@ HangmanAnimations.prototype.bounce = function(state){
             onCompleteScope:this
         });
     } 
-    else if(state == 'out'){
-    }
 }
 
 HangmanAnimations.prototype.dumpLetter = function(letter){
-    console.log(letter);
-    //$('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
-
-    $('.white-bg').append($('<span>' + letter + '</span>'));
+    $('.animated-letter').append($('<span>' + letter + '</span>'));
 
     setTimeout(function(){
-        TweenMax.to($('.white-bg span'), .2, {css:{
+        TweenMax.to($('.animated-letter span'), .2, {css:{
             top:'300px'},
             ease:Bounce.easeOut,
             onComplete:reset
         });
     }, 50);
 
-
-
     function reset(){
-        TweenMax.to($('.white-bg span'), .5, {css:{
+        TweenMax.to($('.animated-letter span'), .5, {css:{
             left:'-=50px'},
             ease:Bounce.easeOut
         });
@@ -103,7 +95,6 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
 HangmanAnimations.prototype.showBodyPart = function(index){
     $('.hangman-man div').eq(index-1).toggle();
 }
-
 
 $(function(){
     HangmanAnimations();

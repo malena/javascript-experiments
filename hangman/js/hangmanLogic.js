@@ -1,5 +1,5 @@
 function HangmanWordDisplay(){
-    this.words          = ['happy', 'hungry', 'tree', 'mug', 'cat', 'dog'];
+    this.words          = ['sake', 'vodka', 'brandy', 'cider', 'rum'];
     this.words_count    = this.words.length;
     this.word           = this.getWord();
     this.letter_count   = this.word.length; 
@@ -12,19 +12,18 @@ HangmanWordDisplay.prototype.initialize = function(){
 }
 
 HangmanWordDisplay.prototype.getWord = function(){
-    var random_index = this.getRandomIndex(6);
+    var random_index = this.getRandomIndex(this.words_count);
 
     if (this.words[random_index] === undefined){
-        console.log('back up word ' + this.words[1]);
-        return this.words[1];
+       return this.words[0];
+
     } else {
-       console.log('chosen word is ' + this.words[random_index]);
        return this.words[random_index];
     }
 }
 
 HangmanWordDisplay.prototype.getRandomIndex = function(word_list_count){
-    var random = Math.round(Math.random() * (word_list_count -  0) + 0);
+    var random = Math.round(Math.random() * (word_list_count) + 0);
     return random;
 }
 
