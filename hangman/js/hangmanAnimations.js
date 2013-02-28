@@ -4,6 +4,7 @@ function HangmanAnimations(element){
 
 HangmanAnimations.prototype.initialize = function(){
     this.startGameScreen();
+    //this.endGame();
 }
 
 HangmanAnimations.prototype.startGameScreen = function(){
@@ -75,6 +76,9 @@ HangmanAnimations.prototype.bounce = function(state){
 }
 
 HangmanAnimations.prototype.dumpLetter = function(letter){
+    console.log(letter);
+    //$('.incorrect-letters').append('<span class="' + letter + '">' + letter + '</span>');
+
     $('.white-bg').append($('<span>' + letter + '</span>'));
 
     setTimeout(function(){
@@ -84,6 +88,8 @@ HangmanAnimations.prototype.dumpLetter = function(letter){
             onComplete:reset
         });
     }, 50);
+
+
 
     function reset(){
         TweenMax.to($('.white-bg span'), .5, {css:{
@@ -98,6 +104,8 @@ HangmanAnimations.prototype.showBodyPart = function(index){
     $('.hangman-man div').eq(index-1).toggle();
 }
 
+
 $(function(){
+    HangmanAnimations();
     HangmanAnimations.prototype.initialize();
 });
