@@ -37,6 +37,10 @@ section.prototype {
     height:100px;
 }
 
+.tictactoe div.highlight {
+    background-color: yellow;
+}
+
 .tictactoe a {
     display: block;
     text-align: center;
