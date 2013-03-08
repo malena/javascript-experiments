@@ -15,7 +15,6 @@ function TicTacToe(){
 }
 
 TicTacToe.prototype.initialize = function(){
-  this.replaceWinningSetItemWithPlayer('x', 1);
 }
 
 TicTacToe.prototype.checkArrayEquality = function(){
@@ -52,7 +51,6 @@ TicTacToe.prototype.checkForThreeOfSameKind = function(){
 
 TicTacToe.prototype.returnClickedBlockPosition = function(element){
    var blockPosition = $(element).parent().index() + 1;
-   console.log(blockPosition);
 
    if(blockPosition == 1){
         //map the player letter with set array

@@ -10,11 +10,15 @@ function TicTacToeView(){
     $('.tictactoe a').click(function(e){
         e.preventDefault();
         var block = $(this).parent();
+        var position = tictactoe.returnClickedBlockPosition(this);
 
         animate.populateBox(this, tictactoe.player);
+        
+        tictactoe.replaceWinningSetItemWithPlayer(tictactoe.player, position);
+        tictactoe.checkArrayEquality();
+
         tictactoe.playerToggle();
 
-        tictactoe.returnClickedBlockPosition(this);
     });
 
 }
