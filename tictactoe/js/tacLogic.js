@@ -15,6 +15,31 @@ function TicTacToe(){
 }
 
 TicTacToe.prototype.initialize = function(){
+  this.replaceWinningSetItemWithPlayer('x', 1);
+}
+
+TicTacToe.prototype.checkArrayEquality = function(){
+  var test_array = this.threeConsecutiveBlocks.set1;
+
+  for(var i = 0; i < test_array.length - 1; i++){
+    if(test_array[i] != test_array[i+1]) {
+      console.log('nope'); 
+      return false;
+    } 
+  }
+  console.log('true');
+}
+
+TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position){
+  var array = this.threeConsecutiveBlocks.set1;
+  var index = array.indexOf(position);
+  
+  var index = array.indexOf(position);
+
+  if(index !== -1){
+    array[index] = player;
+  }
+  console.log(array);
 }
 
 TicTacToe.prototype.checkForThreeOfSameKind = function(){
@@ -39,6 +64,7 @@ TicTacToe.prototype.returnClickedBlockPosition = function(element){
    }
    return blockPosition;
 }
+
 
 TicTacToe.prototype.playerTurn = function(){
     this.markBlock(this.player)
