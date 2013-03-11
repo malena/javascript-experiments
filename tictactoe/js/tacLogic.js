@@ -1,3 +1,4 @@
+
 function TicTacToe(){
     this.player = 'x';
     this.turn = this.player;
@@ -13,6 +14,23 @@ function TicTacToe(){
        set8 : [3,5,7]
     }
 
+    this.caseSets = {
+        case1 : {
+            set1 : this.threeConsecutiveBlocks.set1,
+            set2 : this.threeConsecutiveBlocks.set4,
+            set3 : this.threeConsecutiveBlocks.set7
+        },
+        case2 : {
+            set1 : this.threeConsecutiveBlocks.set1,
+            set2 : this.threeConsecutiveBlocks.set5
+        },
+        case3 : {
+            set1 : this.threeConsecutiveBlocks.set1,
+            set2 : this.threeConsecutiveBlocks.set6,
+            set3 : this.threeConsecutiveBlocks.set8
+        }
+    }
+
     this.winningSet = {
         playerO : ['o', 'o', 'o'],
         playerX : ['x', 'x', 'x']
@@ -23,15 +41,21 @@ TicTacToe.prototype.initialize = function(){
     //this.loopThroughArrays();
 }
 
-TicTacToe.prototype.checkForWin = function(){
+TicTacToe.prototype.checkForWin = function(player){
+    var winningSet;
+
+    if(player === 'x'){
+        winningSet = this.winningSet.playerX.join('');
+    }
+    else if(player === 'o'){
+        winningSet = this.winningSet.playerO.join('');
+    }
     var obj = this.threeConsecutiveBlocks;
-    var winningSet = this.winningSet.playerX.join('');
 
     for(var propt in obj){
         var array = obj[propt];
         set = array.join('');
         if (set === winningSet){
-            alert('win');
            return true;
         } else {
             console.log('no match');
@@ -40,55 +64,70 @@ TicTacToe.prototype.checkForWin = function(){
 }
 
 TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position){
-  var array = this.threeConsecutiveBlocks.set1;
-  var index = array.indexOf(position);
-  
-  var index = array.indexOf(position);
 
-  if(index !== -1){
-    array[index] = player;
-  }
-  console.log(array);
-}
+    var caseSets;
 
-TicTacToe.prototype.checkForThreeOfSameKind = function(){
-   //get set1 first value and plug it into the bottom
-   var $element =  $('.tictactoe div');
-   var value = $element.eq(1).find('a').text();
-   console.log('value: ' + value);
+    switch(position){
+
+        case 1:
+        caseSets = this.caseSets.case1;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 2:
+        caseSets = this.caseSets.case2;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 3:
+        caseSets = this.caseSets.case3;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+    }
+
+    /*
+    if (position === 1) {
+        var caseSets = this.caseSets.case1;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+    }
+    */
 
 }
 
 TicTacToe.prototype.returnClickedBlockPosition = function(element){
-   var blockPosition = $(element).parent().index() + 1;
-
-    if(blockPosition == 1){
-        console.log('set is:' + this.threeConsecutiveBlocks.set1);
-        console.log('set is:' + this.threeConsecutiveBlocks.set4);
-        console.log('set is:' + this.threeConsecutiveBlocks.set7);
-    }
-    else if(blockPosition == 2){
-        console.log('set is:' + this.threeConsecutiveBlocks.set1);
-        console.log('set is:' + this.threeConsecutiveBlocks.set5);
-    }
-    else if(blockPosition == 3){
-        console.log('set is:' + this.threeConsecutiveBlocks.set1);
-        console.log('set is:' + this.threeConsecutiveBlocks.set6);
-        console.log('set is:' + this.threeConsecutiveBlocks.set8);
-    }
-    else if(blockPosition == 4){
-        console.log('set is:' + this.threeConsecutiveBlocks.set2);
-        console.log('set is:' + this.threeConsecutiveBlocks.set4);
-    }
-    else if(blockPosition == 5){
-        console.log('set is:' + this.threeConsecutiveBlocks.set2);
-        console.log('set is:' + this.threeConsecutiveBlocks.set5);
-        console.log('set is:' + this.threeConsecutiveBlocks.set7);
-        console.log('set is:' + this.threeConsecutiveBlocks.set8);
-    }
-    else if(blockPosition == 6 ) {
-
-    }
+    var blockPosition = $(element).parent().index() + 1;
     console.log('block position is: ' + blockPosition);
     return blockPosition;
 }

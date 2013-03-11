@@ -13,9 +13,13 @@ function TicTacToeView(){
         var position = tictactoe.returnClickedBlockPosition(this);
 
         animate.populateBox(this, tictactoe.player);
-        
+
         tictactoe.replaceWinningSetItemWithPlayer(tictactoe.player, position);
-        tictactoe.checkForWin();
+
+        if(tictactoe.checkForWin(tictactoe.player)){
+            console.log('success');
+            alert('win');
+        }
 
         tictactoe.playerToggle();
 
