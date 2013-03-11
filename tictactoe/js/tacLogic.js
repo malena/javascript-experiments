@@ -28,6 +28,33 @@ function TicTacToe(){
             set1 : this.threeConsecutiveBlocks.set1,
             set2 : this.threeConsecutiveBlocks.set6,
             set3 : this.threeConsecutiveBlocks.set8
+        },
+        case4 : {
+            set1 : this.threeConsecutiveBlocks.set2,
+            set2 : this.threeConsecutiveBlocks.set4,
+        },
+        case5 : {
+            set1 : this.threeConsecutiveBlocks.set2,
+            set2 : this.threeConsecutiveBlocks.set5,
+            set3 : this.threeConsecutiveBlocks.set8
+        },
+        case6 : {
+            set1 : this.threeConsecutiveBlocks.set2,
+            set2 : this.threeConsecutiveBlocks.set6,
+        },
+        case7 : {
+            set1 : this.threeConsecutiveBlocks.set3,
+            set2 : this.threeConsecutiveBlocks.set4,
+            set3 : this.threeConsecutiveBlocks.set8
+        },
+        case8: {
+            set1 : this.threeConsecutiveBlocks.set3,
+            set2 : this.threeConsecutiveBlocks.set5,
+        },
+        case9 : {
+            set1 : this.threeConsecutiveBlocks.set3,
+            set2 : this.threeConsecutiveBlocks.set6,
+            set3 : this.threeConsecutiveBlocks.set7
         }
     }
 
@@ -107,11 +134,9 @@ TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position)
             console.log(array);
         }
         break;
-    }
 
-    /*
-    if (position === 1) {
-        var caseSets = this.caseSets.case1;
+        case 4:
+        caseSets = this.caseSets.case4;
         for (var propt in caseSets){
             var array = caseSets[propt];             
             var index = array.indexOf(position);
@@ -121,9 +146,73 @@ TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position)
             }
             console.log(array);
         }
-    }
-    */
+        break;
 
+        case 5:
+        caseSets = this.caseSets.case5;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 6:
+        caseSets = this.caseSets.case6;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 7:
+        caseSets = this.caseSets.case7;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 8:
+        caseSets = this.caseSets.case8;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+
+        case 9:
+        caseSets = this.caseSets.case9;
+        for (var propt in caseSets){
+            var array = caseSets[propt];             
+            var index = array.indexOf(position);
+
+            if(index !== -1){
+              array[index] = player;
+            }
+            console.log(array);
+        }
+        break;
+    }
 }
 
 TicTacToe.prototype.returnClickedBlockPosition = function(element){
