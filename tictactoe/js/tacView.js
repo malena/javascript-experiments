@@ -15,7 +15,7 @@ function TicTacToeView(){
         animate.populateBox(this, tictactoe.player);
         
         tictactoe.replaceWinningSetItemWithPlayer(tictactoe.player, position);
-        tictactoe.checkArrayEquality();
+        tictactoe.checkForWin();
 
         tictactoe.playerToggle();
 

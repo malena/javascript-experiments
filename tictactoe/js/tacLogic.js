@@ -12,21 +12,31 @@ function TicTacToe(){
        set7 : [1,5,9],
        set8 : [3,5,7]
     }
+
+    this.winningSet = {
+        playerO : ['o', 'o', 'o'],
+        playerX : ['x', 'x', 'x']
+    }
 }
 
 TicTacToe.prototype.initialize = function(){
+    //this.loopThroughArrays();
 }
 
-TicTacToe.prototype.checkArrayEquality = function(){
-  var test_array = this.threeConsecutiveBlocks.set1;
+TicTacToe.prototype.checkForWin = function(){
+    var obj = this.threeConsecutiveBlocks;
+    var winningSet = this.winningSet.playerX.join('');
 
-  for(var i = 0; i < test_array.length - 1; i++){
-    if(test_array[i] != test_array[i+1]) {
-      console.log('nope'); 
-      return false;
-    } 
-  }
-  console.log('true');
+    for(var propt in obj){
+        var array = obj[propt];
+        set = array.join('');
+        if (set === winningSet){
+            alert('win');
+           return true;
+        } else {
+            console.log('no match');
+        }
+    }
 }
 
 TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position){
@@ -52,17 +62,36 @@ TicTacToe.prototype.checkForThreeOfSameKind = function(){
 TicTacToe.prototype.returnClickedBlockPosition = function(element){
    var blockPosition = $(element).parent().index() + 1;
 
-   if(blockPosition == 1){
-        //map the player letter with set array
-        //for instance 1 is x so new array is set1populated = [x, 2, 3]
-        //once set1populated has three matching of either x or o, game is over
+    if(blockPosition == 1){
         console.log('set is:' + this.threeConsecutiveBlocks.set1);
         console.log('set is:' + this.threeConsecutiveBlocks.set4);
         console.log('set is:' + this.threeConsecutiveBlocks.set7);
-   }
-   return blockPosition;
-}
+    }
+    else if(blockPosition == 2){
+        console.log('set is:' + this.threeConsecutiveBlocks.set1);
+        console.log('set is:' + this.threeConsecutiveBlocks.set5);
+    }
+    else if(blockPosition == 3){
+        console.log('set is:' + this.threeConsecutiveBlocks.set1);
+        console.log('set is:' + this.threeConsecutiveBlocks.set6);
+        console.log('set is:' + this.threeConsecutiveBlocks.set8);
+    }
+    else if(blockPosition == 4){
+        console.log('set is:' + this.threeConsecutiveBlocks.set2);
+        console.log('set is:' + this.threeConsecutiveBlocks.set4);
+    }
+    else if(blockPosition == 5){
+        console.log('set is:' + this.threeConsecutiveBlocks.set2);
+        console.log('set is:' + this.threeConsecutiveBlocks.set5);
+        console.log('set is:' + this.threeConsecutiveBlocks.set7);
+        console.log('set is:' + this.threeConsecutiveBlocks.set8);
+    }
+    else if(blockPosition == 6 ) {
 
+    }
+    console.log('block position is: ' + blockPosition);
+    return blockPosition;
+}
 
 TicTacToe.prototype.playerTurn = function(){
     this.markBlock(this.player)
