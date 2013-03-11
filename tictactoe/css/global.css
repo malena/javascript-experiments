@@ -3,6 +3,14 @@
     padding: 0;
 }
 
+body {
+    background-color: #000;
+}
+
+a {
+    color: #fff;
+}
+
 section {
     position: absolute;
     height: 350px;

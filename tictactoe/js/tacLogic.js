@@ -1,4 +1,3 @@
-
 function TicTacToe(){
     this.player = 'x';
     this.turn = this.player;
@@ -36,7 +35,8 @@ function TicTacToe(){
         case5 : {
             set1 : this.threeConsecutiveBlocks.set2,
             set2 : this.threeConsecutiveBlocks.set5,
-            set3 : this.threeConsecutiveBlocks.set8
+            set3 : this.threeConsecutiveBlocks.set7,
+            set4 : this.threeConsecutiveBlocks.set8
         },
         case6 : {
             set1 : this.threeConsecutiveBlocks.set2,
@@ -65,7 +65,6 @@ function TicTacToe(){
 }
 
 TicTacToe.prototype.initialize = function(){
-    //this.loopThroughArrays();
 }
 
 TicTacToe.prototype.checkForWin = function(player){
@@ -90,134 +89,54 @@ TicTacToe.prototype.checkForWin = function(player){
     }
 }
 
+TicTacToe.prototype.injectPlayerMarkInSet = function(caseSet, player, position){
+    var caseSets = caseSet;
+
+    for (var propt in caseSets){
+        var array = caseSets[propt];             
+        var index = array.indexOf(position);
+
+        if(index !== -1){
+          array[index] = player;
+        }
+        console.log(array);
+    }
+}
+
 TicTacToe.prototype.replaceWinningSetItemWithPlayer = function(player, position){
-
-    var caseSets;
-
     switch(position){
-
         case 1:
-        caseSets = this.caseSets.case1;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case1, player, position);
         break;
-
         case 2:
-        caseSets = this.caseSets.case2;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case2, player, position);
         break;
-
         case 3:
-        caseSets = this.caseSets.case3;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case3, player, position);
         break;
-
         case 4:
-        caseSets = this.caseSets.case4;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case4, player, position);
         break;
-
         case 5:
-        caseSets = this.caseSets.case5;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case5, player, position);
         break;
-
         case 6:
-        caseSets = this.caseSets.case6;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case6, player, position);
         break;
-
         case 7:
-        caseSets = this.caseSets.case7;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case7, player, position);
         break;
-
         case 8:
-        caseSets = this.caseSets.case8;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case8, player, position);
         break;
-
         case 9:
-        caseSets = this.caseSets.case9;
-        for (var propt in caseSets){
-            var array = caseSets[propt];             
-            var index = array.indexOf(position);
-
-            if(index !== -1){
-              array[index] = player;
-            }
-            console.log(array);
-        }
+        this.injectPlayerMarkInSet(this.caseSets.case9, player, position);
         break;
     }
 }
 
 TicTacToe.prototype.returnClickedBlockPosition = function(element){
     var blockPosition = $(element).parent().index() + 1;
-    console.log('block position is: ' + blockPosition);
     return blockPosition;
 }
 
@@ -227,13 +146,17 @@ TicTacToe.prototype.playerTurn = function(){
 }
 
 TicTacToe.prototype.playerToggle = function(){
-
     if(this.player === 'x') {
         this.player = 'o';
     }
     else{
         this.player = 'x';
     }
+}
+
+TicTacToe.prototype.gameOver = function(){
+     alert('win');
+     location.reload();
 }
 
 TicTacToe.prototype.chooseBox = function(){
