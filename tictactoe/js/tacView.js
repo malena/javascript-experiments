@@ -3,6 +3,8 @@ function TicTacToeView(){
     var animate = new TicTacToeAnimations({});
     animate.initialize();
 	var tictactoe = new TicTacToe({});
+    var robot = new TicTacToeRobot({});
+    robot.initialize();
 
     $('.tictactoe a').click(function(e){
         e.preventDefault();
@@ -19,6 +21,7 @@ function TicTacToeView(){
 
         tictactoe.playerToggle();
 
+        robot.chooseBlock();
     });
 
 }
