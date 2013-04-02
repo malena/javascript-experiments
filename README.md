@@ -8,6 +8,6 @@ I pick existing ideas or games to avoid scope creeping.
 There is also a time limit of one month regardless of the state of the program so don't hate if it sucks! :D
 
 <a href="http://malena.github.com/javascript-experiments/calculator/" target="_blank">calculator</a><br/>
-<a href="http://malena.github.com/javascript-experiments/hangman/" target="_blank">hangman</a>
-<a href="http://malena.github.com/javascript-experiments/tictactoe/" target="_blank">tictactoe</a>
+<a href="http://malena.github.com/javascript-experiments/hangman/" target="_blank">hangman</a><br/>
+<a href="http://malena.github.com/javascript-experiments/tictactoe/" target="_blank">tictactoe</a></br>
 
