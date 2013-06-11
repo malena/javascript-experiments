@@ -10,4 +10,5 @@ There is also a time limit of one month regardless of the state of the program s
 <a href="http://malena.github.com/javascript-experiments/calculator/" target="_blank">calculator</a><br/>
 <a href="http://malena.github.com/javascript-experiments/hangman/" target="_blank">hangman</a><br/>
 <a href="http://malena.github.com/javascript-experiments/tictactoe/" target="_blank">tictactoe</a></br>
+<a href="http://malena.github.com/javascript-experiments/animated-input-box/" target="_blank">animated input box</a></br>
 
