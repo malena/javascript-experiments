@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    background-color: #9D96B1;
+    color: #000;
+    font-size: 16px;
+}
+
+ul {
+    font-size: 0;
+    overflow: hidden;
+    text-align: left;
+    width: 300%;
+    height: 155px;
+    display: block;
+    margin: auto; 
+    list-style-type: none;
+    position: relative;
+    left: 80px; // this should be the same as section a width
+}
+
+li {
+    position: relative;
+    display: inline-block;
+    padding: 10px 0;
+    font-size: 30px;
+}
+
+li a {
+    color: #fff;
+}
+
+a {
+    color:#036064;
+    text-decoration: none;
+}
+
+section {
+    overflow: hidden;
+    margin: auto auto;
+    position: relative;
+    padding: 20px 0px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+section div {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 94;
+    margin: auto; 
+    overflow: hidden;
+}
+
+section a {
+    display: block;
+    width: 80px;
+    height: 100%;
+    text-indent: -3000px;
+    background-image: none;
+}
+
+.right-control,
+.left-control {
+    position: absolute;
+    display: block;
+    height: 100%;
+    top: 0px;
+}
+
+.right-control {
+   right: 0; 
+}
+
+.left-control {
+   left: 0; 
+}
+
+
+section a.left {
+    opacity: 0;
+    background: url(../images/left-arrow.png) #9D96B1 no-repeat center center;
+    z-index: 4;
+}
+
+section a.right {
+    background: url(../images/right-arrow.png) #9D96B1 no-repeat center center;
+}
+
+
+img {
+    opacity: 1;
+}
