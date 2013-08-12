@@ -73,10 +73,10 @@ Controller.prototype.updateLabelState = function(){
 	var myCookieArray = this.getListFromCookie();	
 	var myLabelArray = this.getListOfProducts();
 
-	for(i=myLabelArray.length - 1; i >= 0; --i){
+	for(i=myLabelArray.length - 1; i>= 0; --i){
 		if(myCookieArray.indexOf(myLabelArray[i]) >= 0){
 			myLabelArray.splice(i, 1);	
-			return myLabelArray;
+			console.log(myLabelArray);
 		}	
 	}
 };
