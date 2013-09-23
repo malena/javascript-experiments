@@ -1,6 +1,7 @@
 function dressUpView(){
+	var model = new CatImage();
 
-
-//Events
-
+	$('a').on('click', function(){
+		alert('hello' + model._getTag());
+	});
 }
