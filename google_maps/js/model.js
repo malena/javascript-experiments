@@ -1,13 +1,12 @@
-function MJN_Map (){
+var MJN_Map = function(){
+    this.instantiateGoogleMaps();
+};
 
-}
 
-var geocoder;
-var map;
+MJN_Map.prototype.initialize = function() {
+    var geocoder;
+    var map;
 
-google.maps.event.addDomListener(window, 'load', initialize);
-
-function initialize() {
     geocoder = new google.maps.Geocoder();
 
     var address = geocoder.geocode({'address' : 'Toronto, ON'}, function(results){
@@ -25,9 +24,9 @@ function initialize() {
     };
 
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-}
+};
 
-function codeAddress() {
+MJN_Map.prototype.codeAddress = function () {
 
     var address = document.getElementById('address').value;
     geocoder.geocode({'address' : address }, function(results, status){
@@ -41,6 +40,8 @@ function codeAddress() {
             alert('geocode was not successfull becuz: ' + status);
         }
     });
-}
+};
 
-google.maps.event.addDomListener(window, 'load', initialize);
+MJN_Map.prototype.instantiateGoogleMaps = function(){
+    google.maps.event.addDomListener(window, 'load', this.initialize());
+};

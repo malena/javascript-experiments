@@ -39,6 +39,7 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-left: 1px;
 }
 
 .ct-map {
@@ -58,15 +59,14 @@ ul {
 .map-tabs li {
     cursor: pointer;
     padding: 8px 15px;
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-collapse: collapse;
     display: block;
     float: left;
     width: 32.5%;
     height: 55px;
-}
-.map-tabs li:last-child {
-    border-right: 1px solid #ccc;
+    margin-left: -1px;
 }
 
 .map-tabs li .bar {
@@ -130,7 +130,6 @@ ul {
 .map-tabs li.third.active h3 {
     color: #fff;
 }
-
 
 .map-intro {
     padding: 10px;
