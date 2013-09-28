@@ -1,9 +1,9 @@
-var MJN_Map = function(){
+var Map = function(){
     this.instantiateGoogleMaps();
 };
 
 
-MJN_Map.prototype.initialize = function() {
+Map.prototype.initialize = function() {
     var geocoder;
     var map;
 
@@ -26,7 +26,7 @@ MJN_Map.prototype.initialize = function() {
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 };
 
-MJN_Map.prototype.codeAddress = function () {
+Map.prototype.codeAddress = function () {
 
     var address = document.getElementById('address').value;
     geocoder.geocode({'address' : address }, function(results, status){
@@ -42,6 +42,6 @@ MJN_Map.prototype.codeAddress = function () {
     });
 };
 
-MJN_Map.prototype.instantiateGoogleMaps = function(){
+Map.prototype.instantiateGoogleMaps = function(){
     google.maps.event.addDomListener(window, 'load', this.initialize());
 };

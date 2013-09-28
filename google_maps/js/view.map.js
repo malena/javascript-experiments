@@ -1,4 +1,4 @@
-function MJN_MapView (){
+function MapView(){
     var elements = {
         tabs : '.map-tabs'
     }
@@ -9,14 +9,14 @@ function MJN_MapView (){
 
     this.initialize();
 
-    var model = new MJN_Map();
+    var model = new Map();
 }
 
-MJN_MapView.prototype.initialize = function (){
+MapView.prototype.initialize = function (){
     this.bindTabEvents();
 };
 
-MJN_MapView.prototype.bindTabEvents = function (){
+MapView.prototype.bindTabEvents = function (){
     var that = this;
 
     $(this.tabs).on('click', 'li', function(){
@@ -40,7 +40,7 @@ MJN_MapView.prototype.bindTabEvents = function (){
     });
 };
 
-MJN_MapView.prototype.isActive = function(element){
+MapView.prototype.isActive = function(element){
     if($(element).hasClass('active')){
         return true;
     } else {
@@ -48,26 +48,26 @@ MJN_MapView.prototype.isActive = function(element){
     }
 };
 
-MJN_MapView.prototype.updateCategoryStatus = function(current_tab){
+MapView.prototype.updateCategoryStatus = function(current_tab){
     this.category = this.getCategory(current_tab);
 };
 
-MJN_MapView.prototype.getCategory = function(current_tab){
+MapView.prototype.getCategory = function(current_tab){
     var category = $(current_tab).attr('data-category');
     return category;
 };
 
-MJN_MapView.prototype.initializeMap = function(category){
+MapView.prototype.initializeMap = function(category){
     console.log('initialize Map for this category: ' + this.category);
 
 };
 
-MJN_MapView.prototype.toggleTabState = function(current_tab) {
+MapView.prototype.toggleTabState = function(current_tab) {
     this.$tab.removeClass('active');
     $(current_tab).addClass('active');
 };
 
-MJN_MapView.prototype.animateTab = function(tab, direction) {
+MapView.prototype.animateTab = function(tab, direction) {
     var speed = .4;
 
     if(direction == 'up') {
@@ -85,6 +85,6 @@ MJN_MapView.prototype.animateTab = function(tab, direction) {
     }
 };
 
-MJN_MapView.prototype.resetTabStyles = function(tab, direction) {
+MapView.prototype.resetTabStyles = function(tab, direction) {
     this.$tab.removeAttr('style'); 
 };
