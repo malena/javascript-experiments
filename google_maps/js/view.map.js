@@ -5,7 +5,7 @@ function MapView(){
 
     this.tabs = elements.tabs;
     this.$tab = $(elements.tabs).find('li');
-    this.category = 'null';
+    this.category = 'reach';
 
     this.initialize();
 
@@ -14,17 +14,24 @@ function MapView(){
 
 MapView.prototype.initialize = function (){
     this.bindTabEvents();
+    this.initializeMaps();
+    this.loadMap();
 };
 
 MapView.prototype.bindTabEvents = function (){
     var that = this;
 
-    $(this.tabs).on('click', 'li', function(){
+    $(this.tabs).on('click.tabevents', 'li', function(){
         that.toggleTabState(this);
         that.resetTabStyles();
+    });
 
+    $(this.tabs).on('click.categoryevents', 'li', function(){
         that.updateCategoryStatus(this);
-        that.initializeMap();
+    });
+
+    $(this.tabs).on('click.mapevents', 'li', function(){
+        that.loadMap();
     });
 
     $(this.tabs).on('mouseenter', 'li', function(){
@@ -57,9 +64,14 @@ MapView.prototype.getCategory = function(current_tab){
     return category;
 };
 
-MapView.prototype.initializeMap = function(category){
-    console.log('initialize Map for this category: ' + this.category);
+MapView.prototype.initializeMaps = function(){
+    // get map data
+    console.log('initialize all map stuff');
+};
 
+MapView.prototype.loadMap = function(){
+    // animate map into view
+    console.log('load map for :' + this.category);
 };
 
 MapView.prototype.toggleTabState = function(current_tab) {
