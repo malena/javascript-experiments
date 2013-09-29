@@ -5,15 +5,30 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/underscore.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcKMemaemZObch7fTvbL4RoDKRJqKBVqI&sensor=false"></script>
-    <script type="text/javascript" src="js/model.js"></script>
-    <script type="text/javascript" src="js/view.map.js"></script>
-    <script type="text/javascript" src="js/view.tabs.js"></script>
     <script>
         $(function(){
+            new MapData({
+                title: 'Title: Malena',
+                sub_title: 'Subtitle',
+                city: 'Toronto',
+                country: 'Canada',
+                longitude: '43.7000° N', 
+                latitude: '79.4000° W',
+                category: {
+                    type:'Reach',
+                    title: 'Reach Tittle',
+                    intro: 'Reach Intro'
+                }
+            });
             new MapView();
         });
     </script>
+    <script type="text/javascript" src="js/data.map.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script type="text/javascript" src="js/view.map.js"></script>
+    <script type="text/javascript" src="js/view.tabs.js"></script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
   </head>
   <body>
