@@ -22,7 +22,6 @@ function MapData(options){
 
 MapData.prototype.initialize = function(){
 	this.initMap();
-	this.bindInputButton();
 };
 
 MapData.prototype.initMap = function() {
@@ -50,40 +49,8 @@ MapData.prototype.initMap = function() {
         title: 'my title'
     });
 
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'mouseove	r', function() {
 	    infowindow.open(map,marker);
 	});
 
 };
-
-MapData.prototype.bindInputButton = function () {
-	var that = this;
-	$('#button').on('click', function(){
-		that.codeAddress()
-	});
-};
-
-MapData.prototype.codeAddress = function () {
-	var map;
-	var geocoder = this.geocoder;
-    var user_address = document.getElementById('address').value;
-
-    var address = geocoder.geocode({'address' : user_address }, function(results, status){
-        if(status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);    
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location 
-            });
-        } else {
-            alert('geocode was not successfull becuz: ' + status);
-        }
-    });
-
-    this.map_options['center'] = address;
-
-    var mapOptions = this.map_options;
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-};
-
