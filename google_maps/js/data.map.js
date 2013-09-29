@@ -29,28 +29,48 @@ MapData.prototype.initMap = function() {
 	var lat = this.config.latitude;
 	var lng = this.config.longitude;
 
+	var locationsArray = [[lat,lng],[-33.890542,151.274856]];
+
     this.map_options['center'] = new google.maps.LatLng(lat, lng);
 
-    var mapOptions = this.map_options;
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    var map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 
-    var contentString = '<div id="map-content"><p>alo</p></div>';
+    var coord;
+
+    var marker, i;
+
+    for(i = 0; i < locationsArray.length; i++){
+	    marker = new google.maps.Marker({
+	        map : map,
+	        draggable: true,
+	        animation: google.maps.Animation.DROP,
+	        position: new google.maps.LatLng(locationsArray[i][0] , locationsArray[i][1])
+	    });
+    }
+
+    var info_window = this.initInfoWindow();
+
+    this.bindMarker(info_window, map, marker);
+
+};
+
+MapData.prototype.initInfoWindow = function(){
 
     var infowindow = new google.maps.InfoWindow({
-    	content: contentString,
+    	content: this.getInfoWindowContent(),
     	maxWidth: 200
     });
 
-    var marker = new google.maps.Marker({
-        map : map,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        position: new google.maps.LatLng(lat, lng),
-        title: 'my title'
-    });
+    return infowindow;
+};
 
-    google.maps.event.addListener(marker, 'mouseove	r', function() {
-	    infowindow.open(map,marker);
+MapData.prototype.bindMarker = function(info_window, map, marker){
+    google.maps.event.addListener(marker, 'mouseover', function() {
+	    info_window.open(map,marker);
 	});
+};
 
+MapData.prototype.getInfoWindowContent = function() {
+    var html = '<div id="map-content"><p>alo</p></div>';
+    return html;
 };
