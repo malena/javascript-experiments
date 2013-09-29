@@ -1,4 +1,4 @@
-function MapView(){
+function MapView(options){
     var elements = {
         tabs : '.map-tabs'
     }
@@ -9,12 +9,10 @@ function MapView(){
 
     this.initialize();
 
-    var model = new Map();
 }
 
 MapView.prototype.initialize = function (){
     this.bindTabEvents();
-    this.initializeMaps();
     this.loadMap();
 };
 
@@ -62,11 +60,6 @@ MapView.prototype.updateCategoryStatus = function(current_tab){
 MapView.prototype.getCategory = function(current_tab){
     var category = $(current_tab).attr('data-category');
     return category;
-};
-
-MapView.prototype.initializeMaps = function(){
-    // get map data
-    console.log('initialize all map stuff');
 };
 
 MapView.prototype.loadMap = function(){
