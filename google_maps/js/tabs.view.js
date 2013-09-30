@@ -1,4 +1,7 @@
-function MapView(options){
+function TabView(options){
+    var defaults = {};
+    this.config = $.extend(true, defaults, options || {});
+
     var elements = {
         tabs : '.map-tabs'
     }
@@ -8,16 +11,13 @@ function MapView(options){
     this.category = 'reach';
 
     this.initialize();
-
 }
 
-MapView.prototype.initialize = function (){
+TabView.prototype.initialize = function (){
     this.bindTabEvents();
-    console.log('initializing map view');
-    this.loadMap();
 };
 
-MapView.prototype.bindTabEvents = function (){
+TabView.prototype.bindTabEvents = function (){
     var that = this;
 
     $(this.tabs).on('click.tabevents', 'li', function(){
@@ -27,10 +27,6 @@ MapView.prototype.bindTabEvents = function (){
 
     $(this.tabs).on('click.categoryevents', 'li', function(){
         that.updateCategoryStatus(this);
-    });
-
-    $(this.tabs).on('click.mapevents', 'li', function(){
-        that.loadMap();
     });
 
     $(this.tabs).on('mouseenter', 'li', function(){
@@ -46,7 +42,7 @@ MapView.prototype.bindTabEvents = function (){
     });
 };
 
-MapView.prototype.isActive = function(element){
+TabView.prototype.isActive = function(element){
     if($(element).hasClass('active')){
         return true;
     } else {
@@ -54,25 +50,25 @@ MapView.prototype.isActive = function(element){
     }
 };
 
-MapView.prototype.updateCategoryStatus = function(current_tab){
+TabView.prototype.updateCategoryStatus = function(current_tab){
     this.category = this.getCategory(current_tab);
 };
 
-MapView.prototype.getCategory = function(current_tab){
+TabView.prototype.getCategory = function(current_tab){
     var category = $(current_tab).attr('data-category');
     return category;
 };
 
-MapView.prototype.loadMap = function(){
-    console.log('load ' + this.category + ' map');
+TabView.prototype.loadMap = function(){
+    return this.category;
 };
 
-MapView.prototype.toggleTabState = function(current_tab) {
+TabView.prototype.toggleTabState = function(current_tab) {
     this.$tab.removeClass('active');
     $(current_tab).addClass('active');
 };
 
-MapView.prototype.animateTab = function(tab, direction) {
+TabView.prototype.animateTab = function(tab, direction) {
     var speed = .4;
 
     if(direction == 'up') {
@@ -90,6 +86,6 @@ MapView.prototype.animateTab = function(tab, direction) {
     }
 };
 
-MapView.prototype.resetTabStyles = function(tab, direction) {
+TabView.prototype.resetTabStyles = function(tab, direction) {
     this.$tab.removeAttr('style'); 
 };
