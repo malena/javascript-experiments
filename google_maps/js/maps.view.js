@@ -4,46 +4,50 @@ function MapView(options){
 
     this.map_options = {
     	zoom: 1,
+    	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
+
     this.data_array = this.config.data;
-    this.data_reset = [];
+    this.grouped_array = this.groupDataByCategory();
 
 	this.initialize();
+
 };
 
 MapView.prototype.initialize = function(){
-    this.locations_array = this.generateLocationsArray('reach');
-	this.centerMap();
 	this.initMap();
-	this.bindTab(this.map);
-	this.setMarkers(this.map, this.locations_array);
-};
-
-MapView.prototype.bindTab = function(map){
-	var tabs = new TabView();
-	var that = this;
-
-	$('.map-tabs').on('click.mapevents', 'li', function(){
-		var category = tabs.loadMap();
-	    that.tab_category = category;
-	    that.locations_array = that.generateLocationsArray(that.tab_category);
-	    //reset map
-	    //push locations array to marker
-		that.setMarkers(map, that.locations_array);
-    });
-
+	this.bindTabEvents(this.map);
+	console.log(this.generateLocationsArray('reach'));
+	this.setMarkers(this.map, this.generateLocationsArray('reach'));
 };
 
 MapView.prototype.initMap = function(){
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
+MapView.prototype.bindTabEvents = function(map){
+	var tabs = new TabView();
+	var that = this;
+
+	$('.map-tabs').on('click.mapevents', 'li', function(){
+		var category = tabs.loadMap();
+	    that.tab_category = category;
+	    //reset map
+	    //push locations array to marker
+		that.setMarkers(map, that.generateLocationsArray[category]);
+    });
+
+};
+
 MapView.prototype.setMarkers = function(map, locations_array){
 	var array = locations_array;
-	console.log(array);
-
     var marker, i;
+
+    if (map == null){
+    	console.log('is this happening?')
+    	return false;
+    }
 
     for(i = 0; i < array.length; i++){
 	    marker = new google.maps.Marker({
@@ -52,9 +56,9 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	        animation: google.maps.Animation.DROP,
 	        position: new google.maps.LatLng(array[i][0] , array[i][1])
 	    });
+
 	    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
     }
-
 };
 
 MapView.prototype.initInfoWindow = function(){
@@ -73,24 +77,19 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 	});
 };
 
-MapView.prototype.generateLocationsArray = function(category) {
-
+MapView.prototype.groupDataByCategory = function() {
 	var grouped_array = _.groupBy(this.data_array, 'category');
-	var category_array;
+	return grouped_array;
+};
 
-	if(category == 'reach'){
-		category_array = grouped_array.reach;
-	} else if(category == 'brands'){
-		category_array = grouped_array.brands;
-	} else {
-		category_array = grouped_array.facilities;
-	}
+MapView.prototype.generateLocationsArray = function(category) {
+	var category_array = this.grouped_array[category];
 
 	var locations_array = [];
 	var lat;
 	var lng;
 	var i;
-	var max = category_array.length;
+	var max = 3;
 
 	for(i = 0; i < max; i++){
 		lat = category_array[i].latitude;
@@ -102,13 +101,6 @@ MapView.prototype.generateLocationsArray = function(category) {
 };
 
 
-MapView.prototype.centerMap = function(){
-	var locations_array = this.locations_array;
-
-	var lat = locations_array[0][0];
-	var lng = locations_array[0][1];
-    this.map_options['center'] = new google.maps.LatLng(lat, lng);
-};
 
 MapView.prototype.getInfoWindowContent = function() {
     var html = '<div id="map-content"><p>alo</p></div>';
