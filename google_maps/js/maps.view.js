@@ -7,27 +7,40 @@ function MapView(options){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.data_array = this.config.data;
+
 	this.initialize();
 };
 
 MapView.prototype.initialize = function(){
+    this.locations_array = this.generateLocationsArray('reach');
+	this.bindTab();
 	this.centerMap();
 	this.initMap();
+	this.setMarkers(this.map, this.tab_category);
+};
 
-	var tabs = new TabView({
-		map : this.map
-	});
+MapView.prototype.bindTab = function(){
+	var tabs = new TabView();
+	var that = this;
 
-	this.setMarkers(this.map);
+	$('.map-tabs').on('click.mapevents', 'li', function(){
+		var category = tabs.loadMap();
+	    that.tab_category = category;
+	    that.locations_array = that.generateLocationsArray(that.tab_category);
+	    //reset map
+	    //push locations array to marker
+
+    });
+
 };
 
 MapView.prototype.initMap = function(){
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
-MapView.prototype.setMarkers = function(map){
-	var locations_array = [];
-	locations_array = this.generateLocationsArray();
+MapView.prototype.setMarkers = function(map, category){
+	var locations_array = this.locations_array;
+
     var marker, i;
 
     for(i = 0; i < locations_array.length; i++){
@@ -58,25 +71,37 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 	});
 };
 
-MapView.prototype.generateLocationsArray = function() {
-	var locationsArray = [];
+MapView.prototype.generateLocationsArray = function(category) {
+
+	var grouped_array = _.groupBy(this.data_array, 'category');
+	var category_array;
+
+	if(category == 'reach'){
+		category_array = grouped_array.reach;
+	} else if(category == 'brands'){
+		category_array = grouped_array.brands;
+	} else {
+		category_array = grouped_array.facilities;
+	}
+
+	var locations_array = [];
 	var lat;
 	var lng;
 	var i;
-	var max = this.data_array.length;
+	var max = category_array.length;
 
 	for(i = 0; i < max; i++){
-		lat = this.data_array[i].latitude;
-		lng = this.data_array[i].longitude;
-		locationsArray.push([lat, lng]);
+		lat = category_array[i].latitude;
+		lng = category_array[i].longitude;
+		locations_array.push([lat, lng]);
 	}
 
-	return locationsArray;
+	return locations_array;
 };
 
 
 MapView.prototype.centerMap = function(){
-	var locations_array = this.generateLocationsArray();
+	var locations_array = this.locations_array;
 
 	var lat = locations_array[0][0];
 	var lng = locations_array[0][1];

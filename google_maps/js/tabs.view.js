@@ -15,7 +15,6 @@ function TabView(options){
 
 TabView.prototype.initialize = function (){
     this.bindTabEvents();
-    this.loadMap();
 };
 
 TabView.prototype.bindTabEvents = function (){
@@ -28,10 +27,6 @@ TabView.prototype.bindTabEvents = function (){
 
     $(this.tabs).on('click.categoryevents', 'li', function(){
         that.updateCategoryStatus(this);
-    });
-
-    $(this.tabs).on('click.mapevents', 'li', function(){
-        that.loadMap();
     });
 
     $(this.tabs).on('mouseenter', 'li', function(){
@@ -65,7 +60,7 @@ TabView.prototype.getCategory = function(current_tab){
 };
 
 TabView.prototype.loadMap = function(){
-    console.log('load ' + this.category + ' map');
+    return this.category;
 };
 
 TabView.prototype.toggleTabState = function(current_tab) {
