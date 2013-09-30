@@ -11,13 +11,15 @@ function MapView(options){
     this.data_array = this.config.data;
     this.category_data_array = _.groupBy(this.data_array, 'category');
 
+    this.markers_array = [];
+
 	this.initialize();
 };
 
 MapView.prototype.initialize = function(){
 	this.initMap();
-	this.bindTab(this.map);
 	this.setMarkers(this.map, this.generateLocationsArray('reach'));
+	this.bindTab(this.map);
 };
 
 MapView.prototype.initMap = function(){
@@ -31,10 +33,17 @@ MapView.prototype.bindTab = function(map){
 	$('.map-tabs').on('click.mapevents', 'li', function(){
 		var category = tabs.loadMap();
 	    that.tab_category = category;
-	    //reset map
+	    that.clearMarkers();
 		that.setMarkers(map, that.generateLocationsArray(that.tab_category));
     });
+};
 
+MapView.prototype.clearMarkers = function(){
+	var that = this;
+	for (var i = 0; i < that.markers_array.length; i++){
+		that.markers_array[i].setMap(null);	
+	}
+	that.markers_array = [];
 };
 
 MapView.prototype.setMarkers = function(map, locations_array){
@@ -50,9 +59,10 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	        animation: google.maps.Animation.DROP,
 	        position: new google.maps.LatLng(array[i][0] , array[i][1])
 	    });
+
+	    this.markers_array.push(marker);
 	    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
     }
-
 };
 
 MapView.prototype.initInfoWindow = function(){
