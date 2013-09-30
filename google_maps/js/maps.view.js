@@ -66,10 +66,27 @@ MapView.prototype.setMarkers = function(map, locations_array){
 };
 
 MapView.prototype.initInfoWindow = function(){
-    var infowindow = new google.maps.InfoWindow({
+
+	var myOptions = {
     	content: this.getInfoWindowContent(),
-    	maxWidth: 200
-    });
+    	disableAutoPan: false,
+    	maxWidth: 500,
+    	zIndex: 2,
+    	boxStyle: { 
+            background: "url('images/tipbox.png') no-repeat",
+            opacity: 0.85,
+            width: "380px"
+        },
+        closeBoxMargin: "15px 0px 0px 0px",
+        closeBoxURL: "images/close.png",
+        infoBoxClearance: new google.maps.Size(3, 3),
+        isHidden: false,
+        pane: "floatPane",
+        enableEventPropagation: false
+	};
+
+    var infowindow = new InfoBox(myOptions);
+
     return infowindow;
 };
 
@@ -108,8 +125,7 @@ MapView.prototype.generateLocationsArray = function(category) {
 	return locations_array;
 };
 
-
 MapView.prototype.getInfoWindowContent = function() {
-    var html = '<div id="map-content"><p>alo</p></div>';
+    var html = '<div class="map-info"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
     return html;
 };
