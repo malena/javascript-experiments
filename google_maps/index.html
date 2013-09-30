@@ -9,7 +9,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcKMemaemZObch7fTvbL4RoDKRJqKBVqI&sensor=false"></script>
     <script>
         $(function(){
-            new MapData({
+            new MapView({
                 data : [
                     {
                         title: 'North America',
@@ -33,7 +33,7 @@
                         country: 'Ecuador',
                         latitude: '-0.2500', 
                         longitude: '-78.5833',
-                        category: 'reach' 
+                        category: 'facilities' 
                     },
                     {
                         title: 'Canada',
@@ -41,17 +41,15 @@
                         country: 'Canada',
                         latitude: '+49.1744', 
                         longitude: '-57.4269',
-                        category: 'reach' 
+                        category: 'brands' 
                     }
 
                 ]
             });
-            new MapView();
         });
     </script>
-    <script type="text/javascript" src="js/data.map.js"></script>
-    <script type="text/javascript" src="js/view.map.js"></script>
-    <script type="text/javascript" src="js/view.tabs.js"></script>
+    <script type="text/javascript" src="js/maps.view.js"></script>
+    <script type="text/javascript" src="js/tabs.view.js"></script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
   </head>
   <body>

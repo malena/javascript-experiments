@@ -1,4 +1,4 @@
-function MapData(options){
+function MapView(options){
     var defaults = {};
     this.config = $.extend(true, defaults, options || { });
 
@@ -10,17 +10,22 @@ function MapData(options){
 	this.initialize();
 };
 
-MapData.prototype.initialize = function(){
+MapView.prototype.initialize = function(){
 	this.centerMap();
 	this.initMap();
+
+	var tabs = new TabView({
+		map : this.map
+	});
+
 	this.setMarkers(this.map);
 };
 
-MapData.prototype.initMap = function(){
+MapView.prototype.initMap = function(){
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
-MapData.prototype.setMarkers = function(map){
+MapView.prototype.setMarkers = function(map){
 	var locations_array = [];
 	locations_array = this.generateLocationsArray();
     var marker, i;
@@ -34,10 +39,10 @@ MapData.prototype.setMarkers = function(map){
 	    });
     }
 
-    this.bindInfoWindow(this.initInfoWindow(), map, marker);
+    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
 };
 
-MapData.prototype.initInfoWindow = function(){
+MapView.prototype.initInfoWindow = function(){
     var infowindow = new google.maps.InfoWindow({
     	content: this.getInfoWindowContent(),
     	maxWidth: 200
@@ -45,13 +50,15 @@ MapData.prototype.initInfoWindow = function(){
     return infowindow;
 };
 
-MapData.prototype.bindInfoWindow = function(info_window, map, marker){
-    google.maps.event.addListener(marker, 'mouseover', function() {
+MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
+    google.maps.event.addListener(marker, 'click', function() {
 	    info_window.open(map,marker);
+	    map.setZoom(8);
+	    map.setCenter(marker.getPosition());
 	});
 };
 
-MapData.prototype.generateLocationsArray = function() {
+MapView.prototype.generateLocationsArray = function() {
 	var locationsArray = [];
 	var lat;
 	var lng;
@@ -68,7 +75,7 @@ MapData.prototype.generateLocationsArray = function() {
 };
 
 
-MapData.prototype.centerMap = function(){
+MapView.prototype.centerMap = function(){
 	var locations_array = this.generateLocationsArray();
 
 	var lat = locations_array[0][0];
@@ -76,7 +83,7 @@ MapData.prototype.centerMap = function(){
     this.map_options['center'] = new google.maps.LatLng(lat, lng);
 };
 
-MapData.prototype.getInfoWindowContent = function() {
+MapView.prototype.getInfoWindowContent = function() {
     var html = '<div id="map-content"><p>alo</p></div>';
     return html;
 };
