@@ -13,6 +13,7 @@ function MapView(options){
 
 MapView.prototype.initialize = function (){
     this.bindTabEvents();
+    console.log('initializing map view');
     this.loadMap();
 };
 
@@ -63,8 +64,7 @@ MapView.prototype.getCategory = function(current_tab){
 };
 
 MapView.prototype.loadMap = function(){
-    // animate map into view
-    console.log('load map for :' + this.category);
+    console.log('load ' + this.category + ' map');
 };
 
 MapView.prototype.toggleTabState = function(current_tab) {
