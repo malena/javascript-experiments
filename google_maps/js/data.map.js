@@ -24,14 +24,28 @@ MapData.prototype.initialize = function(){
 	this.initMap();
 };
 
+MapData.prototype.generateLocationsArray = function() {
+	var locationsArray = [];
+	var lat;
+	var lng;
+	var i;
+
+	for(i = 0; i < this.config.data.length; i++){
+		lat = this.config.data[i].latitude;
+		lng = this.config.data[i].longitude;
+		locationsArray.push([lat, lng]);
+	}
+
+	return locationsArray;
+};
+
 MapData.prototype.initMap = function() {
+	var array = this.generateLocationsArray();
 
-	var lat = this.config.latitude;
-	var lng = this.config.longitude;
+	var default_lat = array[0][0];
+	var default_lng = array[0][1];
 
-	var locationsArray = [[lat,lng],[-33.890542,151.274856]];
-
-    this.map_options['center'] = new google.maps.LatLng(lat, lng);
+    this.map_options['center'] = new google.maps.LatLng(default_lat, default_lng);
 
     var map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 
@@ -39,12 +53,12 @@ MapData.prototype.initMap = function() {
 
     var marker, i;
 
-    for(i = 0; i < locationsArray.length; i++){
+    for(i = 0; i < array.length; i++){
 	    marker = new google.maps.Marker({
 	        map : map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(locationsArray[i][0] , locationsArray[i][1])
+	        position: new google.maps.LatLng(array[i][0] , array[i][1])
 	    });
     }
 

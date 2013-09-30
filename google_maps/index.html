@@ -10,16 +10,41 @@
     <script>
         $(function(){
             new MapData({
-                title: 'Title: Malena',
-                city: 'Toronto',
-                country: 'Canada',
-                latitude: '+43.7000', 
-                longitude: '-79.4000',
-                category: {
-                    type:'Reach',
-                    title: 'Reach Tittle',
-                    intro: 'Reach Intro'
-                }
+                data : [
+                    {
+                        title: 'Title: Malena',
+                        city: 'Toronto',
+                        country: 'Canada',
+                        latitude: '+43.7000', 
+                        longitude: '-79.4000',
+                        category: 'Reach',
+                    },
+                    {
+                        title: 'Title: John',
+                        city: 'Sydney',
+                        country: 'Australia',
+                        latitude: '-33.890542', 
+                        longitude: '151.274856',
+                        category: 'Reach' 
+                    },
+                    {
+                        title: 'Title: Sam',
+                        city: 'Quito',
+                        country: 'Ecuador',
+                        latitude: '-0.2500', 
+                        longitude: '-78.5833',
+                        category: 'Reach' 
+                    },
+                    {
+                        title: 'Title: Roger',
+                        city: 'Deerlake',
+                        country: 'Canada',
+                        latitude: '+49.1744', 
+                        longitude: '-57.4269',
+                        category: 'Reach' 
+                    }
+
+                ]
             });
             new MapView();
         });
