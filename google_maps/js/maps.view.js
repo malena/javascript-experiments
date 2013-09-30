@@ -7,19 +7,20 @@ function MapView(options){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.data_array = this.config.data;
+    this.data_reset = [];
 
 	this.initialize();
 };
 
 MapView.prototype.initialize = function(){
     this.locations_array = this.generateLocationsArray('reach');
-	this.bindTab();
 	this.centerMap();
 	this.initMap();
-	this.setMarkers(this.map, this.tab_category);
+	this.bindTab(this.map);
+	this.setMarkers(this.map, this.locations_array);
 };
 
-MapView.prototype.bindTab = function(){
+MapView.prototype.bindTab = function(map){
 	var tabs = new TabView();
 	var that = this;
 
@@ -29,7 +30,7 @@ MapView.prototype.bindTab = function(){
 	    that.locations_array = that.generateLocationsArray(that.tab_category);
 	    //reset map
 	    //push locations array to marker
-
+		that.setMarkers(map, that.locations_array);
     });
 
 };
@@ -38,21 +39,22 @@ MapView.prototype.initMap = function(){
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
-MapView.prototype.setMarkers = function(map, category){
-	var locations_array = this.locations_array;
+MapView.prototype.setMarkers = function(map, locations_array){
+	var array = locations_array;
+	console.log(array);
 
     var marker, i;
 
-    for(i = 0; i < locations_array.length; i++){
+    for(i = 0; i < array.length; i++){
 	    marker = new google.maps.Marker({
 	        map : map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(locations_array[i][0] , locations_array[i][1])
+	        position: new google.maps.LatLng(array[i][0] , array[i][1])
 	    });
+	    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
     }
 
-    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
 };
 
 MapView.prototype.initInfoWindow = function(){
