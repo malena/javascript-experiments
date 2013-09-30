@@ -154,11 +154,12 @@ ul {
 }
 
 .map-info {
-    width: 400px;
-    background-color: #1B2A9E; 
+    position: relative;
+    right: -10px;
 }
 
 .map-info .title {
+    width: 360px;
     background-color: #1B2A9E; 
     padding: 10px 0px 10px 15px;
 }
@@ -174,6 +175,7 @@ ul {
 }
 
 .map-info-content {
+    width: 340px;
     padding: 10px 15px; 
     background-color: #fff;
 }
@@ -181,4 +183,3 @@ ul {
 .map-info-content p {
     font-size: 12px;
 }
-

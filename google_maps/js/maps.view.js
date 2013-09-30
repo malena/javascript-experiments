@@ -57,7 +57,8 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	        map : map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(array[i][0] , array[i][1])
+	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
+	        icon : 'images/icon.png'
 	    });
 
 	    this.markers_array.push(marker);
@@ -70,16 +71,17 @@ MapView.prototype.initInfoWindow = function(){
 	var myOptions = {
     	content: this.getInfoWindowContent(),
     	disableAutoPan: false,
-    	maxWidth: 500,
-    	zIndex: 2,
+    	maxWidth: 0,
+    	pixelOffset: new google.maps.Size(20, -25),
+    	zIndex: null,
     	boxStyle: { 
-            background: "url('images/tipbox.png') no-repeat",
+            background: "url('images/tipbox.png') no-repeat top left",
             opacity: 0.85,
-            width: "380px"
+            width: "400px"
         },
-        closeBoxMargin: "15px 0px 0px 0px",
+        closeBoxMargin: "15px 15px 10px 10px",
         closeBoxURL: "images/close.png",
-        infoBoxClearance: new google.maps.Size(3, 3),
+        infoBoxClearance: new google.maps.Size(1, 1),
         isHidden: false,
         pane: "floatPane",
         enableEventPropagation: false
