@@ -4,20 +4,24 @@ function MapView(options){
 
     this.map_options = {
     	zoom: 1,
+    	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
+
     this.data_array = this.config.data;
-    this.data_reset = [];
+    this.category_data_array = _.groupBy(this.data_array, 'category');
 
 	this.initialize();
 };
 
 MapView.prototype.initialize = function(){
-    this.locations_array = this.generateLocationsArray('reach');
-	this.centerMap();
 	this.initMap();
 	this.bindTab(this.map);
-	this.setMarkers(this.map, this.locations_array);
+	this.setMarkers(this.map, this.generateLocationsArray('reach'));
+};
+
+MapView.prototype.initMap = function(){
+    this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
 MapView.prototype.bindTab = function(map){
@@ -27,16 +31,10 @@ MapView.prototype.bindTab = function(map){
 	$('.map-tabs').on('click.mapevents', 'li', function(){
 		var category = tabs.loadMap();
 	    that.tab_category = category;
-	    that.locations_array = that.generateLocationsArray(that.tab_category);
 	    //reset map
-	    //push locations array to marker
-		that.setMarkers(map, that.locations_array);
+		that.setMarkers(map, that.generateLocationsArray(that.tab_category));
     });
 
-};
-
-MapView.prototype.initMap = function(){
-    this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 };
 
 MapView.prototype.setMarkers = function(map, locations_array){
@@ -74,16 +72,15 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 };
 
 MapView.prototype.generateLocationsArray = function(category) {
-
-	var grouped_array = _.groupBy(this.data_array, 'category');
+	var that = this;
 	var category_array;
 
 	if(category == 'reach'){
-		category_array = grouped_array.reach;
+		category_array = that.category_data_array.reach;
 	} else if(category == 'brands'){
-		category_array = grouped_array.brands;
+		category_array = that.category_data_array.brands;
 	} else {
-		category_array = grouped_array.facilities;
+		category_array = that.category_data_array.facilities;
 	}
 
 	var locations_array = [];
@@ -101,14 +98,6 @@ MapView.prototype.generateLocationsArray = function(category) {
 	return locations_array;
 };
 
-
-MapView.prototype.centerMap = function(){
-	var locations_array = this.locations_array;
-
-	var lat = locations_array[0][0];
-	var lng = locations_array[0][1];
-    this.map_options['center'] = new google.maps.LatLng(lat, lng);
-};
 
 MapView.prototype.getInfoWindowContent = function() {
     var html = '<div id="map-content"><p>alo</p></div>';
