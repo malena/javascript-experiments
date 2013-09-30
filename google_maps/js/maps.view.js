@@ -57,7 +57,8 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	        map : map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(array[i][0] , array[i][1])
+	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
+	        icon : 'images/icon.png'
 	    });
 
 	    this.markers_array.push(marker);
@@ -66,10 +67,28 @@ MapView.prototype.setMarkers = function(map, locations_array){
 };
 
 MapView.prototype.initInfoWindow = function(){
-    var infowindow = new google.maps.InfoWindow({
+
+	var myOptions = {
     	content: this.getInfoWindowContent(),
-    	maxWidth: 200
-    });
+    	disableAutoPan: false,
+    	maxWidth: 0,
+    	pixelOffset: new google.maps.Size(20, -25),
+    	zIndex: null,
+    	boxStyle: { 
+            background: "url('images/tipbox.png') no-repeat top left",
+            opacity: 0.85,
+            width: "400px"
+        },
+        closeBoxMargin: "15px 15px 10px 10px",
+        closeBoxURL: "images/close.png",
+        infoBoxClearance: new google.maps.Size(1, 1),
+        isHidden: false,
+        pane: "floatPane",
+        enableEventPropagation: false
+	};
+
+    var infowindow = new InfoBox(myOptions);
+
     return infowindow;
 };
 
@@ -108,8 +127,7 @@ MapView.prototype.generateLocationsArray = function(category) {
 	return locations_array;
 };
 
-
 MapView.prototype.getInfoWindowContent = function() {
-    var html = '<div id="map-content"><p>alo</p></div>';
+    var html = '<div class="map-info"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
     return html;
 };
