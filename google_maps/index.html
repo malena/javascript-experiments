@@ -5,21 +5,59 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/underscore.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcKMemaemZObch7fTvbL4RoDKRJqKBVqI&sensor=false"></script>
-    <script type="text/javascript" src="js/model.js"></script>
-    <script type="text/javascript" src="js/view.map.js"></script>
-    <script type="text/javascript" src="js/view.tabs.js"></script>
     <script>
         $(function(){
+            new MapData({
+                data : [
+                    {
+                        title: 'North America',
+                        city: 'Toronto',
+                        country: 'Canada',
+                        latitude: '+43.7000', 
+                        longitude: '-79.4000',
+                        category: 'reach',
+                    },
+                    {
+                        title: 'Australia',
+                        city: 'Sydney',
+                        country: 'Australia',
+                        latitude: '-33.890542', 
+                        longitude: '151.274856',
+                        category: 'reach' 
+                    },
+                    {
+                        title: 'Ecuador',
+                        city: 'Quito',
+                        country: 'Ecuador',
+                        latitude: '-0.2500', 
+                        longitude: '-78.5833',
+                        category: 'reach' 
+                    },
+                    {
+                        title: 'Canada',
+                        city: 'Deerlake',
+                        country: 'Canada',
+                        latitude: '+49.1744', 
+                        longitude: '-57.4269',
+                        category: 'reach' 
+                    }
+
+                ]
+            });
             new MapView();
         });
     </script>
+    <script type="text/javascript" src="js/data.map.js"></script>
+    <script type="text/javascript" src="js/view.map.js"></script>
+    <script type="text/javascript" src="js/view.tabs.js"></script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
   </head>
   <body>
     <div id="panel">
         <input id="address" type="textbox" value="Toronto, ON">
-        <input type="button" value="Geocode" onclick="codeAddress()">
+        <input id="button" type="button" value="Geocode">
     </div>
 
     <div class="ct-map">

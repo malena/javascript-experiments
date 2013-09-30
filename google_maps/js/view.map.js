@@ -1,4 +1,4 @@
-function MapView(){
+function MapView(options){
     var elements = {
         tabs : '.map-tabs'
     }
@@ -9,12 +9,11 @@ function MapView(){
 
     this.initialize();
 
-    var model = new Map();
 }
 
 MapView.prototype.initialize = function (){
     this.bindTabEvents();
-    this.initializeMaps();
+    console.log('initializing map view');
     this.loadMap();
 };
 
@@ -64,14 +63,8 @@ MapView.prototype.getCategory = function(current_tab){
     return category;
 };
 
-MapView.prototype.initializeMaps = function(){
-    // get map data
-    console.log('initialize all map stuff');
-};
-
 MapView.prototype.loadMap = function(){
-    // animate map into view
-    console.log('load map for :' + this.category);
+    console.log('load ' + this.category + ' map');
 };
 
 MapView.prototype.toggleTabState = function(current_tab) {
