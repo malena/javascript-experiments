@@ -176,11 +176,11 @@ img[src*="close.png"] {
 }
 
 .map-info.map-brands .title {
-    background-color: yellow; 
+    background-color: #f8c549; 
 }
 
 .map-info.map-facilities .title {
-    background-color: red; 
+    background-color: #c50044; 
 }
 
 .map-info .title {
