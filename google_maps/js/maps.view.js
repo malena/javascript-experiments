@@ -4,7 +4,7 @@ function MapView(model){
 	this.model = model;
 
 	// model category data
-    this.category_data_array = this.model.createCategoryArray();
+    this.category_data_array = this.model.data_array;
 
 	// map variables
     this.map_options = {
