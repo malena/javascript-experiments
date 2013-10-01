@@ -1,20 +1,22 @@
-function MapView(options){
-    var defaults = {};
-    this.config = $.extend(true, defaults, options || { });
+function MapView(array){
 
+	// model category data
+    this.category_data_array = array;
+
+	// map variables
     this.map_options = {
     	zoom: 1,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-
-    this.data_array = this.config.data;
-    this.category_data_array = _.groupBy(this.data_array, 'category');
-
     this.markers_array = [];
+
+    // tab variables
     this.tab_category = 'reach';
 
+   	// initialization
 	this.initialize();
+
 };
 
 MapView.prototype.initialize = function(){

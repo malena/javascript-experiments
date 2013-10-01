@@ -6,8 +6,10 @@ function MapModel(options){
     this.data_array = this.config.data;
     this.category_data_array = _.groupBy(this.data_array, 'category');
 
-    this.tab_category = 'reach';
+    this.initialize();
 
-	this.initialize();
+};
 
+MapModel.prototype.initialize = function(){
+	new MapView(this.category_data_array);
 };
