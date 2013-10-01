@@ -76,10 +76,10 @@ MapView.prototype.initInfoWindow = function(){
     	zIndex: null,
     	boxStyle: { 
             background: "url('images/tipbox.png') no-repeat top left",
-            opacity: 0.85,
+            opacity: 1,
             width: "400px"
         },
-        closeBoxMargin: "15px 15px 10px 10px",
+        closeBoxMargin: "10px 20px 10px 10px",
         closeBoxURL: "images/close.png",
         infoBoxClearance: new google.maps.Size(1, 1),
         isHidden: false,
