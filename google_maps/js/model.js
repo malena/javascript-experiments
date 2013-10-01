@@ -13,3 +13,4 @@ function MapModel(options){
 MapModel.prototype.initialize = function(){
 	new MapView(this.category_data_array);
 };
+

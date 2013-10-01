@@ -21,7 +21,7 @@ function MapView(array){
 
 MapView.prototype.initialize = function(){
 	this.initMap();
-	this.setMarkers(this.map, this.generateLocationsArray('reach'));
+	this.setMarkers(this.map, this.generateLocationsArray('reach'), this.tab_category);
 	this.bindTab(this.map);
 };
 
@@ -37,14 +37,14 @@ MapView.prototype.bindTab = function(map){
 		var category = tabs.loadMap();
 	    that.tab_category = category;
 	    that.clearMarkers();
-		that.setMarkers(map, that.generateLocationsArray(that.tab_category));
+		that.setMarkers(map, that.generateLocationsArray(that.tab_category), that.tab_category);
     });
 };
 
-MapView.prototype.setMarkers = function(map, locations_array){
+MapView.prototype.setMarkers = function(map, locations_array, category){
 	var that = this;
 	var array = locations_array;
-	console.log(array);
+	console.log(category);
 
     var marker, i;
 
@@ -54,7 +54,7 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
 	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
-	        icon : 'images/icon.png'
+	        icon : 'images/icon-' + category + '.png'
 	    });
 
 	    this.markers_array.push(marker);
@@ -79,7 +79,7 @@ MapView.prototype.initInfoWindow = function(category){
     	pixelOffset: new google.maps.Size(20, -25),
     	zIndex: null,
     	boxStyle: { 
-            background: "url('images/tipbox.png') no-repeat top left",
+            background: "url('images/tipbox-" + category + ".png') no-repeat top left",
             opacity: 1,
             width: "400px"
         },
