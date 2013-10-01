@@ -1,7 +1,7 @@
-function MapView(array){
+function MapView(data){
 
 	// model category data
-    this.category_data_array = array;
+    this.category_data_array = data;
 
 	// map variables
     this.map_options = {
@@ -37,8 +37,18 @@ MapView.prototype.bindTab = function(map){
 		var category = tabs.loadMap();
 	    that.tab_category = category;
 	    that.clearMarkers();
+	    that.closeInfoWindow();
+	    that.resetZoom();
 		that.setMarkers(map, that.generateLocationsArray(that.tab_category), that.tab_category);
     });
+};
+
+MapView.prototype.closeInfoWindow = function(){
+	//InfoBox.close();
+};
+
+MapView.prototype.resetZoom = function(){
+	this.map.setZoom(1);
 };
 
 MapView.prototype.setMarkers = function(map, locations_array, category){
@@ -58,7 +68,11 @@ MapView.prototype.setMarkers = function(map, locations_array, category){
 	    });
 
 	    this.markers_array.push(marker);
-	    this.bindMarkerEvents(this.initInfoWindow(that.tab_category), map, marker);
+
+	    var options = this.createInfoWindowOptions(that.tab_category);
+	    var infoWindow = this.injectInfoWindowOptions(options);
+
+	    this.bindMarkerEvents(infoWindow, map, marker);
     }
 };
 
@@ -70,10 +84,10 @@ MapView.prototype.clearMarkers = function(){
 	that.markers_array = [];
 };
 
-MapView.prototype.initInfoWindow = function(category){
+MapView.prototype.createInfoWindowOptions = function(category){
 
-	var myOptions = {
-    	content: this.getInfoWindowContent(category),
+	this.info_window_options = {
+		content: this.getInfoWindowContent(category),
     	disableAutoPan: false,
     	maxWidth: 0,
     	pixelOffset: new google.maps.Size(20, -25),
@@ -89,11 +103,14 @@ MapView.prototype.initInfoWindow = function(category){
         isHidden: false,
         pane: "floatPane",
         enableEventPropagation: false
-	};
+	}
 
-    var infowindow = new InfoBox(myOptions);
+	return this.info_window_options;
+};
 
-    return infowindow;
+MapView.prototype.injectInfoWindowOptions = function(options){
+    this.info_window = new InfoBox(options);
+    return this.info_window;
 };
 
 MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
