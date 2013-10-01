@@ -1,19 +1,22 @@
-function MapView(options){
-    var defaults = {};
-    this.config = $.extend(true, defaults, options || { });
+function MapView(array){
 
+	// model category data
+    this.category_data_array = array;
+
+	// map variables
     this.map_options = {
     	zoom: 1,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-
-    this.data_array = this.config.data;
-    this.category_data_array = _.groupBy(this.data_array, 'category');
-
     this.markers_array = [];
 
+    // tab variables
+    this.tab_category = 'reach';
+
+   	// initialization
 	this.initialize();
+
 };
 
 MapView.prototype.initialize = function(){
@@ -38,15 +41,8 @@ MapView.prototype.bindTab = function(map){
     });
 };
 
-MapView.prototype.clearMarkers = function(){
-	var that = this;
-	for (var i = 0; i < that.markers_array.length; i++){
-		that.markers_array[i].setMap(null);	
-	}
-	that.markers_array = [];
-};
-
 MapView.prototype.setMarkers = function(map, locations_array){
+	var that = this;
 	var array = locations_array;
 	console.log(array);
 
@@ -62,24 +58,32 @@ MapView.prototype.setMarkers = function(map, locations_array){
 	    });
 
 	    this.markers_array.push(marker);
-	    this.bindMarkerEvents(this.initInfoWindow(), map, marker);
+	    this.bindMarkerEvents(this.initInfoWindow(that.tab_category), map, marker);
     }
 };
 
-MapView.prototype.initInfoWindow = function(){
+MapView.prototype.clearMarkers = function(){
+	var that = this;
+	for (var i = 0; i < that.markers_array.length; i++){
+		that.markers_array[i].setMap(null);	
+	}
+	that.markers_array = [];
+};
+
+MapView.prototype.initInfoWindow = function(category){
 
 	var myOptions = {
-    	content: this.getInfoWindowContent(),
+    	content: this.getInfoWindowContent(category),
     	disableAutoPan: false,
     	maxWidth: 0,
     	pixelOffset: new google.maps.Size(20, -25),
     	zIndex: null,
     	boxStyle: { 
             background: "url('images/tipbox.png') no-repeat top left",
-            opacity: 0.85,
+            opacity: 1,
             width: "400px"
         },
-        closeBoxMargin: "15px 15px 10px 10px",
+        closeBoxMargin: "10px 20px 10px 10px",
         closeBoxURL: "images/close.png",
         infoBoxClearance: new google.maps.Size(1, 1),
         isHidden: false,
@@ -127,7 +131,16 @@ MapView.prototype.generateLocationsArray = function(category) {
 	return locations_array;
 };
 
-MapView.prototype.getInfoWindowContent = function() {
-    var html = '<div class="map-info"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+MapView.prototype.getInfoWindowContent = function(category) {
+	var html;
+
+	if (category == 'reach'){
+	    html = '<div class="map-info map-reach"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+	} else if (category == 'facilities'){
+	    html = '<div class="map-info map-facilities"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+	} else {
+	    html = '<div class="map-info map-brands"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+	}
+
     return html;
 };
