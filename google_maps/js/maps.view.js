@@ -1,8 +1,10 @@
 function MapView(model){
 
 	
+	this.model = model;
+
 	// model category data
-    this.category_data_array = model.createCategoryArray();
+    this.category_data_array = this.model.createCategoryArray();
 
 	// map variables
     this.map_options = {
@@ -23,7 +25,7 @@ function MapView(model){
 
 MapView.prototype.initialize = function(){
 	this.initMap();
-	this.setMarkers(this.map, this.generateLocationsArray('reach'), this.tab_category);
+	this.setMarkers(this.map, this.model.createLocationsArray('reach'), this.tab_category);
 	this.bindTab(this.map);
 };
 
@@ -41,7 +43,7 @@ MapView.prototype.bindTab = function(map){
 	    that.clearMarkers();
 	    that.closeInfoWindow();
 	    that.resetZoom();
-		that.setMarkers(map, that.generateLocationsArray(that.tab_category), that.tab_category);
+		that.setMarkers(map, that.model.createLocationsArray(that.tab_category), that.tab_category);
     });
 };
 
@@ -121,33 +123,6 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 	    map.setZoom(8);
 	    map.setCenter(marker.getPosition());
 	});
-};
-
-MapView.prototype.generateLocationsArray = function(category) {
-	var that = this;
-	var category_array;
-
-	if(category == 'reach'){
-		category_array = that.category_data_array.reach;
-	} else if(category == 'brands'){
-		category_array = that.category_data_array.brands;
-	} else {
-		category_array = that.category_data_array.facilities;
-	}
-
-	var locations_array = [];
-	var lat;
-	var lng;
-	var i;
-	var max = category_array.length;
-
-	for(i = 0; i < max; i++){
-		lat = category_array[i].latitude;
-		lng = category_array[i].longitude;
-		locations_array.push([lat, lng]);
-	}
-
-	return locations_array;
 };
 
 MapView.prototype.getInfoWindowContent = function(category, content_options) {
