@@ -3,7 +3,9 @@ function MapModel(options){
     var defaults = {};
     this.config = $.extend(true, defaults, options || { });
 
-    this.data_array = this.config.data;
+    this.data = this.config.data;
+
+    this.data_array = _.groupBy(this.data, 'category');
 
     this.initialize();
 
@@ -13,21 +15,16 @@ MapModel.prototype.initialize = function(){
 	new MapView(this);
 };
 
-MapModel.prototype.createCategoryArray = function(){
-    this.category_data_array = _.groupBy(this.data_array, 'category');
-    return this.category_data_array;
-};
-
 MapModel.prototype.createLocationsArray = function(category){
 	var that = this;
 	var category_array;
 
 	if(category == 'reach'){
-		category_array = that.category_data_array.reach;
+		category_array = that.data_array.reach;
 	} else if(category == 'brands'){
-		category_array = that.category_data_array.brands;
+		category_array = that.data_array.brands;
 	} else {
-		category_array = that.category_data_array.facilities;
+		category_array = that.data_array.facilities;
 	}
 
 	var locations_array = [];
@@ -45,3 +42,4 @@ MapModel.prototype.createLocationsArray = function(category){
 	return locations_array;
 
 };
+
