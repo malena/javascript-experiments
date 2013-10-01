@@ -1,7 +1,8 @@
-function MapView(data){
+function MapView(model){
 
+	
 	// model category data
-    this.category_data_array = data;
+    this.category_data_array = model.createCategoryArray();
 
 	// map variables
     this.map_options = {
@@ -16,6 +17,7 @@ function MapView(data){
 
    	// initialization
 	this.initialize();
+
 
 };
 
@@ -54,8 +56,6 @@ MapView.prototype.resetZoom = function(){
 MapView.prototype.setMarkers = function(map, locations_array, category){
 	var that = this;
 	var array = locations_array;
-	console.log(category);
-
     var marker, i;
 
     for(i = 0; i < array.length; i++){
@@ -86,8 +86,10 @@ MapView.prototype.clearMarkers = function(){
 
 MapView.prototype.createInfoWindowOptions = function(category){
 
+	var content = this.getInfoWindowContent(category);
+
 	this.info_window_options = {
-		content: this.getInfoWindowContent(category),
+		content: content,
     	disableAutoPan: false,
     	maxWidth: 0,
     	pixelOffset: new google.maps.Size(20, -25),
@@ -148,7 +150,7 @@ MapView.prototype.generateLocationsArray = function(category) {
 	return locations_array;
 };
 
-MapView.prototype.getInfoWindowContent = function(category) {
+MapView.prototype.getInfoWindowContent = function(category, content_options) {
 	var html;
 
 	if (category == 'reach'){
