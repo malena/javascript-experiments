@@ -171,6 +171,18 @@ img[src*="close.png"] {
     width: 380px;
 }
 
+.map-info.map-reach .title {
+    background-color: #1B2A9E; 
+}
+
+.map-info.map-brands .title {
+    background-color: yellow; 
+}
+
+.map-info.map-facilities .title {
+    background-color: red; 
+}
+
 .map-info .title {
     position: relative;
     z-index: 2;
