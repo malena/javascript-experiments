@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/infobox.js"></script>
     <script>
         $(function(){
-            var model = new MapModel({
+            new MapView(new MapModel({
                 data : [
                     {
                         title: 'North America',
@@ -46,7 +46,7 @@
                     }
 
                 ]
-            });
+            }));
         });
     </script>
     <script type="text/javascript" src="js/model.js"></script>
