@@ -1,6 +1,5 @@
 function MapView(model){
 
-	
 	this.model = model;
 
 	// model category data
@@ -19,7 +18,6 @@ function MapView(model){
 
    	// initialization
 	this.initialize();
-
 
 };
 
@@ -87,7 +85,6 @@ MapView.prototype.clearMarkers = function(){
 };
 
 MapView.prototype.createInfoWindowOptions = function(category){
-
 	var content = this.getInfoWindowContent(category);
 
 	this.info_window_options = {
