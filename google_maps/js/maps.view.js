@@ -74,6 +74,8 @@ MapView.prototype.setMarkers = function(map, locations_array, category){
 
 	    this.bindMarkerEvents(infoWindow, map, marker);
     }
+
+    this.createInfoWindowContent(this.tab_category);
 };
 
 MapView.prototype.clearMarkers = function(){
@@ -122,11 +124,27 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 	});
 };
 
+MapView.prototype.createInfoWindowContent = function(category){
+	var array = this.model.data_array[category];
+
+	var title;
+	var infoWindowContentArray = [];
+
+	for(var i = 0; i < array.length; i++){
+		title = array[0].title; 
+		infoWindowContentArray.push(title);
+	}
+
+	console.log(infoWindowContentArray);
+	return infoWindowContentArray;
+};
+
 MapView.prototype.getInfoWindowContent = function(category, content_options) {
 	var html;
 
 	if (category == 'reach'){
-	    html = '<div class="map-info map-reach"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+		this.createInfoWindowContent('reach');	
+	    html = '<div class="map-info map-reach"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else if (category == 'facilities'){
 	    html = '<div class="map-info map-facilities"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else {

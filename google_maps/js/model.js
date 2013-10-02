@@ -2,11 +2,8 @@ function MapModel(options){
 
     var defaults = {};
     this.config = $.extend(true, defaults, options || { });
-
     this.data = this.config.data;
-
     this.data_array = _.groupBy(this.data, 'category');
-
 
 };
 
@@ -35,6 +32,7 @@ MapModel.prototype.createLocationsArray = function(category){
 	}
 
 	return locations_array;
-
 };
 
+MapModel.prototype.getCountry = function(){
+};
