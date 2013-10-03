@@ -37,16 +37,17 @@ MapView.prototype.bindTab = function(map){
 
 	$('.map-tabs').on('click.mapevents', 'li', function(){
 		var category = tabs.loadMap();
+	    that.closeInfoWindow();
 	    that.tab_category = category;
 	    that.clearMarkers();
-	    that.closeInfoWindow();
 	    that.resetZoom();
 		that.setMarkers(map, that.model.createLocationsArray(that.tab_category), that.tab_category);
     });
 };
 
 MapView.prototype.closeInfoWindow = function(){
-	//InfoBox.close();
+	console.log(this.info_window);
+	this.info_window.close();
 };
 
 MapView.prototype.resetZoom = function(){
@@ -81,7 +82,7 @@ MapView.prototype.clearMarkers = function(){
 	for (var i = 0; i < that.markers_array.length; i++){
 		that.markers_array[i].setMap(null);	
 	}
-	that.markers_array = [];
+	that.markers_array = new Array(); 
 };
 
 MapView.prototype.createInfoWindowOptions = function(category){
@@ -122,15 +123,23 @@ MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
 	});
 };
 
+MapView.prototype.createInfoWindowContent = function(category){
+	return this.model.data_array[category];
+};
+
 MapView.prototype.getInfoWindowContent = function(category, content_options) {
 	var html;
+	var data;
 
 	if (category == 'reach'){
-	    html = '<div class="map-info map-reach"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+		data = this.model.data_array[category];
+	    html = '<div class="map-info map-reach"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else if (category == 'facilities'){
-	    html = '<div class="map-info map-facilities"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+		data = this.model.data_array[category];
+	    html = '<div class="map-info map-facilities"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else {
-	    html = '<div class="map-info map-brands"> <div class="title"><h2>Title</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
+		data = this.model.data_array[category];
+	    html = '<div class="map-info map-brands"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
 	}
 
     return html;
