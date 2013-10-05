@@ -5,26 +5,37 @@ function MapView(model){
 	// model category data
     this.category_data_array = this.model.data_array;
 
-	// map variables
+	// map variable options
     this.map_options = {
     	zoom: 1,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
 
     this.markers_array = [];
 
-    // tab variables
+    // tab variable, default = 'reach'
     this.tab_category = 'reach';
 
-   	// initialization
-
+    // initialize google map
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
+
+    // marker variable options
+    this.marker_options = {
+    	position: this.map.getCenter(),
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+    	map: this.map,
+    	title: 'Click to Zoom'
+    };
+
+    // initialize marker inside of intitalize
+    //this.marker = new google.maps.Marker(this.marker_options);
+
+   	// initialization
 	this.initialize();
 
-
 };
-
 
 MapView.prototype.initialize = function(){
 	this.bindTab();
@@ -50,18 +61,17 @@ MapView.prototype.bindTab = function(){
 MapView.prototype.initializeMarkers = function(category){
 	var that = this;
 	var array = that.model.createLocationsArray(category);
-    var marker, i;
 
-    for(i = 0; i < array.length; i++){
-	    marker = new google.maps.Marker({
-	        map : that.map,
-	        draggable: true,
-	        animation: google.maps.Animation.DROP,
+    for(var i = 0; i < array.length; i++){
+	    var options = {
 	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
 	        icon : 'images/icon-' + category + '.png'
-	    });
+	    }
 
-	    that.markers_array.push(marker);
+	  	var updated_options = $.extend(that.marker_options, options);
+
+	    this.marker = new google.maps.Marker(updated_options);
+	    that.markers_array.push(this.marker);
     }
 };
 
