@@ -7,8 +7,8 @@ function MapModel(options){
 
     this.data_array = _.groupBy(this.data, 'category');
 
-
 };
+
 
 MapModel.prototype.createLocationsArray = function(category){
 	var that = this;
