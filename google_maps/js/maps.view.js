@@ -140,8 +140,7 @@ MapView.prototype.getInfoWindowOptions = function(category, content){
 };
 
 MapView.prototype.getInfoWindowContent = function(location) {
-	var html;
-    html = '<div class="map-info map-reach"> <div class="title"><h2>' + location.title + '</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
+    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
     return html;
 };
 
