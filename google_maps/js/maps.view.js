@@ -29,6 +29,13 @@ function MapView(model){
     	title: 'Click to Zoom'
     };
 
+
+    this.info_window_options = {
+    	disableAutoPan: false,
+    	maxWidth: 0,
+    	pixelOffset: new google.maps.Size(20, -25),
+    	zIndex: null
+    };
     // initialize marker inside of intitalize
     //this.marker = new google.maps.Marker(this.marker_options);
 
@@ -79,27 +86,14 @@ MapView.prototype.setMarkers = function(locations_array, category){
 
 	    this.markers_array.push(marker);
 
-	    info_window = this.getInfoWindow(this.tab_category);
-
+	    info_window = this.getInfoWindow(locations_array[i]);
 	    // bind events on each marker
 	    // each binding adds a location specific info Window to each marker
 	    this.bindMarkerEvents(info_window, marker);
     }
 };
 
-MapView.prototype.getInfoWindow = function(){
-
-    var content = this.getInfoWindowContent(this.tab_category);
-
-    var options = this.createInfoWindowOptions(this.tab_category, content);
-
-    var info_window = this.injectInfoWindowOptions(options);
-
-    return info_window;
-};
-
 MapView.prototype.bindMarkerEvents = function(info_window, marker){
-
     google.maps.event.addListener(marker, 'click', function() {
 	    info_window.open(this.map,marker);
 	    this.map.setZoom(8);
@@ -115,14 +109,18 @@ MapView.prototype.clearMarkers = function(){
 	that.markers_array = new Array(); 
 };
 
-MapView.prototype.createInfoWindowOptions = function(category, content){
 
-	this.info_window_options = {
-		content: content,
-    	disableAutoPan: false,
-    	maxWidth: 0,
-    	pixelOffset: new google.maps.Size(20, -25),
-    	zIndex: null,
+MapView.prototype.getInfoWindow = function(location){
+    var content = this.getInfoWindowContent(location);
+    var options = this.getInfoWindowOptions(this.tab_category, content);
+    this.info_window = new InfoBox(options);
+    return this.info_window;
+};
+
+MapView.prototype.getInfoWindowOptions = function(category, content){
+
+	var options = {
+    	content: content,
     	boxStyle: { 
             background: "url('images/tipbox-" + category + ".png') no-repeat top left",
             opacity: 1,
@@ -136,29 +134,14 @@ MapView.prototype.createInfoWindowOptions = function(category, content){
         enableEventPropagation: false
 	}
 
-	return this.info_window_options;
+	var updated_options = $.extend(this.info_window_options, options);
+
+	return updated_options; 
 };
 
-MapView.prototype.injectInfoWindowOptions = function(options){
-    this.info_window = new InfoBox(options);
-    return this.info_window;
-};
-
-MapView.prototype.getInfoWindowContent = function(category, content_options) {
+MapView.prototype.getInfoWindowContent = function(location) {
 	var html;
-	var data;
-
-	if (category == 'reach'){
-		data = this.model.data_array[category];
-	    html = '<div class="map-info map-reach"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
-	} else if (category == 'facilities'){
-		data = this.model.data_array[category];
-	    html = '<div class="map-info map-facilities"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
-	} else {
-		data = this.model.data_array[category];
-	    html = '<div class="map-info map-brands"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
-	}
-
+    html = '<div class="map-info map-reach"> <div class="title"><h2>' + location.title + '</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
     return html;
 };
 
