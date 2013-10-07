@@ -43,6 +43,10 @@ MapView.prototype.initialize = function(){
 	this.bindTab(this.map);
 };
 
+MapView.prototype.getLocations = function(category){
+	return this.model.createLocationsArray(category);
+};
+
 MapView.prototype.bindTab = function(map){
 	var tabs = new TabView();
 	var that = this;
@@ -53,19 +57,16 @@ MapView.prototype.bindTab = function(map){
 	    that.tab_category = category;
 	    that.clearMarkers();
 	    that.resetZoom();
+
 	    var locations = that.getLocations(that.tab_category);
 		that.setMarkers(locations, that.tab_category);
     });
 };
 
-MapView.prototype.getLocations = function(category){
-	return this.model.createLocationsArray(category);
-};
-
-
 MapView.prototype.setMarkers = function(locations_array, category){
 
     var marker;
+    var info_window;
 
     for(var i = 0; i < locations_array.length; i++){
 	    marker = new google.maps.Marker({
@@ -78,15 +79,23 @@ MapView.prototype.setMarkers = function(locations_array, category){
 
 	    this.markers_array.push(marker);
 
-	    var options = this.createInfoWindowOptions(this.tab_category);
-	    var infoWindow = this.injectInfoWindowOptions(options);
+	    info_window = this.getInfoWindow(this.tab_category);
 
 	    // bind events on each marker
 	    // each binding adds a location specific info Window to each marker
-	    this.bindMarkerEvents(infoWindow, marker);
+	    this.bindMarkerEvents(info_window, marker);
     }
-    console.log(this.markers_array)
+};
 
+MapView.prototype.getInfoWindow = function(){
+
+    var content = this.getInfoWindowContent(this.tab_category);
+
+    var options = this.createInfoWindowOptions(this.tab_category, content);
+
+    var info_window = this.injectInfoWindowOptions(options);
+
+    return info_window;
 };
 
 MapView.prototype.bindMarkerEvents = function(info_window, marker){
@@ -106,8 +115,7 @@ MapView.prototype.clearMarkers = function(){
 	that.markers_array = new Array(); 
 };
 
-MapView.prototype.createInfoWindowOptions = function(category){
-	var content = this.getInfoWindowContent(category);
+MapView.prototype.createInfoWindowOptions = function(category, content){
 
 	this.info_window_options = {
 		content: content,
