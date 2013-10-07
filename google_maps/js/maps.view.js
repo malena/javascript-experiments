@@ -37,7 +37,9 @@ function MapView(model){
 };
 
 MapView.prototype.initialize = function(){
-	this.setMarkers(this.model.createLocationsArray('reach'), this.tab_category);
+    var locations = this.getLocations(this.tab_category);
+
+	this.setMarkers(locations, this.tab_category);
 	this.bindTab(this.map);
 };
 
@@ -51,9 +53,15 @@ MapView.prototype.bindTab = function(map){
 	    that.tab_category = category;
 	    that.clearMarkers();
 	    that.resetZoom();
-		that.setMarkers(that.model.createLocationsArray(that.tab_category), that.tab_category);
+	    var locations = that.getLocations(that.tab_category);
+		that.setMarkers(locations, that.tab_category);
     });
 };
+
+MapView.prototype.getLocations = function(category){
+	return this.model.createLocationsArray(category);
+};
+
 
 MapView.prototype.setMarkers = function(locations_array, category){
 
@@ -73,15 +81,20 @@ MapView.prototype.setMarkers = function(locations_array, category){
 	    var options = this.createInfoWindowOptions(this.tab_category);
 	    var infoWindow = this.injectInfoWindowOptions(options);
 
-	    this.bindMarkerEvents(infoWindow, this.map, marker);
+	    // bind events on each marker
+	    // each binding adds a location specific info Window to each marker
+	    this.bindMarkerEvents(infoWindow, marker);
     }
+    console.log(this.markers_array)
+
 };
 
-MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
+MapView.prototype.bindMarkerEvents = function(info_window, marker){
+
     google.maps.event.addListener(marker, 'click', function() {
-	    info_window.open(map,marker);
-	    map.setZoom(8);
-	    map.setCenter(marker.getPosition());
+	    info_window.open(this.map,marker);
+	    this.map.setZoom(8);
+	    this.map.setCenter(marker.getPosition());
 	});
 };
 
@@ -122,8 +135,6 @@ MapView.prototype.injectInfoWindowOptions = function(options){
     this.info_window = new InfoBox(options);
     return this.info_window;
 };
-
-
 
 MapView.prototype.getInfoWindowContent = function(category, content_options) {
 	var html;
