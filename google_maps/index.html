@@ -7,9 +7,10 @@
     <script type="text/javascript" src="js/TweenMax.min.js"></script>
     <script type="text/javascript" src="js/underscore.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcKMemaemZObch7fTvbL4RoDKRJqKBVqI&sensor=false"></script>
+    <script type="text/javascript" src="js/infobox.js"></script>
     <script>
         $(function(){
-            new MapData({
+            new MapView(new MapModel({
                 data : [
                     {
                         title: 'North America',
@@ -41,32 +42,26 @@
                         country: 'Canada',
                         latitude: '+49.1744', 
                         longitude: '-57.4269',
-                        category: 'reach' 
+                        category: 'facilities' 
                     }
 
                 ]
-            });
-            new MapView();
+            }));
         });
     </script>
-    <script type="text/javascript" src="js/data.map.js"></script>
-    <script type="text/javascript" src="js/view.map.js"></script>
-    <script type="text/javascript" src="js/view.tabs.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script type="text/javascript" src="js/maps.view.js"></script>
+    <script type="text/javascript" src="js/tabs.view.js"></script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
   </head>
   <body>
-    <div id="panel">
-        <input id="address" type="textbox" value="Toronto, ON">
-        <input id="button" type="button" value="Geocode">
-    </div>
-
     <div class="ct-map">
         <ul class="map-tabs">
             <li data-category="reach"class="first active"><span class="bar"></span><h3>Global Operational Reach</h3></li>
             <li data-category="facilities" class="second"><span class="bar"></span><h3>Manufacturing Facililties</h3></li>
             <li data-category="brands" class="third"><span class="bar"></span><h3>Brands Around the World</h3></li>
         </ul>
-        <div id="FirstTalContent" class="map-content">
+        <div class="map-content">
             <div class="map-intro">
                 <h2>Global Operational Reach</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed accumsan erat. Sed suscipit tellus diam, sit amet scelerisque lacus elementum eu. Praesent scelerisque vel odio et varius.</p>
@@ -75,26 +70,6 @@
                 <div id="map-canvas"></div>
             </div>
         </div>
-        <!--
-        <div id="SecondTabContent" class="map-content">
-            <div class="map-intro">
-                <h2>Global Operational Reach</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed accumsan erat. Sed suscipit tellus diam, sit amet scelerisque lacus elementum eu. Praesent scelerisque vel odio et varius.</p>
-            </div>
-            <div class="map-container">
-                <div id="map-canvas"></div>
-            </div>
-        </div>
-        <div id="ThirdTabContent" class="map-content">
-            <div class="map-intro">
-                <h2>Global Operational Reach</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed accumsan erat. Sed suscipit tellus diam, sit amet scelerisque lacus elementum eu. Praesent scelerisque vel odio et varius.</p>
-            </div>
-            <div class="map-container">
-                <div id="map-canvas"></div>
-            </div>
-        </div>
-        -->
     </div>
   </body>
 </html>

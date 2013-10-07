@@ -43,6 +43,7 @@ ul {
 }
 
 .ct-map {
+    top: 50px;
     position: relative;
     margin: auto auto;
     width: 680px;
@@ -150,4 +151,65 @@ ul {
 
 #map-canvas { 
     height: 100%;
+}
+
+#map-canvas img {
+    z-index: 1000;
+    max-width: none;
+}
+
+/*
+img[src*="close.png"] {
+    max-width: none;
+}
+*/
+
+.map-info {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 380px;
+}
+
+.map-info.map-reach .title {
+    background-color: #1B2A9E; 
+}
+
+.map-info.map-brands .title {
+    background-color: #f8c549; 
+}
+
+.map-info.map-facilities .title {
+    background-color: #c50044; 
+}
+
+.map-info .title {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: #1B2A9E; 
+    padding: 10px 0px 10px 15px;
+    box-shadow: 10px 12px 10px -10px #666;
+}
+
+.map-info h2, .map-info h3 {
+   color: #fff;
+   margin: 0;
+}
+
+.map-info h3 {
+   font-size: 14px;
+}
+
+.map-info-content {
+    position: relative;
+    z-index: 1;
+    width: 365px;
+    padding: 10px 15px; 
+    background-color: #fff;
+    box-shadow: 10px 10px 10px -10px #666;
+}
+
+.map-info-content p {
+    font-size: 12px;
 }
