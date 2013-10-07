@@ -1,12 +1,9 @@
 function MapModel(options){
-
     var defaults = {};
     this.config = $.extend(true, defaults, options || { });
 
     this.data = this.config.data;
-
     this.data_array = _.groupBy(this.data, 'category');
-
 };
 
 
@@ -22,19 +19,5 @@ MapModel.prototype.createLocationsArray = function(category){
 		category_array = that.data_array.facilities;
 	}
 
-	var locations_array = [];
-	var lat;
-	var lng;
-	var i;
-	var max = category_array.length;
-
-	for(i = 0; i < max; i++){
-		lat = category_array[i].latitude;
-		lng = category_array[i].longitude;
-		locations_array.push([lat, lng]);
-	}
-
-	return locations_array;
-
+	return category_array;
 };
-
