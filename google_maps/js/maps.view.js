@@ -56,23 +56,21 @@ MapView.prototype.bindTab = function(map){
 };
 
 MapView.prototype.setMarkers = function(locations_array, category){
-	console.log(locations_array);
-	var that = this;
-	var array = locations_array;
+
     var marker;
 
-    for(var i = 0; i < array.length; i++){
+    for(var i = 0; i < locations_array.length; i++){
 	    marker = new google.maps.Marker({
 	        map : this.map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
+	        position: new google.maps.LatLng(locations_array[i]['latitude'] , locations_array[i]['longitude']),
 	        icon : 'images/icon-' + category + '.png'
 	    });
 
 	    this.markers_array.push(marker);
 
-	    var options = this.createInfoWindowOptions(that.tab_category);
+	    var options = this.createInfoWindowOptions(this.tab_category);
 	    var infoWindow = this.injectInfoWindowOptions(options);
 
 	    this.bindMarkerEvents(infoWindow, this.map, marker);
