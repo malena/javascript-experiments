@@ -5,12 +5,12 @@ function MapView(model){
 	// model category data
     this.category_data_array = this.model.data_array;
 
-	// map variables
+	// map variable options
     this.map_options = {
     	zoom: 1,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
 
     this.markers_array = [];
 
@@ -34,14 +34,16 @@ function MapView(model){
 
    	// initialization
 	this.initialize();
+
 };
 
 MapView.prototype.initialize = function(){
-	this.setMarkers(this.model.createLocationsArray('reach'), this.tab_category);
-	this.bindTab(this.map);
+	this.bindTab();
+	this.initializeMarkers(this.tab_category);
+	this.bindMarkerEvents();
 };
 
-MapView.prototype.bindTab = function(map){
+MapView.prototype.bindTab = function(){
 	var tabs = new TabView();
 	var that = this;
 
@@ -51,39 +53,40 @@ MapView.prototype.bindTab = function(map){
 	    that.tab_category = category;
 	    that.clearMarkers();
 	    that.resetZoom();
-		that.setMarkers(that.model.createLocationsArray(that.tab_category), that.tab_category);
+		that.initializeMarkers(that.tab_category);
+		that.bindMarkerEvents();
     });
 };
 
-MapView.prototype.setMarkers = function(locations_array, category){
-	console.log(locations_array);
+MapView.prototype.initializeMarkers = function(category){
 	var that = this;
-	var array = locations_array;
-    var marker;
+	var array = that.model.createLocationsArray(category);
 
     for(var i = 0; i < array.length; i++){
-	    marker = new google.maps.Marker({
-	        map : this.map,
-	        draggable: true,
-	        animation: google.maps.Animation.DROP,
+	    var options = {
 	        position: new google.maps.LatLng(array[i][0] , array[i][1]),
 	        icon : 'images/icon-' + category + '.png'
-	    });
+	    }
 
-	    this.markers_array.push(marker);
+	  	var updated_options = $.extend(that.marker_options, options);
 
-	    var options = this.createInfoWindowOptions(that.tab_category);
-	    var infoWindow = this.injectInfoWindowOptions(options);
-
-	    this.bindMarkerEvents(infoWindow, this.map, marker);
+	    this.marker = new google.maps.Marker(updated_options);
+	    that.markers_array.push(this.marker);
     }
 };
 
-MapView.prototype.bindMarkerEvents = function(info_window, map, marker){
+
+MapView.prototype.bindMarkerEvents = function(){
+	var marker = this.markers_array;
+	var that = this;
+
+    var options = that.createInfoWindowOptions(that.tab_category);
+    var info_window = that.injectInfoWindowOptions(options);
+
     google.maps.event.addListener(marker, 'click', function() {
-	    info_window.open(map,marker);
-	    map.setZoom(8);
-	    map.setCenter(marker.getPosition());
+	    info_window.open(that.map, marker);
+	    that.map.setZoom(8);
+	    that.map.setCenter(marker.getPosition());
 	});
 };
 
@@ -125,20 +128,28 @@ MapView.prototype.injectInfoWindowOptions = function(options){
     return this.info_window;
 };
 
-
-
 MapView.prototype.getInfoWindowContent = function(category, content_options) {
 	var html;
 	var data;
+	var that = this;
+
+
 
 	if (category == 'reach'){
-		data = this.model.data_array[category];
+		data = that.model.data_array[category];
+
+	/*
+		_.each(data, function(){
+
+		});
+	*/
+
 	    html = '<div class="map-info map-reach"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div> <div class="map-info-content"><p>Lorem ipsum</p> <p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else if (category == 'facilities'){
-		data = this.model.data_array[category];
+		data = that.model.data_array[category];
 	    html = '<div class="map-info map-facilities"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
 	} else {
-		data = this.model.data_array[category];
+		data = that.model.data_array[category];
 	    html = '<div class="map-info map-brands"> <div class="title"><h2>' + data[0].title + '</h2><h3>Subtitle</h3></div><div class="map-info-content"><p>Lorem ipsum</p><p>Lorem ipsum oadl lorem</p></div> </div>';
 	}
 
@@ -152,3 +163,6 @@ MapView.prototype.closeInfoWindow = function(){
 MapView.prototype.resetZoom = function(){
 	this.map.setZoom(1);
 };
+
+
+;
