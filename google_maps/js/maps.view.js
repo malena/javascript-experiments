@@ -140,7 +140,8 @@ MapView.prototype.getInfoWindowOptions = function(category, content){
 };
 
 MapView.prototype.getInfoWindowContent = function(location) {
-    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
+    console.log(location.code);
+    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2><img src="images/flags/' + location.code + '.png"></img>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
     return html;
 };
 
