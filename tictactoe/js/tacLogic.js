@@ -83,9 +83,7 @@ TicTacToe.prototype.checkForWin = function(player){
         set = array.join('');
         if (set === winningSet){
            return true;
-        } else {
-            console.log('no match');
-        }
+        } 
     }
 }
 
@@ -99,7 +97,6 @@ TicTacToe.prototype.injectPlayerMarkInSet = function(caseSet, player, position){
         if(index !== -1){
           array[index] = player;
         }
-        console.log(array);
     }
 }
 
@@ -154,8 +151,8 @@ TicTacToe.prototype.playerToggle = function(){
     }
 }
 
-TicTacToe.prototype.gameOver = function(){
-     alert('win');
+TicTacToe.prototype.gameOver = function(player){
+     alert(player + ' wins!');
      location.reload();
 }
 
