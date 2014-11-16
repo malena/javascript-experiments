@@ -1,13 +1,8 @@
 function TabView(options){
-    var defaults = {};
-    this.config = $.extend(true, defaults, options || {});
+    
+    this.$tabs = $('.map-tabs');
+    this.$tab = this.$tabs.find('li');
 
-    var elements = {
-        tabs : '.map-tabs'
-    }
-
-    this.tabs = elements.tabs;
-    this.$tab = $(elements.tabs).find('li');
     this.category = 'reach';
 
     this.bindTabEvents();
@@ -16,16 +11,16 @@ function TabView(options){
 TabView.prototype.bindTabEvents = function (){
     var that = this;
 
-    $(this.tabs).on('click.tabevents', 'li', function(){
+    this.$tabs.on('click.tabevents', 'li', function(){
         that.setTabActive(this);
         that.category = $(this).attr('data-category');
     });
 
-    $(this.tabs).on('mouseenter', 'li', function(){
+    this.$tabs.on('mouseenter', 'li', function(){
         that.animateTab(this, 'up');
     });
 
-    $(this.tabs).on('mouseleave', 'li', function(){
+    this.$tabs.on('mouseleave', 'li', function(){
         that.animateTab(this, 'down');
     });
 };
