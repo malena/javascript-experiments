@@ -7,7 +7,7 @@ function MapModel(options){
 };
 
 
-MapModel.prototype.createLocationsArray = function(category){
+MapModel.prototype.getCategoryLocations = function(category){
 	var that = this;
 	var category_array;
 

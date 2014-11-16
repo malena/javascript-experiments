@@ -1,5 +1,5 @@
-function TabView(options){
-    
+function TabView(){
+
     this.$tabs = $('.map-tabs');
     this.$tab = this.$tabs.find('li');
 

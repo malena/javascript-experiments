@@ -2,12 +2,9 @@ function MapView(model){
 
 	this.model = model;
 
-	// model category data
-    this.category_data_array = this.model.data_array;
-
 	// map variables
     this.map_options = {
-    	zoom: 1,
+    	zoom: 2,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
@@ -44,50 +41,44 @@ function MapView(model){
 };
 
 MapView.prototype.initialize = function(){
-    var locations = this.getLocations(this.tab_category);
-
+    var locations = this.model.getCategoryLocations(this.tab_category);
 	this.setMarkers(locations, this.tab_category);
-	this.bindTab(this.map);
+	this.bindTab();
 };
 
-MapView.prototype.getLocations = function(category){
-	return this.model.createLocationsArray(category);
-};
-
-MapView.prototype.bindTab = function(map){
+MapView.prototype.bindTab = function(){
 	var Tabs = new TabView();
 	var that = this;
 
 	$('.map-tabs').on('click.mapevents', 'li', function(){
 
-	    that.closeInfoWindow();
+        that.info_window.close();
 	    that.clearMarkers();
-	    that.resetZoom();
+        that.map.setZoom(2);
 
-	    var locations = that.getLocations(Tabs.category);
+	    var locations = that.model.getCategoryLocations(Tabs.category);
 		that.setMarkers(locations, Tabs.category);
     });
 };
 
-MapView.prototype.setMarkers = function(locations_array, category){
+MapView.prototype.setMarkers = function(locations, category){
 
     var marker;
     var info_window;
 
-    for(var i = 0; i < locations_array.length; i++){
+    for(var i = 0; i < locations.length; i++){
 	    marker = new google.maps.Marker({
 	        map : this.map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(locations_array[i]['latitude'] , locations_array[i]['longitude']),
+	        position: new google.maps.LatLng(locations[i]['latitude'] , locations[i]['longitude']),
 	        icon : 'images/icon-' + category + '.png'
 	    });
 
 	    this.markers_array.push(marker);
 
-	    info_window = this.getInfoWindow(locations_array[i]);
-	    // bind events on each marker
-	    // each binding adds a location specific info Window to each marker
+	    info_window = this.getInfoWindow(locations[i]);
+
 	    this.bindMarkerEvents(info_window, marker);
     }
 };
@@ -110,18 +101,11 @@ MapView.prototype.clearMarkers = function(){
 
 
 MapView.prototype.getInfoWindow = function(location){
-    var content = this.getInfoWindowContent(location);
-    var options = this.getInfoWindowOptions(this.tab_category, content);
-    this.info_window = new InfoBox(options);
-    return this.info_window;
-};
-
-MapView.prototype.getInfoWindowOptions = function(category, content){
-
-	var options = {
-    	content: content,
-    	boxStyle: { 
-            background: "url('images/tipbox-" + category + ".png') no-repeat top left",
+    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2><img src="images/flags/' + location.code + '.png"></img>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
+    var options = {
+        content: html,
+        boxStyle: { 
+            background: "url('images/tipbox-" + this.tab_category + ".png') no-repeat top left",
             opacity: 1,
             width: "400px"
         },
@@ -131,23 +115,7 @@ MapView.prototype.getInfoWindowOptions = function(category, content){
         isHidden: false,
         pane: "floatPane",
         enableEventPropagation: false
-	}
+    }
 
-	var updated_options = $.extend(this.info_window_options, options);
-
-	return updated_options; 
-};
-
-MapView.prototype.getInfoWindowContent = function(location) {
-    console.log(location.code);
-    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2><img src="images/flags/' + location.code + '.png"></img>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
-    return html;
-};
-
-MapView.prototype.closeInfoWindow = function(){
-	this.info_window.close();
-};
-
-MapView.prototype.resetZoom = function(){
-	this.map.setZoom(1);
+    return new InfoBox(options);
 };
