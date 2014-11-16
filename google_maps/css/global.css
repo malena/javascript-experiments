@@ -136,8 +136,7 @@ ul {
 }
 
 .map-intro {
-    padding: 10px;
-    height: 15%;
+    height: 0%;
 }
 
 .map-content {
@@ -145,7 +144,7 @@ ul {
     clear: both;
     border: 1px solid #ccc;
     width: 100%;
-    height: 85%;
+    height: 100%;
 }
 
 .map-container {

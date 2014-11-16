@@ -28,7 +28,6 @@ function MapView(model){
     	zIndex: null
     };
 
-
 	this.initialize();
 };
 
