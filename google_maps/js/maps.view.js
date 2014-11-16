@@ -55,18 +55,17 @@ MapView.prototype.getLocations = function(category){
 };
 
 MapView.prototype.bindTab = function(map){
-	var tabs = new TabView();
+	var Tabs = new TabView();
 	var that = this;
 
 	$('.map-tabs').on('click.mapevents', 'li', function(){
-		var category = tabs.loadMap();
+
 	    that.closeInfoWindow();
-	    that.tab_category = category;
 	    that.clearMarkers();
 	    that.resetZoom();
 
-	    var locations = that.getLocations(that.tab_category);
-		that.setMarkers(locations, that.tab_category);
+	    var locations = that.getLocations(Tabs.category);
+		that.setMarkers(locations, Tabs.category);
     });
 };
 
