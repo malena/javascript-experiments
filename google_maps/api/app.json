@@ -1,0 +1,51 @@
+{
+    title: 'North    America',
+    city: 'Toronto',
+    description: 'North America is super!',
+    country: 'Canada',
+    code: 'ca',
+    latitude: '+43.7000', 
+    longitude: '-79.4000',
+    category: 'reach',
+},
+{
+    title: 'Australia',
+    city: 'Sydney',
+    description: 'Australians are awesome!',
+    country: 'Australia',
+    code: 'au',
+    latitude: '-33.890542', 
+    longitude: '151.274856',
+    category: 'reach' 
+},
+{
+    title: 'Ecuador',
+    city: 'Quito',
+    description: 'Ecuadors mountains are spectacular.',
+    country: 'Ecuador',
+    code: 'ec',
+    latitude: '-33.890542', 
+    latitude: '-0.2500', 
+    longitude: '-78.5833',
+    category: 'reach' 
+},
+{
+    title: 'Canada',
+    city: 'Deerlake',
+    description: 'Rocky Mountains are outstanding.',
+    country: 'Canada',
+    code: 'ca',
+    latitude: '+49.1744', 
+    longitude: '-57.4269',
+    category: 'facilities' 
+},
+{
+    title: 'Ecuador',
+    city: 'Quito',
+    description: 'Hablas espanol?',
+    country: 'Ecuador',
+    code: 'ec',
+    latitude: '-0.2500', 
+    longitude: '-78.5833',
+    category: 'brands' 
+}

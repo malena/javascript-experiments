@@ -1,26 +1,18 @@
 function MapView(model){
 
 	this.model = model;
+    this.Tabs = new TabView();
 
-	// model category data
-    this.category_data_array = this.model.data_array;
-
-	// map variables
     this.map_options = {
-    	zoom: 1,
+    	zoom: 2,
     	center: new google.maps.LatLng(+43.7000, -79.4000),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
     this.markers_array = [];
 
-    // tab variable, default = 'reach'
-    this.tab_category = 'reach';
-
-    // initialize google map
     this.map = new google.maps.Map(document.getElementById("map-canvas"), this.map_options);
 
-    // marker variable options
     this.marker_options = {
     	position: this.map.getCenter(),
         draggable: true,
@@ -29,66 +21,54 @@ function MapView(model){
     	title: 'Click to Zoom'
     };
 
-
     this.info_window_options = {
     	disableAutoPan: false,
     	maxWidth: 0,
     	pixelOffset: new google.maps.Size(20, -25),
     	zIndex: null
     };
-    // initialize marker inside of intitalize
-    //this.marker = new google.maps.Marker(this.marker_options);
 
-   	// initialization
 	this.initialize();
 };
 
 MapView.prototype.initialize = function(){
-    var locations = this.getLocations(this.tab_category);
-
-	this.setMarkers(locations, this.tab_category);
-	this.bindTab(this.map);
+    var locations = this.model.getCategoryLocations('reach');
+	this.setMarkers(locations, 'reach');
+	this.bindTab();
 };
 
-MapView.prototype.getLocations = function(category){
-	return this.model.createLocationsArray(category);
-};
-
-MapView.prototype.bindTab = function(map){
-	var tabs = new TabView();
+MapView.prototype.bindTab = function(){
 	var that = this;
 
 	$('.map-tabs').on('click.mapevents', 'li', function(){
-		var category = tabs.loadMap();
-	    that.closeInfoWindow();
-	    that.tab_category = category;
-	    that.clearMarkers();
-	    that.resetZoom();
 
-	    var locations = that.getLocations(that.tab_category);
-		that.setMarkers(locations, that.tab_category);
+        that.info_window.close();
+	    that.clearMarkers();
+        that.map.setZoom(2);
+
+	    var locations = that.model.getCategoryLocations(that.Tabs.category);
+		that.setMarkers(locations, that.Tabs.category);
     });
 };
 
-MapView.prototype.setMarkers = function(locations_array, category){
+MapView.prototype.setMarkers = function(locations, category){
 
     var marker;
     var info_window;
 
-    for(var i = 0; i < locations_array.length; i++){
+    for(var i = 0; i < locations.length; i++){
 	    marker = new google.maps.Marker({
 	        map : this.map,
 	        draggable: true,
 	        animation: google.maps.Animation.DROP,
-	        position: new google.maps.LatLng(locations_array[i]['latitude'] , locations_array[i]['longitude']),
+	        position: new google.maps.LatLng(locations[i]['latitude'] , locations[i]['longitude']),
 	        icon : 'images/icon-' + category + '.png'
 	    });
 
 	    this.markers_array.push(marker);
 
-	    info_window = this.getInfoWindow(locations_array[i]);
-	    // bind events on each marker
-	    // each binding adds a location specific info Window to each marker
+	    info_window = this.getInfoWindow(locations[i]);
+
 	    this.bindMarkerEvents(info_window, marker);
     }
 };
@@ -111,18 +91,12 @@ MapView.prototype.clearMarkers = function(){
 
 
 MapView.prototype.getInfoWindow = function(location){
-    var content = this.getInfoWindowContent(location);
-    var options = this.getInfoWindowOptions(this.tab_category, content);
-    this.info_window = new InfoBox(options);
-    return this.info_window;
-};
+    var html = '<div class="map-info map-' + this.Tabs.category + '"> <div class="title"><h2><img src="images/flags/' + location.code + '.png"></img>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
 
-MapView.prototype.getInfoWindowOptions = function(category, content){
-
-	var options = {
-    	content: content,
-    	boxStyle: { 
-            background: "url('images/tipbox-" + category + ".png') no-repeat top left",
+    var options = {
+        content: html,
+        boxStyle: { 
+            background: "url('images/tipbox-" + this.Tabs.category + ".png') no-repeat top left",
             opacity: 1,
             width: "400px"
         },
@@ -132,23 +106,9 @@ MapView.prototype.getInfoWindowOptions = function(category, content){
         isHidden: false,
         pane: "floatPane",
         enableEventPropagation: false
-	}
+    }
 
-	var updated_options = $.extend(this.info_window_options, options);
+    this.info_window = new InfoBox(options);
 
-	return updated_options; 
-};
-
-MapView.prototype.getInfoWindowContent = function(location) {
-    console.log(location.code);
-    var html = '<div class="map-info map-' + this.tab_category + '"> <div class="title"><h2><img src="images/flags/' + location.code + '.png"></img>' + location.title + '</h2><h3>' + location.city + '</h3></div> <div class="map-info-content"><p>' + location.description + '</p></div> </div>';
-    return html;
-};
-
-MapView.prototype.closeInfoWindow = function(){
-	this.info_window.close();
-};
-
-MapView.prototype.resetZoom = function(){
-	this.map.setZoom(1);
+    return this.info_window;
 };
