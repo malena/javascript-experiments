@@ -10,20 +10,14 @@ function TabView(options){
     this.$tab = $(elements.tabs).find('li');
     this.category = 'reach';
 
-    this.initialize();
-}
-
-TabView.prototype.initialize = function (){
     this.bindTabEvents();
-};
+}
 
 TabView.prototype.bindTabEvents = function (){
     var that = this;
 
     $(this.tabs).on('click.tabevents', 'li', function(){
-        console.log(this);
-        that.toggleTabState(this);
-        that.resetTabStyles();
+        that.setTabActive(this);
         that.category = $(this).attr('data-category');
     });
 
@@ -36,9 +30,9 @@ TabView.prototype.bindTabEvents = function (){
     });
 };
 
-TabView.prototype.toggleTabState = function(current_tab) {
+TabView.prototype.setTabActive = function(tab) {
     this.$tab.removeClass('active');
-    $(current_tab).addClass('active');
+    $(tab).addClass('active');
 };
 
 TabView.prototype.animateTab = function(tab, direction) {
@@ -59,6 +53,3 @@ TabView.prototype.animateTab = function(tab, direction) {
     }
 };
 
-TabView.prototype.resetTabStyles = function() {
-    this.$tab.removeAttr('style'); 
-};
