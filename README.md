@@ -14,4 +14,5 @@ There is also a time limit of one month regardless of the state of the program s
 <a href="http://malena.github.com/javascript-experiments/slider/" target="_blank">slider</a><br>
 <a href="http://malena.github.com/javascript-experiments/cookies/" target="_blank">wish list</a><br>
 <a href="http://malena.github.com/javascript-experiments/bouncy_squares/" target="_blank">bouncy squares</a><br>
+<a href="http://malena.github.com/javascript-experiments/google_maps/" target="_blank">simple google map</a><br>
 
