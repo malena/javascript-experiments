@@ -7,6 +7,7 @@ My goal is to practice the DRY principle, Single Responsibility Principle and us
 I pick existing ideas or games to avoid scope creeping.
 There is also a time limit of one month regardless of the state of the program so don't hate if it sucks! :D
 
+<a href="http://malena.github.io/shopping-cart/" target="_blank">shopping cart</a><br>
 <a href="http://malena.github.io/javascript-experiments/calculator/" target="_blank">calculator</a><br>
 <a href="http://malena.github.io/javascript-experiments/hangman/" target="_blank">hangman</a><br>
 <a href="http://malena.github.io/javascript-experiments/tictactoe/" target="_blank">tictactoe</a><br>
