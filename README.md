@@ -9,7 +9,6 @@ For 2013 I decided to play with CSS/JavaScript by creating "something" every mon
 <a href="http://malena.github.io/javascript-experiments/tictactoe/" target="_blank">tictactoe</a><br>
 <a href="http://malena.github.io/javascript-experiments/animated_input_box/" target="_blank">animated input box</a><br>
 <a href="http://malena.github.io/javascript-experiments/slider/" target="_blank">slider</a><br>
-<a href="http://malena.github.io/javascript-experiments/cookies/" target="_blank">wish list</a><br>
 <a href="http://malena.github.io/javascript-experiments/bouncy_squares/" target="_blank">bouncy squares</a><br>
 <a href="http://malena.github.io/javascript-experiments/google_maps/" target="_blank">simple google map</a><br>
 
